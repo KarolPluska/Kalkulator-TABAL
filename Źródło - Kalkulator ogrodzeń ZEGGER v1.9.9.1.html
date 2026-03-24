@@ -599,6 +599,16 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px}
 
 
 .totalline .value{font-weight:700;font-size:16px}
+.sum-unknown-note{
+  margin-top:2px;
+  padding-right:10px;
+  text-align:right;
+  font-size:11px;
+  line-height:1.25;
+  letter-spacing:0;
+  color:var(--muted);
+  opacity:.82;
+}
 .note{font-size:12px;color:var(--muted);margin-top:8px}
 .sep{height:1px;background:var(--line);margin:12px 0}
 @media (max-width:520px){.row{gap:8px}}
@@ -1595,8 +1605,8 @@ label[for="accAuto-przesuwna"]{
 
   <!-- Własny rozmiar słupka -->
   <!-- ZEGGER TECH: Sekcja formularza (row) - prawa autorskie © Zegger Tech -->
-<div class="row" style="display:none;">
-    <div class="field" id="postCustomWidthField" style="display:none;">
+<div class="row" id="postCustomWidthRow" style="display:none;">
+    <div class="field" id="postCustomWidthField">
       <label for="postCustomWidth">Własny rozmiar słupka (mm)
         <span class="tip" data-tip="Wpisz szerokość słupka w mm. Może to być niestandardowy słupek murowany lub betonowy. Wartość jest używana do obliczeń palisady (długość osi ogrodzenia).">?</span>
       </label>
@@ -1697,6 +1707,7 @@ label[for="accAuto-przesuwna"]{
     <div class="totalline">
       <div class="label">Łącznie:</div><div class="value" id="sum">0,00 zł</div>
     </div>
+    <div id="sumUnknownNote" class="sum-unknown-note" style="display:none;"></div>
 
     <div class="totalline" id="discountRow" style="display:none;">
       <div class="label">
@@ -2274,6 +2285,7 @@ label[for="accAuto-przesuwna"]{
     const aluInfoOpenState = Object.create(null);
     const aluOptionalQtyState = Object.create(null);
     const summaryQtyOverrideState = Object.create(null);
+    const summaryHiddenRowsState = Object.create(null);
     const currentSummaryRowsById = Object.create(null);
     const savedConfigPositions = [];
 
@@ -2334,7 +2346,9 @@ label[for="accAuto-przesuwna"]{
           { value: CUSTOM_ALU_COLOR_VALUE, label: "Inny (Na zamówienia)" }
         ];
       }
-      return Object.values(TABAL_SYSTEM_DATA.colors).map(c => ({ value: c.value, label: c.label }));
+      const base = Object.values(TABAL_SYSTEM_DATA.colors).map(c => ({ value: c.value, label: c.label }));
+      base.push({ value: CUSTOM_ALU_COLOR_VALUE, label: "Inny (Na zamówienia)" });
+      return base;
     }
 
     function systemOptionValues(typeKey){
@@ -2342,7 +2356,8 @@ label[for="accAuto-przesuwna"]{
         return [
           { value: "", label: "- Wybierz -" },
           { value: "toConcrete", label: `${ALUMINIUM_PRIME_DATA.sharedPosts.toConcrete.name} 80x80` },
-          { value: "toAnchor", label: `${ALUMINIUM_PRIME_DATA.sharedPosts.toAnchor.name} 80x80` }
+          { value: "toAnchor", label: `${ALUMINIUM_PRIME_DATA.sharedPosts.toAnchor.name} 80x80` },
+          { value: "custom", label: "Własny rozmiar (murowane/betonowe)" }
         ];
       }
       return Object.values(TABAL_SYSTEM_DATA.clampTypes).map(v => ({ value: v.value, label: v.label }));
@@ -2466,11 +2481,14 @@ label[for="accAuto-przesuwna"]{
     const elPostHeight = $('#postHeight');
     const elPostColor = $('#postColor');
     const elPostDetailsRow = $('#postDetailsRow');
+    const elPostCustomWidthRow = $('#postCustomWidthRow');
     const elPostCustomWidthField = $('#postCustomWidthField');
+    const elPostCustomWidth = $('#postCustomWidth');
     const elVat = $('#vat');
     const boxRes = $('#result');
     const tbody = $('#tbody');
     const sumEl = $('#sum');
+    const sumUnknownNote = $('#sumUnknownNote');
     const fitWarning = $('#fitWarning');
     const priceModeLabel = $('#priceModeLabel');
     const previewBox = document.getElementById('previewImageBox');
@@ -2756,6 +2774,18 @@ label[for="accAuto-przesuwna"]{
       setGateQtyEnabled(gateSlidingQty, isAlu && !!(gateSlidingVariant && gateSlidingVariant.value));
     }
 
+    function refreshPostCustomWidthVisibility(typeKey){
+      const show = isAluminiumSystem(typeKey) && String(elPostType?.value || '') === 'custom';
+      if (elPostCustomWidthRow) elPostCustomWidthRow.style.display = show ? '' : 'none';
+      if (elPostCustomWidthField) elPostCustomWidthField.style.display = show ? '' : 'none';
+      if (elPostCustomWidth){
+        elPostCustomWidth.disabled = !show;
+        if (show && toInt(elPostCustomWidth.value) <= 0){
+          elPostCustomWidth.value = '120';
+        }
+      }
+    }
+
     function refreshGatesUI(typeKey, modelId){
       const isAlu = isAluminiumSystem(typeKey);
       if (gateRow) gateRow.style.display = isAlu ? '' : 'none';
@@ -2795,10 +2825,10 @@ label[for="accAuto-przesuwna"]{
 
       // Te pola nie są wykorzystywane w logice TABAL v2.
       if (elPostDetailsRow) elPostDetailsRow.style.display = 'none';
-      if (elPostCustomWidthField) elPostCustomWidthField.style.display = 'none';
       if (elPostWall) setOptions(elPostWall, [{ value: 'none', label: '- Brak -' }]);
       if (elPostHeight) setOptions(elPostHeight, [{ value: 'none', label: '- Brak -' }]);
       if (elPostColor) setOptions(elPostColor, [{ value: 'none', label: '- Brak -' }]);
+      refreshPostCustomWidthVisibility(typeKey);
 
       refreshGatesUI(typeKey, elModel.value);
       if (autoCalc) calculate();
@@ -2990,8 +3020,8 @@ label[for="accAuto-przesuwna"]{
       const spanWidthM = spanWidthMM / 1000;
       const isAlu = isAluminiumSystem(typeKey);
       const selectedColor = String(elColor?.value || '');
-      const isCustomAluColor = isAlu && selectedColor === CUSTOM_ALU_COLOR_VALUE;
-      const unknownPriceLabel = isCustomAluColor ? CUSTOM_QUOTE_PRICE_LABEL : MISSING_PRICE_LABEL;
+      const isCustomColorSelection = selectedColor === CUSTOM_ALU_COLOR_VALUE;
+      const unknownPriceLabel = MISSING_PRICE_LABEL;
       const activeOptionalMap = getActiveAluminiumOptionalMap(typeKey, modelId);
 
       const gateSelections = [
@@ -3028,8 +3058,31 @@ label[for="accAuto-przesuwna"]{
       }
 
       const effectiveLen_m = Math.max(length_m - gatesWidthM, 0);
-      const spans = Math.max(1, Math.ceil(effectiveLen_m / spanWidthM));
+      const selectedPostType = String(elPostType?.value || '');
+      const postWidthMMForLength = (() => {
+        if (isAlu){
+          if (selectedPostType === 'custom'){
+            let mm = Math.max(0, toInt(elPostCustomWidth?.value));
+            if (mm <= 0) mm = 120;
+            if (elPostCustomWidth) elPostCustomWidth.value = String(mm);
+            return mm;
+          }
+          if (selectedPostType === 'toConcrete' || selectedPostType === 'toAnchor'){
+            return 80;
+          }
+          return 0;
+        }
+        return 40;
+      })();
+      const postWidthMForLength = postWidthMMForLength / 1000;
+      const spans = (() => {
+        if (!(spanWidthM > 0)) return 1;
+        if (!(postWidthMForLength > 0)) return Math.max(1, Math.ceil(effectiveLen_m / spanWidthM));
+        const normalizedLen = Math.max(effectiveLen_m - postWidthMForLength, 0);
+        return Math.max(1, Math.ceil(normalizedLen / (spanWidthM + postWidthMForLength)));
+      })();
       const posts = spans + 1;
+      const postsLen_m = (postWidthMForLength > 0) ? posts * postWidthMForLength : 0;
 
       const withVAT = !!elVat.checked;
       const VAT = 0.23;
@@ -3075,7 +3128,7 @@ label[for="accAuto-przesuwna"]{
       };
       tbody.innerHTML = '';
       Object.keys(currentSummaryRowsById).forEach(k => delete currentSummaryRowsById[k]);
-      let hasUnknownPrice = false;
+      let unknownRowsCount = 0;
 
       const hasRowOverride = (rowId) => !!(rowId && Object.prototype.hasOwnProperty.call(summaryQtyOverrideState, rowId));
       const getFinalQty = (rowId, baseQty) => {
@@ -3085,6 +3138,8 @@ label[for="accAuto-przesuwna"]{
 
       const addRow = (label, baseQty, unit, forcePriceLabel = false, meta = null) => {
         const rowId = meta?.control?.rowId || '';
+        const isHiddenByUser = !!(meta?.control && rowId && summaryHiddenRowsState[rowId] === true);
+        if (isHiddenByUser) return 0;
         const qty = meta?.control ? getFinalQty(rowId, baseQty) : Math.max(0, toInt(baseQty));
         const keepIfZero = !!meta?.keepIfZero && hasRowOverride(rowId);
         const rowUnitNet = (!forcePriceLabel && typeof unit === 'number' && Number.isFinite(unit))
@@ -3110,7 +3165,7 @@ label[for="accAuto-przesuwna"]{
           addRowQtyMoney(label, qty, u, s, meta);
           return s;
         }
-        hasUnknownPrice = true;
+        unknownRowsCount += 1;
         addRowQtyMoney(label, qty, unknownPriceLabel, unknownPriceLabel, meta);
         return 0;
       };
@@ -3146,13 +3201,39 @@ label[for="accAuto-przesuwna"]{
           return s;
         }
 
-        hasUnknownPrice = true;
+        unknownRowsCount += 1;
         addRowQtyMoney(optionName, qty, unknownPriceLabel, unknownPriceLabel, rowMeta);
         return 0;
       };
 
+      const addQuoteRow = (label, baseQty, meta = null) => {
+        const rowId = meta?.control?.rowId || '';
+        const isHiddenByUser = !!(meta?.control && rowId && summaryHiddenRowsState[rowId] === true);
+        if (isHiddenByUser) return 0;
+
+        const qty = meta?.control ? getFinalQty(rowId, baseQty) : Math.max(0, toInt(baseQty));
+        const keepIfZero = !!meta?.keepIfZero && hasRowOverride(rowId);
+        const rowUnitLabel = CUSTOM_QUOTE_PRICE_LABEL;
+
+        if (meta?.control && meta.control.rowType !== 'saved' && !Object.prototype.hasOwnProperty.call(meta.control, 'saveActive')){
+          const rowIdForActiveFlag = String(meta.control.rowId || '');
+          meta = {
+            ...meta,
+            control: {
+              ...meta.control,
+              saveActive: isRowSavedExactInCurrentContext(rowIdForActiveFlag, qty, null, rowUnitLabel)
+            }
+          };
+        }
+
+        if (qty <= 0 && !keepIfZero) return 0;
+        unknownRowsCount += 1;
+        addRowQtyMoney(label, qty, rowUnitLabel, rowUnitLabel, meta);
+        return 0;
+      };
+
       let total = 0;
-      total += addRow(`Przęsło (${model.name})`, spans, getSpanUnitPrice(typeKey, modelId, height), isCustomAluColor, {
+      total += addRow(`Przęsło (${model.name})`, spans, getSpanUnitPrice(typeKey, modelId, height), false, {
         control: { rowType: 'generic', rowId: `span:${typeKey}:${modelId}:${height}` },
         keepIfZero: true
       });
@@ -3167,7 +3248,7 @@ label[for="accAuto-przesuwna"]{
         }
 
         if (postData){
-          total += addRow(`${postData.name} ${postData.sizeMM}x${postData.heightMM} mm`, posts, Number(postData.priceNet), isCustomAluColor, {
+          total += addRow(`${postData.name} ${postData.sizeMM}x${postData.heightMM} mm`, posts, Number(postData.priceNet), false, {
             control: { rowType: 'generic', rowId: `post-alu:${postChoice}:${height}` },
             keepIfZero: true
           });
@@ -3203,7 +3284,7 @@ label[for="accAuto-przesuwna"]{
       }
 
       gateRows.forEach(row => {
-        total += addRow(row.label, row.qty, row.unit, isCustomAluColor, {
+        total += addRow(row.label, row.qty, row.unit, false, {
           control: { rowType: 'gate', gateKind: row.kind, rowId: `gate:${row.kind}:${row.selected || ''}` }
         });
       });
@@ -3213,8 +3294,16 @@ label[for="accAuto-przesuwna"]{
         if (!qty) return;
         const option = activeOptionalMap[optId];
         if (!option) return;
-        total += addOptionalRow(option, qty, isCustomAluColor);
+        total += addOptionalRow(option, qty, false);
       });
+
+      if (isCustomColorSelection){
+        total += addQuoteRow('Kolor: Inny (Na zamówienia)', 1, {
+          comment: 'Dopłata za kolor niestandardowy',
+          control: { rowType: 'generic', rowId: `color-custom:${typeKey}:${modelId}:${height}` },
+          keepIfZero: true
+        });
+      }
 
       const visibleSaved = savedConfigPositions.filter(saved => Math.max(0, toInt(saved.qty)) > 0);
       if (visibleSaved.length){
@@ -3247,13 +3336,27 @@ label[for="accAuto-przesuwna"]{
           addRowQtyMoney(label, qty, unit, sum, rowMeta);
           total += sum;
         } else {
-          hasUnknownPrice = true;
+          unknownRowsCount += 1;
           const textLabel = saved.unitLabel || CUSTOM_QUOTE_PRICE_LABEL;
           addRowQtyMoney(label, qty, textLabel, textLabel, rowMeta);
         }
       });
 
-      sumEl.textContent = hasUnknownPrice ? CUSTOM_QUOTE_PRICE_LABEL : fmt(total);
+      sumEl.textContent = fmt(total);
+      if (sumUnknownNote){
+        if (unknownRowsCount > 0){
+          const countLabel = (unknownRowsCount === 1)
+            ? 'pozycja'
+            : ((unknownRowsCount % 10 >= 2 && unknownRowsCount % 10 <= 4 && !(unknownRowsCount % 100 >= 12 && unknownRowsCount % 100 <= 14))
+              ? 'pozycje'
+              : 'pozycji');
+          sumUnknownNote.textContent = `Poza sumą: ${unknownRowsCount} ${countLabel} z wyceną indywidualną / bez ceny.`;
+          sumUnknownNote.style.display = 'block';
+        } else {
+          sumUnknownNote.style.display = 'none';
+          sumUnknownNote.textContent = '';
+        }
+      }
       priceModeLabel.textContent = withVAT ? 'Ceny brutto (23% VAT)' : 'Ceny netto';
       boxRes.style.display = 'block';
 
@@ -3268,25 +3371,39 @@ label[for="accAuto-przesuwna"]{
       }
 
       const ideal_m = spans * spanWidthM;
-      const totalConfigured_m = ideal_m + gatesWidthM;
-      const diff = ideal_m - effectiveLen_m;
+      const baseWithPosts_m = ideal_m + postsLen_m;
+      const totalConfigured_m = baseWithPosts_m + gatesWidthM;
+      const diff = baseWithPosts_m - effectiveLen_m;
       const eps = 0.005;
 
       if (diff > eps){
         const wmTxt = spanWidthM.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
+        const postWTxt = postWidthMForLength.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
+        const moduleWithPostTxt = (spanWidthM + postWidthMForLength).toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
         const lenTxt = effectiveLen_m.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
         const diffTxt = diff.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
         const totalTxt = totalConfigured_m.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
         const panelsTxt = ideal_m.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
+        const postsTxt = postsLen_m.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
         const extrasTxt = gatesWidthM.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
+        const moduleInfo = postWidthMForLength > 0
+          ? `Szerokość jednego modułu (przęsło + słup) to <b>${wmTxt} m + ${postWTxt} m = ${moduleWithPostTxt} m</b>`
+          : `Szerokość jednego modułu to <b>${wmTxt} m</b>`;
+        const postsPart = postsLen_m > 0 ? ` + słupy: ${postsTxt} m` : '';
 
         fitWarning.innerHTML = `
           <b>Dopasowanie długości</b><br>
-          Po odjęciu bram/furtki do wypełnienia pozostaje <b>${lenTxt} m</b>.
-          Szerokość modułu to <b>${wmTxt} m</b>, więc kalkulator zaokrągla liczbę przęseł w górę.
-          Nadmiar długości wynosi około <b>${diffTxt} m</b>.
-          <p>Łączna długość konfiguracji: <b>${totalTxt} m</b> (przęsła: ${panelsTxt} m + bramy/furtki: ${extrasTxt} m)</p>
-          <p class="calc-summary">Aktualnie przyjęto <b>${spans}</b> przęseł.</p>
+          Po odjęciu dodatkowych elementów do wypełnienia pozostaje <b>${lenTxt} m</b>.
+          ${moduleInfo}, dlatego nie da się uzyskać dokładnie tej długości z całych przęseł.
+          W takim wariancie ogrodzenie będzie <b>dłuższe</b> od wymiaru do wypełnienia o ok. <b>${diffTxt} m</b>.
+          <br><br>Masz trzy możliwości:
+          <ul>
+            <li>zostawić nadmiar i zakończyć montaż z lekką „górką”,</li>
+            <li>skrócić ostatni moduł na budowie o ok. <b>${diffTxt} m</b>,</li>
+            <li>zmienić liczbę modułów (mniej przęseł) i ewentualnie zwiększyć szerokość bramy/furtki.</li>
+          </ul>
+          <p>Łączna długość Twojej konfiguracji: <b>${totalTxt} m</b> (przęsła: ${panelsTxt} m${postsPart} + elementy dodatkowe: ${extrasTxt} m)</p>
+          <p class="calc-summary">Obecnie kalkulator przyjmuje <b>${spans}</b> przęseł (zaokrąglenie w górę).</p>
         `;
 
         fitWarning.dataset.spans = String(spans);
@@ -3295,10 +3412,10 @@ label[for="accAuto-przesuwna"]{
         fitWarning.dataset.diff = String(diff);
         fitWarning.dataset.total = String(totalConfigured_m);
         fitWarning.dataset.panels = String(ideal_m);
-        fitWarning.dataset.postslen = '0';
-        fitWarning.dataset.postw = '0';
+        fitWarning.dataset.postslen = String(postsLen_m);
+        fitWarning.dataset.postw = String(postWidthMForLength);
         fitWarning.dataset.posttype = String(elPostType.value || '');
-        fitWarning.dataset.ispal = '0';
+        fitWarning.dataset.ispal = postWidthMForLength > 0 ? '1' : '0';
         fitWarning.dataset.extras = String(gatesWidthM);
         fitWarning.style.display = 'block';
       } else {
@@ -3319,12 +3436,18 @@ label[for="accAuto-przesuwna"]{
       if (gateWicketQty) gateWicketQty.value = '0';
       if (gateSwingQty) gateSwingQty.value = '0';
       if (gateSlidingQty) gateSlidingQty.value = '0';
+      if (elPostCustomWidth) elPostCustomWidth.value = '';
       Object.keys(aluOptionalQtyState).forEach(k => delete aluOptionalQtyState[k]);
       Object.keys(aluInfoOpenState).forEach(k => delete aluInfoOpenState[k]);
       Object.keys(summaryQtyOverrideState).forEach(k => delete summaryQtyOverrideState[k]);
+      Object.keys(summaryHiddenRowsState).forEach(k => delete summaryHiddenRowsState[k]);
 
       if (tbody) tbody.innerHTML = '';
       if (sumEl) sumEl.textContent = fmt(0);
+      if (sumUnknownNote){
+        sumUnknownNote.style.display = 'none';
+        sumUnknownNote.textContent = '';
+      }
       if (priceModeLabel) priceModeLabel.textContent = 'Ceny netto';
 
       if (boxRes) boxRes.style.display = 'none';
@@ -3418,6 +3541,7 @@ label[for="accAuto-przesuwna"]{
 
           const rowId = String(btn.dataset.rowId || '');
           if (!rowId) return;
+          summaryHiddenRowsState[rowId] = true;
           summaryQtyOverrideState[rowId] = 0;
           calculate();
           return;
@@ -3595,6 +3719,9 @@ label[for="accAuto-przesuwna"]{
         t.id === 'gateSwingVariant' ||
         t.id === 'gateSlidingVariant'
       ){
+        if (t.id === 'postType'){
+          refreshPostCustomWidthVisibility(elType.value);
+        }
         if (t.id === 'gateWicketVariant' || t.id === 'gateSwingVariant' || t.id === 'gateSlidingVariant'){
           refreshGateQtyAvailability(elType.value);
         }
@@ -3615,7 +3742,9 @@ label[for="accAuto-przesuwna"]{
       ['input', 'change'].forEach(evt => {
         el.addEventListener(evt, () => {
           if (normalizeNonNegative){
-            const v = Math.max(0, toInt(el.value));
+            const minAttr = (el.min !== '') ? Number(el.min) : 0;
+            const minVal = Number.isFinite(minAttr) ? minAttr : 0;
+            const v = Math.max(minVal, toInt(el.value));
             el.value = String(v);
           }
           if (autoCalc) calculate();
@@ -3627,6 +3756,7 @@ label[for="accAuto-przesuwna"]{
     bindAutoCalcInput(gateWicketQty, true);
     bindAutoCalcInput(gateSwingQty, true);
     bindAutoCalcInput(gateSlidingQty, true);
+    bindAutoCalcInput(elPostCustomWidth, true);
 
 
     // Telefon – tylko dozwolone znaki
@@ -3787,9 +3917,17 @@ if (phoneEl) phoneEl.addEventListener('input', function(){
         : '';
 
       const selectedPostType = getSelText(postTypeEl) || postTypeVal;
-      const slupLabel = (!selectedPostType || postTypeVal === 'none')
+      const postCustomWidthVal = Math.max(0, parseInt($('#postCustomWidth')?.value || '0', 10) || 0);
+      const slupLabel = (
+        !postTypeVal ||
+        !selectedPostType ||
+        selectedPostType === '- Wybierz -' ||
+        postTypeVal === 'none'
+      )
         ? 'brak'
-        : selectedPostType;
+        : (postTypeVal === 'custom' && postCustomWidthVal > 0
+          ? `${selectedPostType} (${postCustomWidthVal} mm)`
+          : selectedPostType);
 
       const tableData = [
         ['Długość (m)', `${$('#len').value}`],
@@ -4091,14 +4229,19 @@ if (phoneEl) phoneEl.addEventListener('input', function(){
         const pageW = doc.internal.pageSize.width, pageH = doc.internal.pageSize.height, boxW  = pageW - marginX * 2;
 
         const wmTxt   = widthm.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
+        const postWTxt = postWm.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
+        const moduleWmTxt = (widthm + (isPal ? postWm : 0)).toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
         const effTxt  = effective.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
         const diffTxt = diff.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
         const totalTxt  = totalCfg.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
         const panelsTxt = panelsLen.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
         const extrasTxt = extrasLen.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
+        const moduleInfoTxt = isPal
+          ? `${wmTxt} m + ${postWTxt} m = ${moduleWmTxt} m`
+          : `${wmTxt} m`;
 
         const header  = 'Dopasowanie długości';
-        const body1   = `Po odjęciu dodatkowych elementów do wypełnienia pozostaje ${effTxt} m. Szerokość jednego modułu${isPal ? ' (przęsło + słupek)' : ''} to ${wmTxt} m, dlatego nie da się uzyskać dokładnie tej długości z całych przęseł.`;
+        const body1   = `Po odjęciu dodatkowych elementów do wypełnienia pozostaje ${effTxt} m. Szerokość jednego modułu${isPal ? ' (przęsło + słupek)' : ''} to ${moduleInfoTxt}, dlatego nie da się uzyskać dokładnie tej długości z całych przęseł.`;
         const body2   = `W takim wariancie ogrodzenie będzie dłuższe od wymiaru do wypełnienia o ok. ${diffTxt} m. Masz trzy możliwości:`;
         const bullets = [
           'zostawić nadmiar i zakończyć montaż z lekką „górką”,',
