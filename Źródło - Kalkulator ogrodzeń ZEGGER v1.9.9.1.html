@@ -28,11 +28,13 @@ modification or distribution is prohibited. For licensing please contact Zegger 
    ========================================================================== */
 
 :root{
-  --bg:#f6f7f8; --card:#fff; --muted:#6b6f72; --text:#111; --radius:12px; --container:980px;
-  --ok:#2e7d32; --warn:#d32f2f; --line:#e9ecef; --warn-bg:#fdecec;
+  --bg:#f5f8fc; --card:#fff; --muted:#6b6f72; --text:#111; --radius:12px; --container:980px;
+  --ok:#2e7d32; --warn:#d32f2f; --line:#e4ebf3; --warn-bg:#fdecec;
   --brand:#0f5ea8; --brand-dark:#0b4e8d; --brand-soft:#eaf3fb;
+  --input-bg:#f8fbff; --input-border:#d7e1ec; --focus-ring:0 0 0 3px rgba(15,94,168,.12);
+  --shadow-soft:0 8px 24px rgba(15,94,168,.08); --shadow-soft-sm:0 4px 12px rgba(15,94,168,.06);
 }
-.fcalc{position:relative;font-family:'Poppins',sans-serif;max-width:var(--container);margin:0 auto;background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:0 6px 18px rgba(16,24,32,0.06);border:1px solid var(--line);color:var(--text)}
+.fcalc{position:relative;font-family:'Poppins',sans-serif;max-width:var(--container);margin:0 auto;background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-soft);border:1px solid var(--line);color:var(--text)}
 .fcalc h4{margin:0 0 10px 0;font-size:20px;font-weight:700}
 .row{
   display:grid;
@@ -66,26 +68,38 @@ modification or distribution is prohibited. For licensing please contact Zegger 
   width:100%;
   padding:10px 12px;
   border-radius:10px;
-  border:1px solid #dfe3e6;
-  background:var(--bg);
+  border:1px solid var(--input-border);
+  background:var(--input-bg);
   font-size:14px;
   box-sizing:border-box;
+  transition:border-color .18s ease, box-shadow .18s ease, background-color .18s ease;
+}
+.field input[type="number"]:focus,
+.field input[type="email"]:focus,
+.field input[type="text"]:focus,
+.field select:focus,
+.field textarea:focus{
+  outline:none;
+  background:#fff;
+  border-color:#b9cbdf;
+  box-shadow:var(--focus-ring);
 }
 .actions{display:flex;gap:12px;align-items:center;margin-top:6px;flex-wrap:wrap}
 .actions .spacer{flex:1}
-.btn{padding:10px 16px;border-radius:10px;background:var(--brand);color:#fff;border:none;cursor:pointer;font-weight:600}
+.btn{padding:10px 16px;border-radius:10px;background:var(--brand);color:#fff;border:none;cursor:pointer;font-weight:600;box-shadow:0 2px 8px rgba(15,94,168,.18)}
 .btn:hover{background:var(--brand-dark)}
 .btn.secondary{background:transparent;color:var(--brand);border:1px solid #c5d8ea}
 .btn.secondary:hover{background:var(--brand-soft);border-color:#9fc0df}
 .vatwrap{display:flex;align-items:center;gap:6px}
 .vatwrap label{font-size:13px;color:var(--muted)}
-.box{margin-top:16px;background:var(--bg);border-radius:10px;padding:12px;color:var(--text)}
+.box{margin-top:16px;background:linear-gradient(180deg,#f8fbff 0%, var(--bg) 100%);border-radius:10px;padding:12px;color:var(--text);border:1px solid #e6edf4;box-shadow:var(--shadow-soft-sm)}
 #zeggerCalc .alu-info{
   margin-top:8px;
-  border:1px solid #e1e6ea;
-  background:#fff;
+  border:1px solid #dce6f1;
+  background:#fbfdff;
   border-radius:10px;
   padding:10px 12px;
+  box-shadow:0 2px 8px rgba(15,94,168,.04);
 }
 #zeggerCalc .alu-info-head{
   font-size:14px;
@@ -121,18 +135,18 @@ modification or distribution is prohibited. For licensing please contact Zegger 
   font-weight:600;
 }
 #zeggerCalc .alu-info-item-toggle:hover{
-  background:#f7f9fb;
+  background:#f3f8fd;
   border-radius:8px;
 }
 #zeggerCalc .alu-info-item-toggle:focus-visible{
-  outline:2px solid #cad5e0;
+  outline:2px solid #c1d5ea;
   outline-offset:1px;
   border-radius:8px;
 }
 #zeggerCalc .alu-item-caret{
   width:18px;
   height:18px;
-  border:1px solid #c7d1dc;
+  border:1px solid #c2d2e4;
   border-radius:50%;
   display:inline-flex;
   align-items:center;
@@ -150,8 +164,8 @@ modification or distribution is prohibited. For licensing please contact Zegger 
 }
 #zeggerCalc .alu-info-item.is-open .alu-item-caret{
   transform:rotate(90deg);
-  background:#eef3f8;
-  border-color:#b7c4d1;
+  background:#edf5fd;
+  border-color:#aec6dc;
 }
 #zeggerCalc .alu-item-title{
   margin-right:auto;
@@ -251,9 +265,9 @@ modification or distribution is prohibited. For licensing please contact Zegger 
   gap:3px;
   min-width:62px;
   height:24px;
-  border:1px solid #cdd6df;
+  border:1px solid #c4d4e4;
   border-radius:12px;
-  background:#f7f9fb;
+  background:#f4f8fd;
   padding:0 5px;
 }
 #zeggerCalc .alu-opt-step-btn{
@@ -528,7 +542,7 @@ modification or distribution is prohibited. For licensing please contact Zegger 
 
 table.tbl{width:100%;border-collapse:collapse;font-size:14px}
 .tbl th,.tbl td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
-.tbl th{font-weight:600;color:var(--muted);font-size:12px;text-transform:uppercase}
+.tbl th{font-weight:600;color:#5f7184;font-size:12px;text-transform:uppercase}
 
 .totalline{display:flex;gap:8px;justify-content:flex-end;align-items:center;margin-top:8px;padding-right:10px}
 .totalline .label{font-weight:700}
@@ -538,10 +552,15 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px}
   padding:6px 8px;
   min-width:90px;
   border-radius:8px;
-  border:1px solid #dfe3e6;
+  border:1px solid var(--input-border);
   background:var(--card);
   font-size:13px;
   box-sizing:border-box;
+}
+.discount-input:focus{
+  outline:none;
+  border-color:#b9cbdf;
+  box-shadow:0 0 0 2px rgba(15,94,168,.10);
 }
 
 .totalline .discount-label{
@@ -557,11 +576,16 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px}
   max-width:100%;
   padding:4px 6px;
   border-radius:8px;
-  border:1px solid #dfe3e6;
+  border:1px solid var(--input-border);
   background:var(--card);
   font-size:12px;
   box-sizing:border-box;
   text-align:right;
+}
+.row-discount-input:focus{
+  outline:none;
+  border-color:#b9cbdf;
+  box-shadow:0 0 0 2px rgba(15,94,168,.10);
 }
 /* Wiersze wyłączone z rabatów (np. podmurówki) */
 #zeggerCalc .discount-col.discount-disabled .row-discount-input{
@@ -723,7 +747,8 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px}
 .c-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between}
 .c-field{flex:1 1 48%;min-width:230px}
 .c-field label{display:block;margin-bottom:4px;font-size:13px;color:var(--muted)}
-.c-field input,.c-field textarea{width:100%;height:56px;padding:10px 12px;border-radius:10px;border:1px solid #dfe3e6;background:var(--bg);font-size:14px;box-sizing:border-box;resize:none}
+.c-field input,.c-field textarea{width:100%;height:56px;padding:10px 12px;border-radius:10px;border:1px solid var(--input-border);background:var(--input-bg);font-size:14px;box-sizing:border-box;resize:none}
+.c-field input:focus,.c-field textarea:focus{outline:none;background:#fff;border-color:#b9cbdf;box-shadow:var(--focus-ring)}
 .send-box{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
 .send-box .btn{height:56px;min-width:260px;font-size:14px;font-weight:600}
 #sendStatus{display:block;text-align:right;margin:0;max-width:100%;white-space:normal;line-height:1.4;color:var(--muted)}
@@ -731,25 +756,26 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px}
 #sendStatus.ok{color:var(--ok)} 
 
 /* Telefon */
-.phone-wrapper{display:flex;align-items:center;background:var(--bg);border:1px solid #dfe3e6;border-radius:10px;overflow:hidden;height:56px}
-.phone-wrapper .prefix{background:#e9ecef;color:#111;padding:0 10px;font-weight:600;font-size:14px;user-select:none;white-space:nowrap}
+.phone-wrapper{display:flex;align-items:center;background:var(--input-bg);border:1px solid var(--input-border);border-radius:10px;overflow:hidden;height:56px}
+.phone-wrapper .prefix{background:#edf3fa;color:#17314a;padding:0 10px;font-weight:600;font-size:14px;user-select:none;white-space:nowrap}
 .phone-wrapper input{flex:1;border:none;background:transparent;padding:10px 12px;font-size:14px;outline:none}
 .phone-wrapper input::-webkit-outer-spin-button,.phone-wrapper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.phone-wrapper:focus-within{border-color:#b9cbdf;box-shadow:var(--focus-ring);background:#fff}
 
 /* Tooltip */
-.tip{display:inline-flex;justify-content:center;align-items:center;width:16px;height:16px;font-size:11px;font-weight:600;border-radius:50%;background:#e5e7eb;color:#111;margin-left:5px;cursor:pointer;position:relative;transition:all .2s ease}
-.tip:hover{background:#111;color:#fff}
+.tip{display:inline-flex;justify-content:center;align-items:center;width:16px;height:16px;font-size:11px;font-weight:600;border-radius:50%;background:#e8f1fb;color:#214a73;margin-left:5px;cursor:pointer;position:relative;transition:all .2s ease}
+.tip:hover{background:var(--brand);color:#fff}
 .tip::after{content:attr(data-tip);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#111;color:#fff;font-size:11px;padding:6px 8px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;transform-origin:bottom center}
 .tip:hover::after{opacity:1;transform:translate(-50%,-4px);z-index:100}
 
 /* Etykieta trybu cen */
-.price-mode-label{font-size:13px;font-weight:700;color:#111;border-radius:8px;padding:6px 10px;display:block;text-align:right;margin-bottom:10px}
+.price-mode-label{font-size:13px;font-weight:700;color:var(--brand-dark);background:var(--brand-soft);border-radius:8px;padding:6px 10px;display:block;text-align:right;margin-bottom:10px}
 
 /* Mobile tabela */
 @media (max-width: 720px){
   table.tbl,.tbl thead,.tbl tbody,.tbl th,.tbl td,.tbl tr{display:block}
   .tbl thead{display:none}
-  .tbl tr{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:10px;padding:10px 8px;box-shadow:0 2px 6px rgba(0,0,0,.05)} /* © Zegger Tech - komentarz pr. aut. (blok CSS) */ 
+  .tbl tr{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:10px;padding:10px 8px;box-shadow:0 2px 6px rgba(15,94,168,.08)} /* © Zegger Tech - komentarz pr. aut. (blok CSS) */ 
   .tbl td{font-size:13px;padding:4px 0;text-align:left}
   .tbl td::before{content:attr(data-label);font-weight:600;display:inline-block;width:45%;color:var(--muted)}
   .totalline{flex-direction:column;align-items:flex-end;margin-top:8px}
@@ -776,6 +802,7 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px}
     "size  ctr   qty"
     "note  note  note"
     "motors motors motors";
+  box-shadow:var(--shadow-soft-sm);
 }
 .acc-title{
   grid-area:title;
@@ -800,7 +827,7 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px}
   background-position:center !important;
   background-size:contain !important;
   background-repeat:no-repeat !important;
-  border:1px dashed #d7dbe0; display:flex; align-items:center; justify-content:center;
+  border:1px dashed #ccdae8; display:flex; align-items:center; justify-content:center;
   color:#888; font-weight:600;
 }
 
@@ -808,8 +835,8 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px}
 /* Wspólny wygląd selectów */
 .acc-size,
 .acc-auto {
-  background-color: var(--bg);
-  border: 1px solid #dfe3e6;
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
   border-radius: 10px;
   align-self: center;
   padding: 10px 12px;
@@ -822,13 +849,14 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px}
 }
 .acc-size:hover,
 .acc-auto:hover {
-  border-color: #cfd6db;
+  border-color: #bfcee0;
 }
 .acc-size:focus,
 .acc-auto:focus {
   outline: none;
-  border-color: #cfd6db;
-  box-shadow: 0 0 0 2px rgba(17,17,17,.06);
+  border-color: #b5c8dc;
+  box-shadow: var(--focus-ring);
+  background:#fff;
 }
 .acc-size{ grid-area:size; width:100% }
 .acc-note{
