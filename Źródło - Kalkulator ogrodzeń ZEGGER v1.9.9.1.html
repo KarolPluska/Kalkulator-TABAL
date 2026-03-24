@@ -39,10 +39,6 @@ modification or distribution is prohibited. For licensing please contact Zegger 
   gap:12px;
   margin-bottom:12px;
 }
-#cornerRow{
-  display:grid !important;
-  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-}
 
 .field{
   min-width:0;
@@ -58,6 +54,9 @@ modification or distribution is prohibited. For licensing please contact Zegger 
   }
 }
 .field label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+#zeggerCalc #gateRow .gate-qty-label{
+  margin-top:10px;
+}
 .field input[type="number"],
 .field input[type="email"],
 .field input[type="text"],
@@ -78,6 +77,393 @@ modification or distribution is prohibited. For licensing please contact Zegger 
 .vatwrap{display:flex;align-items:center;gap:6px}
 .vatwrap label{font-size:13px;color:var(--muted)}
 .box{margin-top:16px;background:var(--bg);border-radius:10px;padding:12px;color:var(--text)}
+#zeggerCalc .alu-info{
+  margin-top:8px;
+  border:1px solid #e1e6ea;
+  background:#fff;
+  border-radius:10px;
+  padding:10px 12px;
+}
+#zeggerCalc .alu-info-head{
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:2px;
+}
+#zeggerCalc .alu-info-intro{
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+#zeggerCalc .alu-info-item{
+  margin:0;
+  padding:0;
+  border:none;
+  border-top:1px solid #edf1f4;
+}
+#zeggerCalc .alu-info-item:first-child{
+  border-top:none;
+}
+#zeggerCalc .alu-info-item > summary{
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  gap:7px;
+  padding:8px 2px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:600;
+}
+#zeggerCalc .alu-info-item > summary::-webkit-details-marker{
+  display:none;
+}
+#zeggerCalc .alu-info-item > summary::marker{
+  content:"";
+}
+#zeggerCalc .alu-info-item > summary::before{
+  content:"▸";
+  font-size:16px;
+  font-weight:700;
+  color:#1f2a33;
+  margin-right:4px;
+  width:14px;
+  text-align:center;
+  flex-shrink:0;
+}
+#zeggerCalc .alu-info-item[open] > summary::before{
+  content:"▾";
+}
+#zeggerCalc .alu-item-title{
+  margin-right:auto;
+}
+#zeggerCalc .alu-item-meta{
+  font-size:10px;
+  font-weight:500;
+  color:var(--muted);
+  white-space:nowrap;
+  margin-left:auto;
+}
+#zeggerCalc .alu-info-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+  gap:9px 10px;
+  margin:0 0 10px 0;
+  padding:0 2px;
+}
+#zeggerCalc .alu-info-col h5{
+  margin:0 0 4px 0;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.01em;
+  text-transform:uppercase;
+  color:#66707a;
+}
+#zeggerCalc .alu-info-col ul{
+  margin:0;
+  padding-left:14px;
+  font-size:11px;
+  line-height:1.28;
+}
+#zeggerCalc .alu-info-col-optional ul{
+  list-style:none;
+  padding-left:0;
+}
+#zeggerCalc .alu-info-col-optional li{
+  list-style:none;
+  margin-left:0;
+  padding-left:0;
+}
+#zeggerCalc .alu-info-col li + li{
+  margin-top:2px;
+}
+#zeggerCalc .alu-info-col-notes{
+  grid-column:1 / -1;
+  border-top:1px dashed #e7ebef;
+  padding-top:5px;
+  margin-top:2px;
+}
+#zeggerCalc .alu-opt-row{
+  display:grid;
+  grid-template-columns:68px minmax(0,1fr);
+  align-items:center;
+  gap:8px;
+}
+#zeggerCalc .alu-opt-actions{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:68px;
+  flex-shrink:0;
+}
+#zeggerCalc .alu-opt-stepper{
+  display:grid;
+  grid-template-columns:16px minmax(14px,auto) 16px;
+  align-items:center;
+  justify-items:center;
+  gap:3px;
+  min-width:62px;
+  height:24px;
+  border:1px solid #cdd6df;
+  border-radius:12px;
+  background:#f7f9fb;
+  padding:0 5px;
+}
+#zeggerCalc .alu-opt-step-btn{
+  border:none;
+  background:transparent;
+  color:#4c5966;
+  border-radius:50%;
+  width:16px;
+  height:16px;
+  font-size:11px;
+  font-weight:700;
+  line-height:1;
+  padding:0;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition:background .12s ease, color .12s ease, transform .08s ease;
+}
+#zeggerCalc .alu-opt-step-btn:hover{
+  background:#e8edf2;
+  color:#1d2730;
+}
+#zeggerCalc .alu-opt-step-btn:active{
+  transform:translateY(1px);
+}
+#zeggerCalc .alu-opt-step-value{
+  min-width:14px;
+  font-size:11px;
+  font-weight:600;
+  color:#44515d;
+  text-align:center;
+  line-height:1;
+}
+#zeggerCalc .alu-opt-row > span{
+  font-size:11px;
+  line-height:1.28;
+}
+#zeggerCalc .alu-opt-text{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:baseline;
+  gap:8px;
+  min-width:0;
+}
+#zeggerCalc .alu-opt-name{
+  min-width:0;
+  font-size:11px;
+  line-height:1.28;
+  color:#1f252c;
+}
+#zeggerCalc .alu-opt-price{
+  font-size:10px;
+  line-height:1.2;
+  font-weight:600;
+  color:#64717d;
+  white-space:nowrap;
+}
+#zeggerCalc .alu-opt-qty{
+  font-size:10px;
+  color:var(--muted);
+  white-space:nowrap;
+}
+#zeggerCalc .sum-row-comment{
+  display:block;
+  margin-top:2px;
+  font-size:11px;
+  color:var(--muted);
+}
+#zeggerCalc .sum-row-title-line{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:8px;
+}
+#zeggerCalc .sum-row-title{
+  display:inline-block;
+}
+#zeggerCalc .sum-row-actions{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  flex-shrink:0;
+}
+#zeggerCalc .tbl th.sum-func-col,
+#zeggerCalc .tbl td.sum-func-col{
+  width:84px;
+  min-width:84px;
+  text-align:center;
+  vertical-align:middle;
+}
+#zeggerCalc .sum-row-action-btn{
+  width:20px;
+  height:20px;
+  border-radius:7px;
+  border:1px solid #ccd4dc;
+  background:#f3f6f8;
+  color:#606b76;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:600;
+  line-height:1;
+  padding:0;
+  box-shadow:0 1px 0 rgba(0,0,0,.02);
+  transition:background .12s ease, border-color .12s ease, color .12s ease, transform .08s ease;
+}
+#zeggerCalc .sum-row-action-btn:hover{
+  background:#e8edf2;
+  border-color:#bec8d2;
+}
+#zeggerCalc .sum-row-action-btn.save.active{
+  background:#1f9f59;
+  border-color:#19884b;
+  color:#fff;
+}
+#zeggerCalc .sum-row-action-btn.remove{
+  border-color:#d4dbe2;
+  color:#8a95a0;
+  background:#f3f6f8;
+}
+#zeggerCalc .sum-row-action-btn.remove:hover{
+  background:#f6eef0;
+  border-color:#d7c2c7;
+  color:#b14e59;
+}
+#zeggerCalc .sum-row-action-btn:active{
+  transform:translateY(1px);
+}
+#zeggerCalc .alu-info-muted{
+  font-size:11px;
+  color:var(--muted);
+}
+#zeggerCalc .sum-saved-separator td{
+  border-top:2px solid #cfd8e2;
+  border-bottom:1px solid #dbe3ea;
+  padding:8px 10px;
+  background:linear-gradient(180deg,#f8fafc 0%, #f2f6fa 100%);
+}
+#zeggerCalc .sum-saved-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
+#zeggerCalc .sum-saved-title{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:#5f6d79;
+}
+#zeggerCalc .sum-saved-title::before{
+  content:"";
+  width:8px;
+  height:8px;
+  border-radius:2px;
+  background:#6e8aa5;
+  box-shadow:0 0 0 2px rgba(110,138,165,.15);
+}
+#zeggerCalc .sum-saved-note{
+  display:block;
+  margin-top:2px;
+  font-size:10px;
+  color:#7f8c99;
+}
+#zeggerCalc .sum-saved-count{
+  display:inline-block;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0;
+  text-transform:none;
+  color:#6e7c89;
+  white-space:nowrap;
+}
+#zeggerCalc .sum-row-saved{
+  background:linear-gradient(180deg,#f9fbfe 0%, #f5f9fd 100%);
+}
+#zeggerCalc .sum-row-saved td{
+  border-bottom-color:#d8e2ec;
+}
+#zeggerCalc .sum-row-saved td:first-child{
+  position:relative;
+  padding-left:16px;
+}
+#zeggerCalc .sum-row-saved td:first-child::before{
+  content:"";
+  position:absolute;
+  left:6px;
+  top:10px;
+  bottom:10px;
+  width:3px;
+  border-radius:2px;
+  background:#6f8ca8;
+}
+#zeggerCalc .sum-qty-control{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+}
+#zeggerCalc .sum-qty-stack{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+#zeggerCalc .sum-qty-btn{
+  width:18px;
+  height:12px;
+  border:1px solid #d8dde3;
+  background:#f6f8fa;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:0;
+  line-height:1;
+  padding:0;
+}
+#zeggerCalc .sum-qty-btn:hover{
+  background:#eceff3;
+}
+#zeggerCalc .sum-qty-btn::before{
+  content:"";
+  display:block;
+  width:100%;
+  height:100%;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:11px 11px;
+}
+#zeggerCalc .sum-qty-btn[data-dir="up"]::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%232b2f33' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 15 12 9 18 15'/%3E%3C/svg%3E");
+}
+#zeggerCalc .sum-qty-btn[data-dir="down"]::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%232b2f33' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+}
+#zeggerCalc .sum-qty-value{
+  min-width:18px;
+  text-align:center;
+  display:inline-block;
+  font-size:13px;
+}
+@media (max-width:900px){
+  #zeggerCalc .alu-info-grid{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  #zeggerCalc .alu-info-col-notes{
+    grid-column:auto;
+    border-top:none;
+    padding-top:0;
+    margin-top:0;
+  }
+  #zeggerCalc .alu-item-meta{
+    display:none;
+  }
+}
+
 table.tbl{width:100%;border-collapse:collapse;font-size:14px}
 .tbl th,.tbl td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
 .tbl th{font-weight:600;color:var(--muted);font-size:12px;text-transform:uppercase}
@@ -771,19 +1157,7 @@ label[for="accAuto-przesuwna"]{
   }
 }
 
-/* Fix: Narożniki - pełna szerokość na mobile/tablet */
-@media (max-width:1024px){
-  #cornerRow{
-    grid-template-columns:1fr !important;
-  }
-}
-
-@media (max-width:680px){
-  #cornerRow{
-    grid-template-columns:1fr !important;
-  }
-}
-/* ZEGGER PATCH - ujednolicenie pól w Safari + Narożniki na mobile */
+/* ZEGGER PATCH - ujednolicenie pól w Safari */
 
 /* 1) Normalizacja wyglądu wszystkich pól formularza */
 #zeggerCalc .field input[type="number"],
@@ -805,17 +1179,9 @@ label[for="accAuto-przesuwna"]{
   margin: 0;
 }
 
-/* 1b) Twardy override dla dwóch krytycznych pól */
-#len,
-#corners{
+/* 1b) Twardy override dla krytycznego pola długości */
+#len{
   border-radius: 10px !important;
-}
-
-/* 2) Narożniki - pełna szerokość na mobile jak reszta formularza */
-@media (max-width: 1024px){
-  #cornerRow{
-    grid-template-columns: 1fr !important;
-  }
 }
 /* === ZEGGER PATCH: „ptaszek” tylko dla głównych selectów === */
 #zeggerCalc .field select{
@@ -837,7 +1203,7 @@ label[for="accAuto-przesuwna"]{
 #zeggerCalc .field select::-ms-expand{
   display:none;
 }
-/* ZEGGER PATCH - spinner dla długości ogrodzenia i ilości narożników */
+/* ZEGGER PATCH - spinner dla długości ogrodzenia */
 .zegger-input-spinner{
   position: relative;
   display: inline-block;
@@ -890,6 +1256,13 @@ label[for="accAuto-przesuwna"]{
   padding-right: 46px; /* trochę więcej miejsca */
 }
 
+#zeggerCalc .z-spinner-wrap input[type="number"]:disabled{
+  background:#eceff2;
+  color:#7b828a;
+  cursor:not-allowed;
+  opacity:1;
+}
+
 #zeggerCalc .zegger-spin{
   position:absolute;
   top:50%;
@@ -930,6 +1303,18 @@ label[for="accAuto-przesuwna"]{
 /* delikatny hover, żeby pasowało do kapsuł +/- */
 #zeggerCalc .zegger-spin-btn:hover{
   background:#f0f2f4;
+}
+
+#zeggerCalc .z-spinner-wrap input[disabled] + .zegger-spin{
+  opacity:.58;
+}
+
+#zeggerCalc .z-spinner-wrap input[disabled] + .zegger-spin .zegger-spin-btn{
+  cursor:not-allowed;
+}
+
+#zeggerCalc .z-spinner-wrap input[disabled] + .zegger-spin .zegger-spin-btn:hover{
+  background:transparent;
 }
 
 /* ikony zostają takie jak były */
@@ -1146,21 +1531,15 @@ label[for="accAuto-przesuwna"]{
     </div>
 
     <div class="field">
-      <label for="type">Typ ogrodzenia
-        <span class="tip" data-tip="Wybierz główny typ ogrodzenia: panelowe 3D lub palisadowe.">?</span>
+      <label for="type">System ogrodzenia
+        <span class="tip" data-tip="Wybierz system: Fokus, Fokus Light, Flat lub Aluminium Prime.">?</span>
       </label>
-      <select id="type">
-        <option value="panel_2500">Panel 3D - szer. 2500 mm</option>
-        <option value="pal_1000">Palisada - szer. 1000 mm</option>
-        <option value="pal_1500">Palisada - szer. 1500 mm</option>
-        <option value="pal_2000">Palisada - szer. 2000 mm</option>
-        <option value="pal_2500">Palisada - szer. 2500 mm</option>
-      </select>
+      <select id="type"></select>
     </div>
 
     <div class="field">
-      <label for="model">Rodzaj przęsła / model 
-        <span class="tip" data-tip="Wybierz typ panelu lub palisady.">?</span>
+      <label for="model">Model
+        <span class="tip" data-tip="Lista modeli zależy od wybranego systemu.">?</span>
       </label>
       <select id="model"></select>
     </div>
@@ -1183,15 +1562,15 @@ label[for="accAuto-przesuwna"]{
     </div>
 
     <div class="field">
-      <label for="postType">Słupek - typ (mm)
-        <span class="tip" data-tip="Wybierz przekrój słupka.">?</span>
+      <label for="postType"><span id="postTypeLabel">Opcja systemowa</span>
+        <span class="tip" data-tip="Dla systemów panelowych: typ obejmy. Dla Aluminium Prime: rodzaj słupka.">?</span>
       </label>
       <select id="postType"></select>
     </div>
   </div>
 
   <!-- ZEGGER TECH: Sekcja formularza (row) - prawa autorskie © Zegger Tech -->
-<div class="row" id="postDetailsRow">
+<div class="row" id="postDetailsRow" style="display:none;">
   <div class="field">
     <label for="postWall">Słupek - wariant (grubość ścianki)
       <span class="tip" data-tip="Im większa ścianka, tym mocniejszy słupek.">?</span>
@@ -1214,67 +1593,48 @@ label[for="accAuto-przesuwna"]{
   </div>
 </div>
 
-  <!-- Podmurówka + mocowanie -->
+  <!-- Własny rozmiar słupka -->
   <!-- ZEGGER TECH: Sekcja formularza (row) - prawa autorskie © Zegger Tech -->
-<div class="row">
-    <div class="field">
-      <label for="pdm">Podmurówka (szer. 2500 mm)
-        <span class="tip" data-tip="Prefabrykowana podmurówka betonowa.">?</span>
-      </label>
-      <select id="pdm">
-        <option value="none">- Brak -</option>
-        <option value="pdm_250_gry">Podmurówka wys. 250 mm - Szary</option>
-        <option value="pdm_250_antr">Podmurówka wys. 250 mm - Antracyt</option>
-        <option value="pdm_300_gry">Podmurówka wys. 300 mm - Szary</option>
-        <option value="pdm_300_antr">Podmurówka wys. 300 mm - Antracyt</option>
-      </select>
-    </div>
-
-    <div class="field" id="mocField" style="display:block;">
-      <label for="moc">Mocowanie do podmurówki
-        <span class="tip" data-tip="Łączy podmurówkę ze słupkiem.">?</span>
-      </label>
-      <select id="moc">
-        <option value="none">- Brak -</option>
-        <option value="moc_250">Mocowanie 50x250 mm</option>
-        <option value="moc_300">Mocowanie 60x300 mm</option>
-      </select>
-    </div>
-
-    <div class="field" id="mocColorField" style="display:block;">
-      <label for="mocColor">Kolor mocowania (RAL)</label>
-      <select id="mocColor">
-        <option value="none">- Brak -</option>
-        <option value="RAL 9005 - Czarny">RAL 9005 - Czarny</option>
-        <option value="RAL 7016 - Antracytowy">RAL 7016 - Antracytowy</option>
-        <option value="RAL 8017 - Brązowy">RAL 8017 - Brązowy</option>
-        <option value="RAL 6005 - Zielony">RAL 6005 - Zielony</option>
-      </select>
-    </div>
-  </div>
-
-  <!-- Narożniki -->
-  <!-- ZEGGER TECH: Sekcja formularza (row) - prawa autorskie © Zegger Tech -->
-<div class="row" id="cornerRow" style="display:none;">
+<div class="row" style="display:none;">
     <div class="field" id="postCustomWidthField" style="display:none;">
       <label for="postCustomWidth">Własny rozmiar słupka (mm)
         <span class="tip" data-tip="Wpisz szerokość słupka w mm. Może to być niestandardowy słupek murowany lub betonowy. Wartość jest używana do obliczeń palisady (długość osi ogrodzenia).">?</span>
       </label>
       <input id="postCustomWidth" type="number" min="1" step="1" value="" placeholder="np. 120">
     </div>
+  </div>
 
+  <div class="row" id="gateRow" style="display:none;">
     <div class="field">
-      <label for="corners">Narożniki (ilość)
-        <span class="tip" data-tip="Liczba rogów pod kątem prostym.">?</span>
-      </label>
-      <input id="corners" type="number" min="0" step="1" value="0" placeholder="np. 2">
+      <label for="gateWicketVariant">Furtka (wariant)</label>
+      <select id="gateWicketVariant"></select>
+      <label class="gate-qty-label" for="gateWicketQty">Ilość furtki</label>
+      <input id="gateWicketQty" type="number" min="0" step="1" value="0" disabled>
     </div>
+    <div class="field">
+      <label for="gateSwingVariant">Brama dwuskrzydłowa (wariant)</label>
+      <select id="gateSwingVariant"></select>
+      <label class="gate-qty-label" for="gateSwingQty">Ilość bram dwuskrzydłowych</label>
+      <input id="gateSwingQty" type="number" min="0" step="1" value="0" disabled>
+    </div>
+    <div class="field">
+      <label for="gateSlidingVariant">Brama przesuwna (wariant)</label>
+      <select id="gateSlidingVariant"></select>
+      <label class="gate-qty-label" for="gateSlidingQty">Ilość bram przesuwnych</label>
+      <input id="gateSlidingQty" type="number" min="0" step="1" value="0" disabled>
+    </div>
+  </div>
+
+  <div id="aluInfoPanel" class="box alu-info" style="display:none;">
+    <div class="alu-info-head">Aluminium Prime - wyposażenie i uwagi</div>
+    <div id="aluInfoIntro" class="alu-info-intro"></div>
+    <div id="aluInfoContent"></div>
   </div>
 
 
   <!-- PRZYCISKI -->
   <!-- ZEGGER TECH: Pasek akcji (actions) - prawa autorskie © Zegger Tech -->
-<div class="actions">
+  <div class="actions">
     <!-- ZEGGER TECH: Przycisk obliczeń (calc) - prawa autorskie © Zegger Tech -->
 <button class="btn" id="calc" type="button">Oblicz</button>
     <button class="btn secondary" id="reset" type="button">Reset</button>
@@ -1325,6 +1685,7 @@ label[for="accAuto-przesuwna"]{
           <th>Suma</th>
           <th>Rabat %</th>
           <th>Po rabacie</th>
+          <th class="sum-func-col">Funkcje</th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
@@ -1350,8 +1711,7 @@ label[for="accAuto-przesuwna"]{
 
     <div class="note">
       Słupki liczone jako <b>przęsła + 1</b>.<br>
-      Dla paneli obejmy liczone jako <b>przelotowe</b> + <b>końcowe</b> (2 słupki końcowe).<br>
-      Podmurówka dostępna tylko dla szerokości 2500 mm.
+      Dla paneli obejmy liczone jako <b>przelotowe</b> + <b>końcowe</b> (2 słupki końcowe).
     </div>
 
     <div class="sep"></div>
@@ -1598,8 +1958,6 @@ label[for="accAuto-przesuwna"]{
       1700: 2500
     };
 
-    const MOC_PRICE = { moc_250: 9.20, moc_300: 10.35 };
-
     const COLORS = {
       panel: ['RAL 9005 - Czarny','RAL 7016 - Antracytowy','RAL 8017 - Brązowy','RAL 6005 - Zielony'],
       palisada: ['RAL 9005 - Czarny','RAL 7016 - Antracytowy','RAL 8017 - Brązowy','RAL 6005 - Zielony'],
@@ -1625,849 +1983,1362 @@ label[for="accAuto-przesuwna"]{
       "PLATE": "https://zegger.pl/wp-content/uploads/2025/10/FullPlate-scaled.png"
     };
 
+    const TABAL_SYSTEM_DATA = {
+      systems: {
+        fokus: {
+          id: "fokus",
+          name: "System Fokus",
+          panelWidthMM: 2500,
+          heights: [1030, 1230, 1330, 1530, 1730, 1930, 2030, 2230, 2430],
+          models: [
+            { id: "fokus_3d_fi5_50x200", name: "Panel Fokus 3D Fi5 50x200" },
+            { id: "fokus_3d_fi4_50x200", name: "Panel Fokus ECO 3D Fi4 50x200" }
+          ]
+        },
+        fokus_light: {
+          id: "fokus_light",
+          name: "System Fokus Light",
+          panelWidthMM: 2500,
+          heights: [1030, 1230, 1330, 1530, 1730, 1930, 2030, 2230, 2430],
+          models: [
+            { id: "fokus_light_3d_fi5_55x200", name: "Panel Fokus Light 3D Fi5 55x200" },
+            { id: "fokus_light_3d_fi4_55x200", name: "Panel Fokus Light ECO 3D Fi4 55x200" }
+          ]
+        },
+        flat: {
+          id: "flat",
+          name: "System Flat",
+          panelWidthMM: 2500,
+          heights: [830, 1030, 1230, 1430, 1630, 1830, 2030, 2230, 2430],
+          models: [
+            { id: "flat_2d_5_4_5_55x200", name: "Panel Flat 5/4/5 2D Fi4 55x200" },
+            { id: "flat_2d_6_5_6_50x200", name: "Panel Fokus 6/5/6 2D Fi5 50x200" },
+            { id: "flat_2d_8_6_8_50x200", name: "Panel Fokus 8/6/8 2D Fi6 50x200" }
+          ]
+        }
+      },
+      colors: {
+        "9005": { value: "9005", label: "RAL 9005 - czarny" },
+        "7016": { value: "7016", label: "RAL 7016 - antracyt" },
+        "8017": { value: "8017", label: "RAL 8017 - brązowy" },
+        "6005": { value: "6005", label: "RAL 6005 - zielony" }
+      },
+      clampTypes: {
+        "OM-1": { value: "OM-1", label: "OM-1" },
+        "OM-2": { value: "OM-2", label: "OM-2 (uniwersalna)" }
+      },
+      postRules: {
+        830:  { post: 1400, clamps: 2 },
+        1030: { post: 1600, clamps: 2 },
+        1230: { post: 1800, clamps: 2 },
+        1330: { post: 2000, clamps: 3 },
+        1430: { post: 2000, clamps: 3 },
+        1530: { post: 2200, clamps: 3 },
+        1630: { post: 2200, clamps: 3 },
+        1730: { post: 2400, clamps: 3 },
+        1830: { post: 2600, clamps: 4 },
+        1930: { post: 2600, clamps: 4 },
+        2030: { post: 2800, clamps: 4 },
+        2230: { post: 3000, clamps: 4 },
+        2430: { post: 3200, clamps: 4 }
+      }
+    };
+
+    const ALUMINIUM_PRIME_DATA = {
+      id: "system_aluminium_prime",
+      name: "System Aluminium Prime",
+      standardColor: { code: "7016M", label: "RAL 7016M - antracyt półmat gładki" },
+      sharedPosts: {
+        toConcrete: { id: "post_80x80_to_concrete", name: "Słup do wbetonowania", sizeMM: "80x80", heightMM: 2390, priceNet: 246 },
+        toAnchor:   { id: "post_80x80_to_anchor",   name: "Słup do kotwienia",    sizeMM: "80x80", heightMM: 1800, priceNet: 227 }
+      },
+      models: [
+        {
+          id: "morana",
+          name: "Morana",
+          segment: { widthMM: 2560, variants: [{ heightMM: 900, priceNet: 500 }, { heightMM: 1260, priceNet: 661 }, { heightMM: 1620, priceNet: 822 }] },
+          gateOptions: {
+            wicket:      [{ type: "furtka", name: "Furtka z wypełnieniem poziomym Morana", widthMM: 1000, heightMM: 1620, priceNet: 1377 }],
+            swingGate:   [{ type: "brama_dwuskrzydlowa", name: "Brama dwuskrzydłowa z wypełnieniem poziomym Morana", widthMM: 4000, heightMM: 1620, priceNet: 3258 }],
+            slidingGate: [{ type: "brama_przesuwna", name: "Brama przesuwna z wypełnieniem poziomym Morana", widthMM: 4000, heightMM: 1620, priceNet: 6548 }]
+          }
+        },
+        {
+          id: "khors",
+          name: "Khors",
+          segment: { widthMM: 2560, variants: [{ heightMM: 900, priceNet: 642 }, { heightMM: 1260, priceNet: 855 }, { heightMM: 1620, priceNet: 1069 }] },
+          gateOptions: {
+            wicket:      [{ type: "furtka", name: "Furtka z wypełnieniem poziomym Khors", widthMM: 1000, heightMM: 1620, priceNet: 1471 }],
+            swingGate:   [{ type: "brama_dwuskrzydlowa", name: "Brama dwuskrzydłowa z wypełnieniem poziomym Khors", widthMM: 4000, heightMM: 1620, priceNet: 3736 }],
+            slidingGate: [{ type: "brama_przesuwna", name: "Brama przesuwna z wypełnieniem poziomym Khors", widthMM: 4000, heightMM: 1620, priceNet: 6875 }]
+          }
+        },
+        {
+          id: "perun",
+          name: "Perun",
+          segment: { widthMM: 2560, variants: [{ heightMM: 900, priceNet: 775 }, { heightMM: 1260, priceNet: 1034 }, { heightMM: 1620, priceNet: 1292 }] },
+          gateOptions: {
+            wicket:      [{ type: "furtka", name: "Furtka z wypełnieniem poziomym Perun", widthMM: 1000, heightMM: 1620, priceNet: 1530 }],
+            swingGate:   [{ type: "brama_dwuskrzydlowa", name: "Brama dwuskrzydłowa z wypełnieniem poziomym Perun", widthMM: 4000, heightMM: 1620, priceNet: 4056 }],
+            slidingGate: [{ type: "brama_przesuwna", name: "Brama przesuwna z wypełnieniem poziomym Perun", widthMM: 4000, heightMM: 1620, priceNet: 7096 }]
+          }
+        },
+        {
+          id: "veles",
+          name: "Veles",
+          segment: { widthMM: 2560, variants: [{ heightMM: 900, priceNet: 827 }, { heightMM: 1260, priceNet: 1111 }, { heightMM: 1620, priceNet: 1395 }] },
+          gateOptions: {
+            wicket:      [{ type: "furtka", name: "Furtka z wypełnieniem poziomym Veles", widthMM: 1000, heightMM: 1620, priceNet: 1564 }],
+            swingGate:   [{ type: "brama_dwuskrzydlowa", name: "Brama dwuskrzydłowa z wypełnieniem poziomym Veles", widthMM: 4000, heightMM: 1620, priceNet: 4215 }],
+            slidingGate: [{ type: "brama_przesuwna", name: "Brama przesuwna z wypełnieniem poziomym Veles", widthMM: 4000, heightMM: 1620, priceNet: 7260 }]
+          }
+        },
+        {
+          id: "svarog",
+          name: "Svarog",
+          segment: { widthMM: 2560, variants: [{ heightMM: 900, priceNet: 977 }, { heightMM: 1260, priceNet: 1338 }, { heightMM: 1620, priceNet: 1698 }] },
+          gateOptions: {
+            wicket:      [{ type: "furtka", name: "Furtka z wypełnieniem poziomym Svarog", widthMM: 1000, heightMM: 1620, priceNet: 1644 }],
+            swingGate:   [{ type: "brama_dwuskrzydlowa", name: "Brama dwuskrzydłowa z wypełnieniem poziomym Svarog", widthMM: 4000, heightMM: 1620, priceNet: 4691 }],
+            slidingGate: [{ type: "brama_przesuwna", name: "Brama przesuwna z wypełnieniem poziomym Svarog", widthMM: 4000, heightMM: 1620, priceNet: 7752 }]
+          }
+        }
+      ]
+    };
+
+    const ALUMINIUM_COMPONENT_INFO = {
+      segment: {
+        included: [
+          "Zaślepki aluminiowe przykręcane z łącznikami.",
+          "Łączniki do skręcenia profili wypełnienia z profilami ramowymi."
+        ],
+        optional: [],
+        notes: [
+          "Cennik obejmuje segmenty do złożenia na terenie budowy (montaż bezpośredni)."
+        ]
+      },
+      post_toConcrete: {
+        included: [
+          "Słup 80x80x3.",
+          "Zaślepka aluminiowa przykręcana z łącznikami."
+        ],
+        optional: [
+          {
+            id: "post_toConcrete_rosette",
+            name: "Rozeta maskująca do słupa systemowego 80x80x3",
+            uiLabel: "Rozeta maskująca do słupa systemowego 80x80x3 - 35 zł netto/szt.",
+            priceNet: 35
+          }
+        ],
+        notes: []
+      },
+      post_toAnchor: {
+        included: [
+          "Marka kotwiąca z łącznikami do słupa systemowego 80x80x3."
+        ],
+        optional: [
+          {
+            id: "post_toAnchor_rosette",
+            name: "Rozeta maskująca do słupa systemowego 80x80x3",
+            uiLabel: "Rozeta maskująca do słupa systemowego 80x80x3 - 35 zł netto/szt.",
+            priceNet: 35
+          }
+        ],
+        notes: [
+          "Zestaw do kotwienia nie zawiera łączników elementów ogrodzenia z podłożem - dobór po stronie montera."
+        ]
+      },
+      wicket: {
+        included: [
+          "Zaślepki aluminiowe przykręcane z łącznikami.",
+          "Szyld w kolorze RAL9005 (czarny) klamka/klamka.",
+          "Zamek uniwersalny z czołem ze stali nierdzewnej.",
+          "Wkładka nikiel/satyna z 3 kluczami.",
+          "Płytka kaseta zaczepu z zaczepem manualnym.",
+          "Zawiasy regulowane ze stali nierdzewnej."
+        ],
+        optional: [
+          {
+            id: "wicket_cover",
+            name: "Maskownica zawiasów i przymyku",
+            uiLabel: "Maskownica zawiasów i przymyku - 300 zł netto/kpl.",
+            priceNet: 300
+          },
+          {
+            id: "wicket_electric_strike",
+            name: "Elektrozaczep",
+            uiLabel: "Elektrozaczep - 100 zł netto/kpl.",
+            priceNet: 100
+          },
+          {
+            id: "wicket_stainless_shield",
+            name: "Wymiana szyldu ze stali nierdzewnej (klamka/gałka)",
+            uiLabel: "Wymiana szyldu ze stali nierdzewnej (klamka/gałka) - 200 zł netto/kpl.",
+            priceNet: 200
+          },
+          {
+            id: "wicket_post_prep",
+            name: "Przygotowanie słupa pod funkcję zawiasu lub kasety",
+            uiLabel: "Przygotowanie słupa pod funkcję zawiasu lub kasety - 100 zł netto/szt.",
+            priceNet: 100
+          }
+        ],
+        notes: []
+      },
+      swing: {
+        included: [
+          "Zaślepki aluminiowe przykręcane z łącznikami.",
+          "Zawiasy ze stali nierdzewnej.",
+          "Szyld w kolorze RAL9005 (czarny) klamka/klamka.",
+          "Systemowy rygiel dolny bramy w kolorze RAL9005 (czarny), zamykany kluczykiem.",
+          "Płytka kaseta zaczepu z zaczepem manualnym."
+        ],
+        optional: [
+          {
+            id: "swing_cover",
+            name: "Maskownica zawiasów",
+            uiLabel: "Maskownica zawiasów - 300 zł netto/kpl.",
+            priceNet: 300
+          },
+          {
+            id: "swing_stop",
+            name: "Systemowy opór dolny bramy",
+            uiLabel: "Systemowy opór dolny bramy - 200 zł netto/szt.",
+            priceNet: 200
+          },
+          {
+            id: "swing_stainless_shield",
+            name: "Szyld ze stali nierdzewnej (klamka/gałka)",
+            uiLabel: "Szyld ze stali nierdzewnej (klamka/gałka) - 200 zł netto/kpl.",
+            priceNet: 200
+          },
+          {
+            id: "swing_post_prep",
+            name: "Przygotowanie słupa pod funkcję zawiasu lub kasety",
+            uiLabel: "Przygotowanie słupa pod funkcję zawiasu lub kasety - 100 zł netto/szt.",
+            priceNet: 100
+          }
+        ],
+        notes: [
+          "Słupy do nabycia oddzielnie."
+        ]
+      },
+      sliding: {
+        included: [
+          "Zaślepki aluminiowe przykręcane z łącznikami.",
+          "Wózki jezdne.",
+          "Najazd górny.",
+          "Najazd dolny.",
+          "Prowadzenie górne.",
+          "Zestaw odbojników bramowych.",
+          "Regulowany ściąg przeciwwagi ze stali nierdzewnej.",
+          "Szyld w kolorze RAL9005 (czarny) klamka/klamka.",
+          "Zamek uniwersalny hakowy z czołem ze stali nierdzewnej."
+        ],
+        optional: [
+          {
+            id: "sliding_wheel_covers",
+            name: "Maskownice wózków RAL7016 antracyt (tworzywo)",
+            uiLabel: "Maskownice wózków RAL7016 antracyt, tworzywo - 100 zł netto.",
+            priceNet: 100
+          },
+          {
+            id: "sliding_gear_rack",
+            name: "Listwa zębata z tworzywa w zestawie z łącznikami",
+            uiLabel: "Listwa zębata z tworzywa w zestawie z łącznikami - 50 zł/mb.",
+            priceNet: 50
+          },
+          {
+            id: "sliding_post_prep",
+            name: "Przygotowanie słupa pod funkcję dojazdu lub prowadzenia",
+            uiLabel: "Przygotowanie słupa pod funkcję dojazdu lub prowadzenia - 100 zł netto/szt.",
+            priceNet: 100
+          }
+        ],
+        notes: [
+          "Słupy do nabycia oddzielnie."
+        ]
+      }
+    };
+
+    const ALL_SYSTEMS = {
+      ...TABAL_SYSTEM_DATA.systems,
+      [ALUMINIUM_PRIME_DATA.id]: ALUMINIUM_PRIME_DATA
+    };
+
     /* ==== STAN ==== */
-    const extrasState = { furtka:{qty:0,size:null}, brama2s:{qty:0,size:null}, przesuwna:{qty:0,size:null} };
-    const autoState = { brama2s:{name:'none', qty:0}, przesuwna:{name:'none', qty:0} };
     let autoCalc = false;
-    let automatyVisible = false;
+    const MISSING_PRICE_LABEL = "brak ceny";
+    const CUSTOM_QUOTE_PRICE_LABEL = "Wycena indywidualna";
+    const CUSTOM_ALU_COLOR_VALUE = "custom_order";
+    const aluInfoOpenState = Object.create(null);
+    const aluOptionalQtyState = Object.create(null);
+    const summaryQtyOverrideState = Object.create(null);
+    const currentSummaryRowsById = Object.create(null);
+    const savedConfigPositions = [];
 
     /* ==== UTIL ==== */
     const $ = s=>document.querySelector(s);
     const fmt = n=>Number(n).toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2})+' zł';
     const round2 = n => Math.round((n + Number.EPSILON) * 100) / 100;
-    const unique = arr => [...new Set(arr)];
-    const widthOfType = (t)=> 
-  t==='panel_2500' ? 2500 :
-  (t==='pal_1000' ? 1000 :
-  (t==='pal_1500' ? 1500 :
-  (t==='pal_2000' ? 2000 : 2500)));
-    // Szerokość słupka (mm) - do obliczeń palisady w osi długości
-    function postWidthMM(postType){
-      if (!postType || postType === 'none') return 0;
+    const toInt = (v) => parseInt(v, 10) || 0;
 
-      // NOWE: własny rozmiar - szerokość wpisana przez użytkownika (mm)
-      if (postType === 'custom'){
-        const el = document.getElementById('postCustomWidth');
-        const v0 = el ? parseInt(String(el.value||'').trim(), 10) : NaN;
-        const v = (isFinite(v0) && v0 > 0) ? v0 : 0;
-        return v;
-      }
-
-      const parts = String(postType).split('x').map(s => parseInt(s, 10));
-      const a = parts[0];
-      const b = parts.length > 1 ? parts[1] : NaN;
-      if (!isFinite(a)) return 0;
-      // Dla bezpieczeństwa bierzemy większy wymiar (dla palisady i tak zwykle kwadrat)
-      if (isFinite(b)) return Math.max(a, b);
-      return a;
-    }
     function setOptions(select, arr){
       if (!select) return;
       const prev = select.value;
       select.innerHTML='';
-      (arr||[]).forEach(v=>{
-        const o=document.createElement('option');
-        if (typeof v==='object'){ o.value=v.value; o.textContent=v.label; }
-        else { o.value=v; o.textContent=v; }
+      (arr || []).forEach(v=>{
+        const o = document.createElement('option');
+        if (typeof v === 'object'){
+          o.value = String(v.value);
+          o.textContent = v.label;
+        } else {
+          o.value = String(v);
+          o.textContent = String(v);
+        }
         select.appendChild(o);
       });
-      if (prev && [...select.options].some(o=>o.value===prev)) select.value = prev;
+      if (prev && [...select.options].some(o => o.value === prev)) select.value = prev;
+      if (!select.value && select.options.length) select.selectedIndex = 0;
     }
-    function modelsForType(typeKey) {
-      if (typeKey === 'panel_2500') return Object.keys(PANEL_PRICES);
-      const w = widthOfType(typeKey);
-      let models = Object.keys(PAL_PRICES).filter(model =>
-        Object.keys(PAL_PRICES[model]).some(k => k.startsWith(String(w) + 'x'))
-      );
-      if (typeKey === 'pal_1000') {
-        models = Object.keys(PAL_PRICES).filter(model =>
-          Object.keys(PAL_PRICES[model]).some(k => k.startsWith('1000x'))
-        );
+
+    const isAluminiumSystem = (typeKey) => typeKey === ALUMINIUM_PRIME_DATA.id;
+    const getSystem = (typeKey) => ALL_SYSTEMS[typeKey] || null;
+
+    function getModel(typeKey, modelId){
+      const sys = getSystem(typeKey);
+      if (!sys || !Array.isArray(sys.models)) return null;
+      return sys.models.find(m => m.id === modelId) || sys.models[0] || null;
+    }
+
+    function modelsForType(typeKey){
+      const sys = getSystem(typeKey);
+      if (!sys || !Array.isArray(sys.models)) return [];
+      return sys.models.map(m => ({ value: m.id, label: m.name }));
+    }
+
+    function heightsForSelection(typeKey, modelId){
+      const sys = getSystem(typeKey);
+      if (!sys) return [];
+      if (!isAluminiumSystem(typeKey)) return (sys.heights || []).map(h => ({ value: String(h), label: `${h} mm` }));
+      const model = getModel(typeKey, modelId);
+      const hs = (model?.segment?.variants || []).map(v => v.heightMM);
+      return hs.map(h => ({ value: String(h), label: `${h} mm` }));
+    }
+
+    function colorOptionsForType(typeKey){
+      if (isAluminiumSystem(typeKey)){
+        const c = ALUMINIUM_PRIME_DATA.standardColor;
+        return [
+          { value: c.code, label: c.label },
+          { value: CUSTOM_ALU_COLOR_VALUE, label: "Inny (Na zamówienia)" }
+        ];
       }
-      return models;
-    }
-    function heightsForSelection(typeKey, model){
-      if (typeKey==='panel_2500') return Object.keys(PANEL_PRICES[model]).map(h=>Number(h));
-      const w = widthOfType(typeKey);
-      const map = PAL_PRICES[model];
-      const hs = Object.keys(map).filter(k=>k.startsWith(String(w)+'x')).map(k=>Number(k.split('x')[1]));
-      return unique(hs).sort((a,b)=>a-b);
-    }
-    const postTypesForType = (t) => {
-    const base = (t === 'panel_2500')
-      ? ['60x40']
-      : ['60x60','80x80','100x100'];
-
-    // Pierwsza pozycja: brak słupków
-    const opts = [{ value: 'none', label: '- Brak -' }];
-
-    base.forEach(v => {
-      opts.push({ value: v, label: v });
-    });
-
-    // NOWE: własny rozmiar słupka (tylko palisada: np. słupek murowany/betonowy)
-    if (String(t).startsWith('pal_')) {
-      opts.push({ value: 'custom', label: 'Własny rozmiar' });
+      return Object.values(TABAL_SYSTEM_DATA.colors).map(c => ({ value: c.value, label: c.label }));
     }
 
-    return opts;
-  };
-
-    function postWallsForPostType(pt){
-      const walls =
-        (pt==='60x40') ? ['1.2','1.5'] :
-        (pt==='60x60') ? ['2'] :
-        (pt==='80x80') ? ['2','3'] :
-        (pt==='100x100') ? ['2','3'] : ['2'];
-
-      // + opcja bazowa
-      return [{ value:'none', label:'- Brak -' }].concat(walls);
-    }
-    const postHeightsForType = (t)=> {
-    const hs = (t==='panel_2500') ? [2000,2300,2600,3000] : [2000,2300,2500];
-    return [{ value:'none', label:'- Brak -' }].concat(hs);
-  };
-  function setNoneOptionState(sel, allowNone){
-  if (!sel) return;
-  const noneOpt = Array.from(sel.options || []).find(o => o.value === 'none');
-  if (!noneOpt) return;
-
-  // allowNone=true -> widoczny i wybieralny
-  // allowNone=false -> ukryty i niewybieralny
-  noneOpt.disabled = !allowNone;
-  noneOpt.hidden = !allowNone;
-
-  // Jeżeli none został zablokowany, a select nadal stoi na none -> przestaw na pierwszą sensowną opcję
-  if (!allowNone && sel.value === 'none'){
-    const first = Array.from(sel.options || []).find(o => o.value && o.value !== 'none' && !o.disabled && !o.hidden);
-    if (first) sel.value = first.value;
-  }
-}
-    function colorsFor(typeKey, postType){
-  const fence = (typeKey==='panel_2500') ? 'panel' : 'palisada';
-
-  const basePostColors = (postType==='60x40') ? COLORS.post_60x40 : COLORS.post_other;
-
-  // WAŻNE: zawsze dodajemy opcję "- Brak -" do koloru słupka,
-  // żeby przy disabled select nie pokazywał pierwszego RAL-a.
-  const postColors = [{ value:'none', label:'- Brak -' }].concat(basePostColors);
-
-  return {
-    fenceColors: COLORS[fence],
-    postColors: postColors
-  };
-}
-    function togglePostDetailsVisibility() {
-    const row = document.getElementById('postDetailsRow');
-    if (!row) return;
-
-    // ZAWSZE widoczne
-    row.style.display = '';
-
-    const ptVal = (elPostType && elPostType.value) ? elPostType.value : 'none';
-
-    const isNone = (ptVal === 'none');
-    const isCustom = (ptVal === 'custom');
-
-    // helper: ustaw none jeśli dostępne
-    function setNoneIfPossible(sel){
-      if (!sel) return;
-      const hasNone = Array.from(sel.options || []).some(o => o.value === 'none');
-      if (hasNone) sel.value = 'none';
-    }
-
-    // helper: jeśli none, wybierz pierwszą inną opcję
-    function ensureNotNone(sel){
-      if (!sel) return;
-      if (sel.value !== 'none') return;
-      const opt = Array.from(sel.options || []).find(o => o.value && o.value !== 'none');
-      if (opt) sel.value = opt.value;
-    }
-
-    [elPostWall, elPostHeight, elPostColor].forEach(sel => {
-  if (!sel) return;
-
-  sel.disabled = (isNone || isCustom);
-
-  if (isNone || isCustom) {
-    setNoneIfPossible(sel);
-
-    // gdy pole nieaktywne - Brak ma być dostępny
-    if (sel === elPostColor) setNoneOptionState(sel, true);
-  } else {
-    ensureNotNone(sel);
-
-    // gdy pole aktywne - Brak ma być NIEWYBIERALNY
-    if (sel === elPostColor) setNoneOptionState(sel, false);
-  }
-});
-  }
-
-    function getSpanPrice(typeKey, model, height){
-      if (typeKey==='panel_2500'){ return PANEL_PRICES[model][height] ?? null; }
-      const w = widthOfType(typeKey); return PAL_PRICES[model][w+'x'+height] ?? null;
-    }
-    function getPostUnitPrice(postType, wall, h){
-      const map = POST_PRICE[postType] || {}; const wmap = map[wall] || {};
-      return wmap[h] ?? null;
-    }
-    const pdmAvailable = (t)=> (widthOfType(t)===2500) || String(t).startsWith('pal_');
-
-    // Logika obejm i minimalnej wysokości słupka
-    function clampsPerPost(panelHeight, hasPdm){
-      const base = CLAMPS_PER_POST_BY_PANEL_H_NO_PDM[panelHeight] || 0;
-      if (hasPdm){
-        const v = CLAMPS_PER_POST_BY_PANEL_H_PDM[panelHeight];
-        return (typeof v === 'number') ? v : base;
+    function systemOptionValues(typeKey){
+      if (isAluminiumSystem(typeKey)){
+        return [
+          { value: "", label: "- Wybierz -" },
+          { value: "toConcrete", label: `${ALUMINIUM_PRIME_DATA.sharedPosts.toConcrete.name} 80x80` },
+          { value: "toAnchor", label: `${ALUMINIUM_PRIME_DATA.sharedPosts.toAnchor.name} 80x80` }
+        ];
       }
-      return base;
+      return Object.values(TABAL_SYSTEM_DATA.clampTypes).map(v => ({ value: v.value, label: v.label }));
     }
 
-    function recommendedPostHeight(typeKey, panelHeight, hasPdm){
-      if (!panelHeight || !typeKey) return null;
-      if (typeKey === 'panel_2500'){
-        const src = hasPdm ? PANEL_POST_CFG_PDM : PANEL_POST_CFG_NO_PDM;
-        const cfg = src[panelHeight];
-        return cfg ? cfg.post : null;
-      }
-      // Palisady – wszystkie warianty pal_* traktowane wspólnie
-      if (String(typeKey).startsWith('pal_')){
-        const src = hasPdm ? PAL_POST_CFG_PDM : PAL_POST_CFG_NO_PDM;
-        const h = src[panelHeight];
-        return h || null;
-      }
-      return null;
+    function getSpanWidthMM(typeKey, modelId){
+      const sys = getSystem(typeKey);
+      if (!sys) return 2500;
+      if (!isAluminiumSystem(typeKey)) return sys.panelWidthMM || 2500;
+      const model = getModel(typeKey, modelId);
+      return model?.segment?.widthMM || 2560;
     }
 
-    let lastPostConstraintKey = null;
+    function getSpanUnitPrice(typeKey, modelId, height){
+      if (!isAluminiumSystem(typeKey)) return null;
+      const model = getModel(typeKey, modelId);
+      if (!model) return null;
+      const variant = (model.segment?.variants || []).find(v => Number(v.heightMM) === Number(height));
+      return variant ? Number(variant.priceNet) : null;
+    }
 
-    function syncPostHeightConstraints(){
-      if (!elPostHeight || !elHeight || !elType || !elPostType) return;
-      const typeKey = elType.value;
-      if (!typeKey) return;
-      // "Brak" słupków – nic nie blokujemy
-      if (elPostType.value === 'none') return;
+    function getTabalPostRule(height){
+      return TABAL_SYSTEM_DATA.postRules[height] || { post: 2000, clamps: 2 };
+    }
 
-      const panelHeight = parseInt(elHeight.value, 10);
-      if (!panelHeight || Number.isNaN(panelHeight)) return;
-
-      const hasPdm = (elPdm && elPdm.value !== 'none' && pdmAvailable(typeKey));
-      const required = recommendedPostHeight(typeKey, panelHeight, hasPdm);
-      if (!required) return;
-
-      const opts = Array.from(elPostHeight.options || []);
-      // NIE blokujemy i NIE ukrywamy niższych słupków.
-      // Zostawiamy wszystkie opcje dostępne, bo user ma mieć możliwość wyboru niższej wersji.
-      opts.forEach(o=>{
-        const v = parseInt(o.value, 10);
-        if (Number.isNaN(v)) return;
-        o.disabled = false;
-        o.hidden = false;
+    function setGateOptions(select, gateList){
+      const opts = [{ value: "", label: "- Wybierz -" }];
+      gateList.forEach((g, idx) => {
+        opts.push({
+          value: String(idx),
+          label: `${g.widthMM}x${g.heightMM} mm`
+        });
       });
-
-      const key = typeKey + '|' + panelHeight + '|' + (hasPdm ? '1' : '0');
-      const configChanged = (lastPostConstraintKey !== key);
-      lastPostConstraintKey = key;
-
-      const current = parseInt(elPostHeight.value, 10);
-      const currentOpt = elPostHeight.options[elPostHeight.selectedIndex] || null;
-
-      // Jeżeli konfiguracja (typ/wysokość/podmurówka) się zmieniła,
-      // zawsze ustawiamy słupek na wartość rekomendowaną (lub najniższą >= wymaganej)
-      if (configChanged){
-        let target = null;
-        for (const o of opts){
-          const v = parseInt(o.value, 10);
-          if (Number.isNaN(v) || o.disabled) continue;
-          if (v === required){
-            target = o.value;
-            break;
-          }
-          if (v > required && target === null){
-            target = o.value;
-          }
-        }
-        if (target !== null){
-          elPostHeight.value = target;
-          return;
-        }
-        // jeżeli z jakiegoś powodu nie znaleźliśmy żadnej opcji >= required,
-        // spadamy do logiki zabezpieczającej poniżej
-      }
-
-      // Nie nadpisujemy ręcznego wyboru użytkownika tylko dlatego, że jest < recommended.
-      // Fallback robimy wyłącznie gdy wartość jest pusta/nieparsowalna albo gdy select wskazuje nieistniejącą opcję.
-      if (Number.isNaN(current) || !currentOpt){
-        let fallback = null;
-        for (const o of opts){
-          const v = parseInt(o.value, 10);
-          if (!Number.isNaN(v)){
-            fallback = o.value; // pierwsza sensowna opcja
-            break;
-          }
-        }
-        if (fallback !== null) elPostHeight.value = fallback;
-      }
+      setOptions(select, opts);
     }
 
-    function clampsForPanels(spans, panelHeight, postType, hasPdm){
-      const perPost = clampsPerPost(panelHeight, hasPdm);
-      const intermediatePosts = Math.max(spans-1, 0);
-      const endPosts = 2;
-      const passQty = intermediatePosts * perPost;
-      const endQty  = endPosts * perPost;
-      const passPrice = (CLAMP_PRICE.pass[postType] ?? 0);
-      const endPrice  = (CLAMP_PRICE.end[postType] ?? 0);
-      return { passQty, endQty, passUnit:passPrice, endUnit:endPrice };
+    function getGateList(model, kind){
+      if (!model || !model.gateOptions) return [];
+      if (kind === "wicket") return model.gateOptions.wicket || [];
+      if (kind === "swing") return model.gateOptions.swingGate || [];
+      if (kind === "sliding") return model.gateOptions.slidingGate || [];
+      return [];
     }
 
-    function accessoryFamily(typeKey, modelName) {
-      if (typeKey === 'panel_2500') return '3D Fi4';
-      const m = (modelName || '').toUpperCase();
-      if (m.includes('HORIZONTAL 80'))  return 'Horizontal 80';
-      if (m.includes('HORIZONTAL 100')) return 'Horizontal 100';
-      if (m.includes('HORIZONTAL 200')) return 'Horizontal 200';
-      if (m === 'VERTICAL')             return 'Vertical';
-      if (m.includes('VERTICAL 20'))    return 'Vertical 20';
-      if (m.includes('VERTICAL 60'))    return 'Vertical 60';
-      if (m.includes('CURTAIN'))        return 'Curtain';
-      if (m.includes('PLATE'))          return 'Plate';
+    function getGateBySelection(model, kind, selectValue){
+      const list = getGateList(model, kind);
+      const idx = parseInt(selectValue, 10);
+      if (Number.isNaN(idx) || idx < 0 || idx >= list.length) return null;
+      return list[idx];
+    }
+
+    function getActiveAluminiumSections(typeKey, modelId){
+      if (!isAluminiumSystem(typeKey)) return [];
+      const model = getModel(typeKey, modelId);
+      const sections = [{
+        id: 'segment',
+        title: `Segment - ${model?.name || 'model'}`,
+        info: ALUMINIUM_COMPONENT_INFO.segment
+      }];
+
+      const postChoice = String(elPostType?.value || '');
+      if (postChoice === 'toConcrete'){
+        sections.push({
+          id: 'post_toConcrete',
+          title: 'Słupek systemowy do betonowania',
+          info: ALUMINIUM_COMPONENT_INFO.post_toConcrete
+        });
+      } else if (postChoice === 'toAnchor'){
+        sections.push({
+          id: 'post_toAnchor',
+          title: 'Słupek systemowy do kotwienia',
+          info: ALUMINIUM_COMPONENT_INFO.post_toAnchor
+        });
+      }
+
+      if (gateWicketVariant && gateWicketVariant.value){
+        sections.push({ id: 'wicket', title: 'Furtka', info: ALUMINIUM_COMPONENT_INFO.wicket });
+      }
+      if (gateSwingVariant && gateSwingVariant.value){
+        sections.push({ id: 'swing', title: 'Brama dwuskrzydłowa', info: ALUMINIUM_COMPONENT_INFO.swing });
+      }
+      if (gateSlidingVariant && gateSlidingVariant.value){
+        sections.push({ id: 'sliding', title: 'Brama przesuwna samonośna', info: ALUMINIUM_COMPONENT_INFO.sliding });
+      }
+      return sections;
+    }
+
+    function getActiveAluminiumOptionalMap(typeKey, modelId){
+      const map = Object.create(null);
+      const sections = getActiveAluminiumSections(typeKey, modelId);
+      sections.forEach(section => {
+        (section.info?.optional || []).forEach(opt => {
+          if (opt && opt.id){
+            map[opt.id] = {
+              ...opt,
+              sectionId: section.id,
+              sectionTitle: section.title
+            };
+          }
+        });
+      });
+      return map;
+    }
+
+    function getGateQtyInput(kind){
+      if (kind === 'wicket') return gateWicketQty;
+      if (kind === 'swing') return gateSwingQty;
+      if (kind === 'sliding') return gateSlidingQty;
       return null;
-    }
-    function setImgBg(id,url){ const el=document.getElementById(id); if(el) el.style.backgroundImage = url ? `url("${url}")` : 'none'; }
-    function parseWH(sizeStr){ const [w,h]=sizeStr.split('x').map(n=>parseInt(n,10)); return {w,h}; }
-    function fillSizes(selectEl, map){
-      if (!selectEl) return;
-      const sizes = Object.keys(map||{}).sort((a,b)=>parseInt(a)-parseInt(b));
-      selectEl.innerHTML='';
-      if (sizes.length){
-        sizes.forEach(s=>{ const o=document.createElement('option'); o.value=s; o.textContent=s; selectEl.appendChild(o); });
-        if (!sizes.includes(selectEl.value)) selectEl.value = sizes[0];
-      } else {
-        const o=document.createElement('option'); o.value=''; o.textContent='Brak dostępnych rozmiarów'; selectEl.appendChild(o);
-      }
     }
 
     /* ==== ELEMENTY UI ==== */
-    const elLen = $('#len'), elType=$('#type'), elModel=$('#model'), elHeight=$('#height'), elColor=$('#color');
-    const elPostType=$('#postType'), elPostWall=$('#postWall'), elPostHeight=$('#postHeight'), elPostColor=$('#postColor');
-    const elPostCustomWidth=$('#postCustomWidth'), elPostCustomWidthField=$('#postCustomWidthField');
-    const elPdm=$('#pdm'), elVat=$('#vat'), boxRes=$('#result'), tbody=$('#tbody'), sumEl=$('#sum');
-    const fitWarning = $('#fitWarning'), priceModeLabel = $('#priceModeLabel');
-    const extrasBtn = $('#extrasBtn'), extrasBox = $('#extrasBox');
-
-    // NOWE: pole własnej szerokości słupka (pokazuj tylko gdy Słupki - typ = "Własny rozmiar")
-    function toggleCustomPostWidthUI(){
-      if (!elPostCustomWidthField || !elPostCustomWidth || !elPostType) return;
-
-      const typeKey = (elType && elType.value) ? elType.value : '';
-      const isPalisade = String(typeKey).startsWith('pal_');
-      if (!isPalisade && elPostType.value === 'custom') {
-        elPostType.value = 'none';
-      }
-      const isCustom = isPalisade && (elPostType.value === 'custom');
-      elPostCustomWidthField.style.display = isCustom ? '' : 'none';
-      elPostCustomWidth.disabled = !isCustom;
-
-      // domyślny start (żeby nie liczyć palisady bez słupka)
-      if (isCustom && !String(elPostCustomWidth.value || '').trim()){
-        elPostCustomWidth.value = '80';
-      }
-    }
-    const extrasFooter = $('#extrasFooter'), autosBtn = $('#autosBtn');
-    const elMoc = $('#moc'); const mocField = $('#mocField');
-    const elMocColor = $('#mocColor'); const mocColorField = $('#mocColorField');
+    const elLen = $('#len');
+    const elType = $('#type');
+    const elModel = $('#model');
+    const elHeight = $('#height');
+    const elColor = $('#color');
+    const elPostType = $('#postType');
+    const elPostTypeLabel = $('#postTypeLabel');
+    const elPostWall = $('#postWall');
+    const elPostHeight = $('#postHeight');
+    const elPostColor = $('#postColor');
+    const elPostDetailsRow = $('#postDetailsRow');
+    const elPostCustomWidthField = $('#postCustomWidthField');
+    const elVat = $('#vat');
+    const boxRes = $('#result');
+    const tbody = $('#tbody');
+    const sumEl = $('#sum');
+    const fitWarning = $('#fitWarning');
+    const priceModeLabel = $('#priceModeLabel');
     const previewBox = document.getElementById('previewImageBox');
     const previewImg = document.getElementById('previewImage');
     const btnCalc = document.getElementById('calc');
+    const gateRow = $('#gateRow');
+    const gateWicketVariant = $('#gateWicketVariant');
+    const gateWicketQty = $('#gateWicketQty');
+    const gateSwingVariant = $('#gateSwingVariant');
+    const gateSwingQty = $('#gateSwingQty');
+    const gateSlidingVariant = $('#gateSlidingVariant');
+    const gateSlidingQty = $('#gateSlidingQty');
+    const aluInfoPanel = $('#aluInfoPanel');
+    const aluInfoIntro = $('#aluInfoIntro');
+    const aluInfoContent = $('#aluInfoContent');
 
-    /* ==== POMOCNICZE UI (NOWE) ==== */
-    function updateExtrasQtyLabels(){
-      ['furtka','brama2s','przesuwna'].forEach(kind=>{
-        const lbl = document.getElementById('accQty-'+kind);
-        if (lbl) lbl.textContent = `${extrasState[kind].qty} szt.`;
+    function getSelectedLabel(selectEl){
+      if (!selectEl) return '';
+      const opt = selectEl.options?.[selectEl.selectedIndex];
+      return (opt?.textContent || selectEl.value || '').trim();
+    }
+
+    function buildSavedSourceKey(systemId, modelId, rowId){
+      return `${String(systemId || '')}|${String(modelId || '')}|${String(rowId || '')}`;
+    }
+
+    function normalizeSavedSourceKey(sourceKey){
+      const raw = String(sourceKey || '');
+      if (!raw) return '';
+      const parts = raw.split('|');
+      if (parts.length <= 3) return raw;
+      return `${parts[0] || ''}|${parts[1] || ''}|${parts.slice(3).join('|')}`;
+    }
+
+    function getCurrentSourceKeyForRowId(rowId){
+      return buildSavedSourceKey(
+        String(elType?.value || ''),
+        String(elModel?.value || ''),
+        String(rowId || '')
+      );
+    }
+
+    function removeSavedBySourceKey(sourceKey){
+      let removed = false;
+      for (let i = savedConfigPositions.length - 1; i >= 0; i--){
+        if (normalizeSavedSourceKey(savedConfigPositions[i].sourceKey) === sourceKey){
+          savedConfigPositions.splice(i, 1);
+          removed = true;
+        }
+      }
+      return removed;
+    }
+
+    function saveCurrentSummaryRow(rowId){
+      const normalizedRowId = String(rowId || '');
+      if (!normalizedRowId) return false;
+
+      const snapshot = currentSummaryRowsById[normalizedRowId];
+      if (!snapshot) return false;
+
+      const systemId = String(elType?.value || '');
+      const modelId = String(elModel?.value || '');
+      const sourceKey = getCurrentSourceKeyForRowId(normalizedRowId);
+      const qtyToSave = Math.max(1, toInt(snapshot.qty));
+      const unitNetValue = (typeof snapshot.unitValue === 'number' && Number.isFinite(snapshot.unitValue))
+        ? (elVat?.checked ? round2(snapshot.unitValue / 1.23) : snapshot.unitValue)
+        : null;
+
+      const payload = {
+        sourceKey,
+        sourceRowId: normalizedRowId,
+        systemId,
+        systemLabel: getSelectedLabel(elType),
+        modelId,
+        modelLabel: getSelectedLabel(elModel),
+        label: String(snapshot.label || 'Pozycja zapisana'),
+        sourceComment: String(snapshot.comment || ''),
+        qty: qtyToSave,
+        unitNetValue,
+        modeLabel: '',
+        unitLabel: String(snapshot.unitLabel || MISSING_PRICE_LABEL)
+      };
+
+      const existing = savedConfigPositions.find(saved => normalizeSavedSourceKey(saved.sourceKey) === sourceKey);
+      if (existing){
+        Object.assign(existing, payload);
+        return true;
+      }
+
+      savedConfigPositions.push({
+        id: `${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+        ...payload
       });
-      ['brama2s','przesuwna'].forEach(kind=>{
-        autoState[kind].qty = Math.min(autoState[kind].qty, extrasState[kind].qty);
-        const lbl = document.getElementById('accAutoQty-'+kind);
-        if (lbl) lbl.textContent = `${autoState[kind].qty} szt.`;
-      });
+      return true;
     }
 
-    function equalizeAccControlsRow(){
-      const host = document.getElementById('zeggerCalc');
-      if (!host) return;
-      const titles = host.querySelectorAll('.acc-card .acc-title');
-      if (!titles.length) return;
-      host.style.setProperty('--acc-title-row', 'auto');
-      titles.forEach(el => { el.style.minHeight = '0px'; });
-      requestAnimationFrame(()=>{
-        const maxH = Math.max(0, ...Array.from(titles, el => Math.ceil(el.getBoundingClientRect().height)));
-        host.style.setProperty('--acc-title-row', maxH + 'px');
-        titles.forEach(el => { el.style.minHeight = maxH + 'px'; });
-      });
-    }
+    function createTextInfoColumn(title, rows, opts = {}){
+      const col = document.createElement('div');
+      col.className = `alu-info-col ${opts.colClass || ''}`.trim();
+      const h = document.createElement('h5');
+      h.textContent = title;
+      col.appendChild(h);
 
-    function setAccTitle(id, main, famName){
-      const el = document.getElementById(id);
-      if (!el) return;
-      const mainSpan = document.createElement('span');
-      mainSpan.className = 'acc-main';
-      mainSpan.textContent = main;
-      const subSpan = document.createElement('span');
-      subSpan.className  = 'acc-sub';
-      subSpan.textContent = `- ${famName || '-'}`;
-      el.replaceChildren(mainSpan, subSpan);
-    }
-
-    function refreshMocOptions() {
-    const pdmVal = elPdm.value;
-    const pdmNone = (pdmVal === 'none');
-
-    // ZAWSZE widoczne
-    if (mocField) mocField.style.display = 'block';
-    if (mocColorField) mocColorField.style.display = 'block';
-
-    if (elMocColor) {
-      if (elMoc && elMoc.value === 'none') elMocColor.value = 'none';
-      elMocColor.disabled = true;
-
-      // DODANE: gdy nieaktywne - Brak ma być dostępny
-      setNoneOptionState(elMocColor, true);
-    }
-
-    // podmurówka wybrana -> mocowanie aktywne
-    if (elMoc) {
-      elMoc.disabled = false;
-      elMoc.innerHTML =
-  `<option value="none">- Brak -</option>` +
-  `<option value="moc_250">Mocowanie 50x250 mm</option>` +
-  `<option value="moc_300">Mocowanie 60x300 mm</option>`;
-    }
-
-    // kolor mocowania aktywny dopiero, gdy wybrano mocowanie != none
-    if (elMocColor) {
-      const isNone = (elMoc && elMoc.value === 'none');
-      elMocColor.disabled = isNone;
-
-      if (isNone) {
-        elMocColor.value = 'none';
-        setNoneOptionState(elMocColor, true);   // nieaktywne => allow none
+      const ul = document.createElement('ul');
+      if (Array.isArray(rows) && rows.length){
+        rows.forEach(txt => {
+          const li = document.createElement('li');
+          li.textContent = txt;
+          ul.appendChild(li);
+        });
       } else {
-        setNoneOptionState(elMocColor, false);  // aktywne => block none
+        const li = document.createElement('li');
+        li.textContent = opts.emptyLabel || 'Brak pozycji.';
+        li.className = 'alu-info-muted';
+        ul.appendChild(li);
+      }
+      col.appendChild(ul);
+      return col;
+    }
+
+	    function createOptionalInfoColumn(rows){
+	      const col = document.createElement('div');
+	      col.className = 'alu-info-col alu-info-col-optional';
+	      const h = document.createElement('h5');
+	      h.textContent = 'Opcje dodatkowe';
+	      col.appendChild(h);
+
+	      const ul = document.createElement('ul');
+	      if (Array.isArray(rows) && rows.length){
+	        rows.forEach(opt => {
+	          const optionNameRaw = String(opt?.name || '').trim();
+	          const uiLabelRaw = String(opt?.uiLabel || '').trim();
+	          let optionName = optionNameRaw || uiLabelRaw || '-';
+	          let optionPrice = '';
+	          if (uiLabelRaw){
+	            const marker = ' - ';
+	            if (optionNameRaw && uiLabelRaw.toLowerCase().startsWith((optionNameRaw + marker).toLowerCase())){
+	              optionName = optionNameRaw;
+	              optionPrice = uiLabelRaw.slice(optionNameRaw.length + marker.length).trim();
+	            } else {
+	              const splitAt = uiLabelRaw.lastIndexOf(marker);
+	              if (splitAt > 0){
+	                optionName = uiLabelRaw.slice(0, splitAt).trim() || optionName;
+	                optionPrice = uiLabelRaw.slice(splitAt + marker.length).trim();
+	              }
+	            }
+	          }
+
+	          const li = document.createElement('li');
+	          const row = document.createElement('div');
+	          row.className = 'alu-opt-row';
+
+	          const txt = document.createElement('span');
+	          txt.className = 'alu-opt-text';
+	          const txtName = document.createElement('span');
+	          txtName.className = 'alu-opt-name';
+	          txtName.textContent = optionName;
+	          txt.appendChild(txtName);
+	          if (optionPrice){
+	            const txtPrice = document.createElement('span');
+	            txtPrice.className = 'alu-opt-price';
+	            txtPrice.textContent = optionPrice;
+	            txt.appendChild(txtPrice);
+	          }
+
+	          const actions = document.createElement('div');
+	          actions.className = 'alu-opt-actions';
+
+          const currentQty = Math.max(0, toInt(aluOptionalQtyState[opt?.id]));
+          const stepper = document.createElement('div');
+          stepper.className = 'alu-opt-stepper';
+
+          const minusBtn = document.createElement('button');
+          minusBtn.type = 'button';
+          minusBtn.className = 'alu-opt-step-btn';
+          minusBtn.dataset.optId = String(opt?.id || '');
+          minusBtn.dataset.delta = '-1';
+          minusBtn.textContent = '-';
+
+          const qtyBadge = document.createElement('span');
+          qtyBadge.className = 'alu-opt-step-value';
+          qtyBadge.textContent = String(currentQty);
+
+          const plusBtn = document.createElement('button');
+          plusBtn.type = 'button';
+          plusBtn.className = 'alu-opt-step-btn';
+          plusBtn.dataset.optId = String(opt?.id || '');
+          plusBtn.dataset.delta = '1';
+          plusBtn.textContent = '+';
+
+          stepper.appendChild(minusBtn);
+          stepper.appendChild(qtyBadge);
+          stepper.appendChild(plusBtn);
+          actions.appendChild(stepper);
+          row.appendChild(actions);
+          row.appendChild(txt);
+          li.appendChild(row);
+          ul.appendChild(li);
+        });
+      } else {
+        const li = document.createElement('li');
+        li.textContent = 'Brak pozycji.';
+        li.className = 'alu-info-muted';
+        ul.appendChild(li);
+      }
+
+      col.appendChild(ul);
+      return col;
+    }
+
+    function createAluInfoItem(item){
+      const details = document.createElement('details');
+      details.className = 'alu-info-item';
+      details.open = !!aluInfoOpenState[item.id];
+      details.dataset.infoId = item.id;
+      details.addEventListener('toggle', () => {
+        aluInfoOpenState[item.id] = details.open;
+      });
+
+      const summary = document.createElement('summary');
+      const summaryTitle = document.createElement('span');
+      summaryTitle.className = 'alu-item-title';
+      summaryTitle.textContent = item.title;
+      summary.appendChild(summaryTitle);
+
+      const includedCount = Array.isArray(item.info?.included) ? item.info.included.length : 0;
+      const optionalCount = Array.isArray(item.info?.optional) ? item.info.optional.length : 0;
+      const meta = document.createElement('span');
+      meta.className = 'alu-item-meta';
+      meta.textContent = `${includedCount} w cenie • ${optionalCount} opcji`;
+      summary.appendChild(meta);
+      details.appendChild(summary);
+
+      const grid = document.createElement('div');
+      grid.className = 'alu-info-grid';
+      grid.appendChild(createTextInfoColumn('W cenie', item.info?.included || [], { colClass: 'alu-info-col-included' }));
+      grid.appendChild(createOptionalInfoColumn(item.info?.optional || []));
+      grid.appendChild(createTextInfoColumn('Uwagi', item.info?.notes || [], { colClass: 'alu-info-col-notes', emptyLabel: 'Brak uwag.' }));
+      details.appendChild(grid);
+
+      return details;
+    }
+
+    function refreshAluminiumInfoPanel(typeKey, modelId){
+      if (!aluInfoPanel || !aluInfoIntro || !aluInfoContent) return;
+      const isAlu = isAluminiumSystem(typeKey);
+      if (!isAlu){
+        aluInfoPanel.style.display = 'none';
+        aluInfoIntro.textContent = '';
+        aluInfoContent.replaceChildren();
+        return;
+      }
+
+      const selectedItems = getActiveAluminiumSections(typeKey, modelId);
+
+      aluInfoPanel.style.display = '';
+      aluInfoIntro.textContent = 'Szczegóły aktualizują się dynamicznie po wyborze elementów.';
+      aluInfoContent.replaceChildren();
+
+      selectedItems.forEach(item => {
+        aluInfoContent.appendChild(createAluInfoItem(item));
+      });
+
+      if (selectedItems.length === 1){
+        const hint = document.createElement('div');
+        hint.className = 'alu-info-muted';
+        hint.textContent = 'Wybierz słupek systemowy oraz wariant furtki/bramy, aby zobaczyć pełne wyposażenie tych elementów.';
+        aluInfoContent.appendChild(hint);
       }
     }
-  }
 
-    function refreshExtrasUI(){
-      const fam  = accessoryFamily(elType.value, elModel.value);
-      const imgs = ACCESSORY_IMAGES[fam] || {};
-      setAccTitle('accTitle-furtka',    'Skrzydło furtki',              fam);
-      setAccTitle('accTitle-brama2s',   'Skrzydło bramy dwuskrzydłowej', fam);
-      setAccTitle('accTitle-przesuwna', 'Skrzydło bramy przesuwnej',     fam);
+    function setGateQtyEnabled(qtyInput, enabled){
+      if (!qtyInput) return;
+      qtyInput.disabled = !enabled;
+      qtyInput.setAttribute('aria-disabled', enabled ? 'false' : 'true');
+      if (!enabled) qtyInput.value = '0';
+    }
 
-      setImgBg('accImg-furtka',    imgs.furtka);
-      setImgBg('accImg-brama2s',   imgs.brama2s);
-      setImgBg('accImg-przesuwna', imgs.przesuwna);
+    function refreshGateQtyAvailability(typeKey){
+      const isAlu = isAluminiumSystem(typeKey);
+      setGateQtyEnabled(gateWicketQty, isAlu && !!(gateWicketVariant && gateWicketVariant.value));
+      setGateQtyEnabled(gateSwingQty, isAlu && !!(gateSwingVariant && gateSwingVariant.value));
+      setGateQtyEnabled(gateSlidingQty, isAlu && !!(gateSlidingVariant && gateSlidingVariant.value));
+    }
 
-      const lib = ACCESSORIES[fam] || {};
-      fillSizes(document.getElementById('accSize-furtka'),    (lib.furtka?.standard || lib.furtka?.light || {}));
-      fillSizes(document.getElementById('accSize-brama2s'),   (lib.brama_dwuskrzydlowa?.reczna || {}));
-      fillSizes(document.getElementById('accSize-przesuwna'), (lib.brama_przesuwna?.reczna || {}));
+    function refreshGatesUI(typeKey, modelId){
+      const isAlu = isAluminiumSystem(typeKey);
+      if (gateRow) gateRow.style.display = isAlu ? '' : 'none';
 
-      ['furtka','brama2s','przesuwna'].forEach(kind=>{
-        const sel = document.getElementById('accSize-'+kind);
-        extrasState[kind].size = (sel && sel.value) ? sel.value : null;
-      });
+      if (!isAlu){
+        if (gateWicketQty) gateWicketQty.value = '0';
+        if (gateSwingQty) gateSwingQty.value = '0';
+        if (gateSlidingQty) gateSlidingQty.value = '0';
+        setOptions(gateWicketVariant, [{ value: "", label: "- Wybierz -" }]);
+        setOptions(gateSwingVariant, [{ value: "", label: "- Wybierz -" }]);
+        setOptions(gateSlidingVariant, [{ value: "", label: "- Wybierz -" }]);
+        refreshGateQtyAvailability(typeKey);
+        refreshAluminiumInfoPanel(typeKey, modelId);
+        return;
+      }
 
-      // Napędy – opcje
-      const auto2sSel = document.getElementById('accAuto-brama2s');
-      const autoPrzSel = document.getElementById('accAuto-przesuwna');
-      if (auto2sSel) setOptions(auto2sSel, [{value:'none',label:'- Wybierz napęd -'}, ...Object.keys(AUTOMAT_PRICE.brama2s)]);
-      if (autoPrzSel) setOptions(autoPrzSel, [{value:'none',label:'- Wybierz napęd -'}, ...Object.keys(AUTOMAT_PRICE.przesuwna)]);
-      if (auto2sSel && ![...auto2sSel.options].some(o=>o.value===autoState.brama2s.name)) autoState.brama2s.name='none';
-      if (autoPrzSel && ![...autoPrzSel.options].some(o=>o.value===autoState.przesuwna.name)) autoState.przesuwna.name='none';
-      if (auto2sSel) auto2sSel.value = autoState.brama2s.name;
-      if (autoPrzSel) autoPrzSel.value = autoState.przesuwna.name;
-
-      updateExtrasQtyLabels();
-      equalizeAccControlsRow();
+      const model = getModel(typeKey, modelId);
+      setGateOptions(gateWicketVariant, getGateList(model, "wicket"));
+      setGateOptions(gateSwingVariant, getGateList(model, "swing"));
+      setGateOptions(gateSlidingVariant, getGateList(model, "sliding"));
+      refreshGateQtyAvailability(typeKey);
+      refreshAluminiumInfoPanel(typeKey, modelId);
     }
 
     function refreshUI(){
+      setOptions(elType, Object.values(ALL_SYSTEMS).map(s => ({ value: s.id, label: s.name })));
+
       const typeKey = elType.value;
       setOptions(elModel, modelsForType(typeKey));
       setOptions(elHeight, heightsForSelection(typeKey, elModel.value));
+      setOptions(elColor, colorOptionsForType(typeKey));
+      setOptions(elPostType, systemOptionValues(typeKey));
 
-      const pts = postTypesForType(typeKey);
-      setOptions(elPostType, pts);
-
-      setOptions(elPostWall, postWallsForPostType(elPostType.value));
-      setOptions(elPostHeight, postHeightsForType(typeKey));
-
-      syncPostHeightConstraints();
-
-      const {fenceColors, postColors} = colorsFor(typeKey, elPostType.value);
-      setOptions(elColor, fenceColors);
-      setOptions(elPostColor, postColors);
-
-      // NOWE: widoczność szczegółów słupka
-      togglePostDetailsVisibility();
-      toggleCustomPostWidthUI();
-
-      if (pdmAvailable(typeKey)) {
-        elPdm.disabled = false;
-      } else {
-        elPdm.value = 'none';
-        elPdm.disabled = true;
+      if (elPostTypeLabel){
+        elPostTypeLabel.textContent = isAluminiumSystem(typeKey) ? "Słupek systemowy" : "Rodzaj obejmy";
       }
-      const cornerRow = document.getElementById('cornerRow');
-      if (cornerRow) cornerRow.style.display = 'flex'; // dostępne dla paneli i palisad
-      if (typeKey !== 'panel_2500') { const c=document.getElementById('corners'); if(c) c.value = 0; }
-      refreshExtrasUI();
-      refreshMocOptions();
+
+      // Te pola nie są wykorzystywane w logice TABAL v2.
+      if (elPostDetailsRow) elPostDetailsRow.style.display = 'none';
+      if (elPostCustomWidthField) elPostCustomWidthField.style.display = 'none';
+      if (elPostWall) setOptions(elPostWall, [{ value: 'none', label: '- Brak -' }]);
+      if (elPostHeight) setOptions(elPostHeight, [{ value: 'none', label: '- Brak -' }]);
+      if (elPostColor) setOptions(elPostColor, [{ value: 'none', label: '- Brak -' }]);
+
+      refreshGatesUI(typeKey, elModel.value);
       if (autoCalc) calculate();
     }
 
     /* ==== OBLICZANIE ==== */
-    function addRowQtyMoney(name, qty, unitMoney, sumMoney){
+    function addRowQtyMoney(name, qty, unitMoney, sumMoney, meta){
       const tr = document.createElement('tr');
-      const makeCell = (text, label, isMoney=false) => {
-        const td = document.createElement('td');
-        td.textContent = isMoney ? fmt(text) : text;
-        td.setAttribute('data-label', label);
-        return td;
-      };
-      tr.appendChild(makeCell(name, 'Element'));
-      tr.appendChild(makeCell(qty, 'Ilość'));
-      tr.appendChild(makeCell(unitMoney, 'Cena jedn.', true));
-      tr.appendChild(makeCell(sumMoney, 'Suma', true));
+      if (meta?.control?.rowType === 'saved'){
+        tr.classList.add('sum-row-saved');
+      }
+
+      const tdName = document.createElement('td');
+      const titleLine = document.createElement('div');
+      titleLine.className = 'sum-row-title-line';
+
+      const titleSpan = document.createElement('span');
+      titleSpan.className = 'sum-row-title';
+      titleSpan.textContent = String(name || '');
+      titleLine.appendChild(titleSpan);
+
+      tdName.appendChild(titleLine);
+      if (meta?.comment){
+        const comment = document.createElement('small');
+        comment.className = 'sum-row-comment';
+        comment.textContent = String(meta.comment);
+        tdName.appendChild(comment);
+      }
+      tdName.setAttribute('data-label', 'Element');
+      tr.appendChild(tdName);
+
+      const tdQty = document.createElement('td');
+      tdQty.setAttribute('data-label', 'Ilość');
+      if (meta?.control){
+        const qtyWrap = document.createElement('div');
+        qtyWrap.className = 'sum-qty-control';
+
+        const value = document.createElement('span');
+        value.className = 'sum-qty-value';
+        value.textContent = String(qty);
+
+        const stack = document.createElement('div');
+        stack.className = 'sum-qty-stack';
+
+        const btnUp = document.createElement('button');
+        btnUp.type = 'button';
+        btnUp.className = 'sum-qty-btn';
+        btnUp.dataset.delta = '1';
+        btnUp.dataset.dir = 'up';
+        btnUp.dataset.rowType = String(meta.control.rowType || 'generic');
+        if (meta.control.rowId) btnUp.dataset.rowId = String(meta.control.rowId);
+        if (meta.control.optId) btnUp.dataset.optId = String(meta.control.optId);
+        if (meta.control.gateKind) btnUp.dataset.gateKind = String(meta.control.gateKind);
+        btnUp.setAttribute('aria-label', 'Zwiększ ilość');
+
+        const btnDown = document.createElement('button');
+        btnDown.type = 'button';
+        btnDown.className = 'sum-qty-btn';
+        btnDown.dataset.delta = '-1';
+        btnDown.dataset.dir = 'down';
+        btnDown.dataset.rowType = String(meta.control.rowType || 'generic');
+        if (meta.control.rowId) btnDown.dataset.rowId = String(meta.control.rowId);
+        if (meta.control.optId) btnDown.dataset.optId = String(meta.control.optId);
+        if (meta.control.gateKind) btnDown.dataset.gateKind = String(meta.control.gateKind);
+        btnDown.setAttribute('aria-label', 'Zmniejsz ilość');
+
+        stack.appendChild(btnUp);
+        stack.appendChild(btnDown);
+        qtyWrap.appendChild(value);
+        qtyWrap.appendChild(stack);
+        tdQty.appendChild(qtyWrap);
+      } else {
+        tdQty.textContent = String(qty);
+      }
+      tr.appendChild(tdQty);
+
+      const tdUnit = document.createElement('td');
+      tdUnit.textContent = (typeof unitMoney === 'number' && Number.isFinite(unitMoney)) ? fmt(unitMoney) : String(unitMoney);
+      tdUnit.setAttribute('data-label', 'Cena jedn.');
+      tr.appendChild(tdUnit);
+
+      const tdSum = document.createElement('td');
+      tdSum.textContent = (typeof sumMoney === 'number' && Number.isFinite(sumMoney)) ? fmt(sumMoney) : String(sumMoney);
+      tdSum.setAttribute('data-label', 'Suma');
+      tr.appendChild(tdSum);
+
+      const tdFunc = document.createElement('td');
+      tdFunc.className = 'sum-func-col';
+      tdFunc.setAttribute('data-label', 'Funkcje');
+      if (meta?.control){
+        const actions = document.createElement('div');
+        actions.className = 'sum-row-actions';
+
+        const saveBtn = document.createElement('button');
+        saveBtn.type = 'button';
+        saveBtn.className = 'sum-row-action-btn save';
+        saveBtn.dataset.action = 'save';
+        saveBtn.dataset.rowType = String(meta.control.rowType || 'generic');
+        if (meta.control.rowId) saveBtn.dataset.rowId = String(meta.control.rowId);
+        if (meta.control.optId) saveBtn.dataset.optId = String(meta.control.optId);
+        if (meta.control.gateKind) saveBtn.dataset.gateKind = String(meta.control.gateKind);
+        saveBtn.setAttribute('aria-label', 'Zapisz pozycję');
+        saveBtn.title = meta.control.saveActive ? 'Odznacz zapisanie pozycji' : 'Zapisz pozycję';
+        saveBtn.textContent = '✓';
+        if (meta.control.saveActive) saveBtn.classList.add('active');
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'sum-row-action-btn remove';
+        removeBtn.dataset.action = 'remove';
+        removeBtn.dataset.rowType = String(meta.control.rowType || 'generic');
+        if (meta.control.rowId) removeBtn.dataset.rowId = String(meta.control.rowId);
+        if (meta.control.optId) removeBtn.dataset.optId = String(meta.control.optId);
+        if (meta.control.gateKind) removeBtn.dataset.gateKind = String(meta.control.gateKind);
+        removeBtn.setAttribute('aria-label', 'Usuń pozycję');
+        removeBtn.title = 'Usuń pozycję';
+        removeBtn.textContent = '✕';
+
+        actions.appendChild(saveBtn);
+        actions.appendChild(removeBtn);
+        tdFunc.appendChild(actions);
+      }
+      tr.appendChild(tdFunc);
+
+      if (meta?.control?.rowId && meta.control.rowType !== 'saved'){
+        const rowId = String(meta.control.rowId);
+        currentSummaryRowsById[rowId] = {
+          rowId,
+          rowType: String(meta.control.rowType || 'generic'),
+          gateKind: String(meta.control.gateKind || ''),
+          optId: String(meta.control.optId || ''),
+          label: String(name || ''),
+          comment: String(meta.comment || ''),
+          qty: Math.max(0, toInt(qty)),
+          unitValue: (typeof unitMoney === 'number' && Number.isFinite(unitMoney)) ? unitMoney : null,
+          unitLabel: (typeof unitMoney === 'number' && Number.isFinite(unitMoney)) ? fmt(unitMoney) : String(unitMoney)
+        };
+      }
+
       tbody.appendChild(tr);
 
-      // ZEGGER PATCH - po każdej nowej pozycji odśwież rabaty, jeśli są aktywne
       if (typeof window.zeggerRecalcDiscounts === 'function'){
         window.zeggerRecalcDiscounts();
       }
     }
 
+    function addSavedSectionSeparator(savedCount){
+      const tr = document.createElement('tr');
+      tr.className = 'sum-saved-separator';
+
+      const td = document.createElement('td');
+      td.colSpan = 7;
+
+      const head = document.createElement('div');
+      head.className = 'sum-saved-head';
+
+      const left = document.createElement('div');
+      const title = document.createElement('span');
+      title.className = 'sum-saved-title';
+      title.textContent = 'Zapisane pozycje';
+      const note = document.createElement('span');
+      note.className = 'sum-saved-note';
+      note.textContent = 'Pozycje zapisane niezależnie od bieżącej konfiguracji.';
+      left.appendChild(title);
+      left.appendChild(note);
+
+      const countBadge = document.createElement('span');
+      countBadge.className = 'sum-saved-count';
+      countBadge.textContent = `${Math.max(0, toInt(savedCount))} pozycji`;
+      head.appendChild(left);
+      head.appendChild(countBadge);
+      td.appendChild(head);
+
+      tr.appendChild(td);
+      tbody.appendChild(tr);
+    }
+
     function calculate(){
-      const length_m = parseFloat(elLen.value)||0;
-      if (length_m<=0){ return; }
+      const length_m = parseFloat(String(elLen?.value || '').replace(',', '.')) || 0;
+      if (length_m <= 0) return;
 
-      const typeKey = elType.value, model = elModel.value, height = parseInt(elHeight.value,10);
-      const width_m_panel = widthOfType(typeKey)/1000;
+      const typeKey = elType.value;
+      const modelId = elModel.value;
+      const height = toInt(elHeight.value);
+      const model = getModel(typeKey, modelId);
+      if (!model) return;
 
-      const fam = accessoryFamily(typeKey, model);
-      const lib = ACCESSORIES[fam] || {};
-      function accUnitPrice(kind, size){
-        if (!size) return null;
-        if (kind==='furtka'){
-          const src = lib.furtka?.standard || lib.furtka?.light || {};
-          return src[size] ?? null;
+      const spanWidthMM = getSpanWidthMM(typeKey, modelId);
+      const spanWidthM = spanWidthMM / 1000;
+      const isAlu = isAluminiumSystem(typeKey);
+      const selectedColor = String(elColor?.value || '');
+      const isCustomAluColor = isAlu && selectedColor === CUSTOM_ALU_COLOR_VALUE;
+      const unknownPriceLabel = isCustomAluColor ? CUSTOM_QUOTE_PRICE_LABEL : MISSING_PRICE_LABEL;
+      const activeOptionalMap = getActiveAluminiumOptionalMap(typeKey, modelId);
+
+      const gateSelections = [
+        { kind: 'wicket',  label: 'Furtka',                 qty: toInt(gateWicketQty?.value),  selected: gateWicketVariant?.value || '' },
+        { kind: 'swing',   label: 'Brama dwuskrzydłowa',    qty: toInt(gateSwingQty?.value),   selected: gateSwingVariant?.value || '' },
+        { kind: 'sliding', label: 'Brama przesuwna',        qty: toInt(gateSlidingQty?.value), selected: gateSlidingVariant?.value || '' }
+      ];
+
+      let gatesWidthM = 0;
+      const gateRows = [];
+      if (isAlu){
+        gateSelections.forEach(g => {
+          if (g.qty <= 0) return;
+          const gate = getGateBySelection(model, g.kind, g.selected);
+          if (gate){
+            gatesWidthM += (Number(gate.widthMM) / 1000) * g.qty;
+            gateRows.push({
+              kind: g.kind,
+              selected: g.selected,
+              label: `${gate.name} (${gate.widthMM}x${gate.heightMM} mm)`,
+              qty: g.qty,
+              unit: Number(gate.priceNet)
+            });
+          } else {
+            gateRows.push({
+              kind: g.kind,
+              selected: g.selected,
+              label: `${g.label} (${model.name})`,
+              qty: g.qty,
+              unit: null
+            });
+          }
+        });
+      }
+
+      const effectiveLen_m = Math.max(length_m - gatesWidthM, 0);
+      const spans = Math.max(1, Math.ceil(effectiveLen_m / spanWidthM));
+      const posts = spans + 1;
+
+      const withVAT = !!elVat.checked;
+      const VAT = 0.23;
+      const getSavedEntryForRowId = (rowId) => {
+        const normalizedRowId = String(rowId || '');
+        if (!normalizedRowId) return null;
+        const key = buildSavedSourceKey(typeKey, modelId, normalizedRowId);
+        return savedConfigPositions.find(saved => normalizeSavedSourceKey(saved.sourceKey) === key) || null;
+      };
+      const getSavedUnitNet = (saved) => {
+        if (!saved) return null;
+        if (typeof saved.unitNetValue === 'number' && Number.isFinite(saved.unitNetValue)){
+          return round2(Number(saved.unitNetValue));
         }
-        if (kind==='brama2s') return lib.brama_dwuskrzydlowa?.reczna?.[size] ?? null;
-        if (kind==='przesuwna') return lib.brama_przesuwna?.reczna?.[size] ?? null;
+        if (typeof saved.unitValue === 'number' && Number.isFinite(saved.unitValue)){
+          const legacyNet = saved.modeLabel === 'brutto'
+            ? Number(saved.unitValue) / (1 + VAT)
+            : Number(saved.unitValue);
+          return round2(legacyNet);
+        }
         return null;
-      }
-      function accWidthM(size){ if(!size) return 0; return parseWH(size).w/1000; }
+      };
+      const isRowSavedExactInCurrentContext = (rowId, qty, unitNet, unitLabel) => {
+        const saved = getSavedEntryForRowId(rowId);
+        if (!saved) return false;
 
-      const accWidth_m =
-        accWidthM(extrasState.furtka.size)    * extrasState.furtka.qty +
-        accWidthM(extrasState.brama2s.size)   * extrasState.brama2s.qty +
-        accWidthM(extrasState.przesuwna.size) * extrasState.przesuwna.qty;
+        const currQty = Math.max(0, toInt(qty));
+        const savedQty = Math.max(0, toInt(saved.qty));
+        if (currQty !== savedQty) return false;
 
-      const effectiveLen_m = Math.max(length_m - accWidth_m, 0);
+        const savedUnitNet = getSavedUnitNet(saved);
+        const currUnitNet = (typeof unitNet === 'number' && Number.isFinite(unitNet))
+          ? round2(Number(unitNet))
+          : null;
 
-      // PALISADA: uwzględnij szerokość słupka w długości (wpływa na liczbę przęseł)
-      const isPalisade = String(typeKey).startsWith('pal_');
-      const ptForLen   = (elPostType && elPostType.value) ? elPostType.value : 'none';
-      const postW_m    = (isPalisade && ptForLen !== 'none') ? (postWidthMM(ptForLen) / 1000) : 0;
+        if (savedUnitNet !== null || currUnitNet !== null){
+          return savedUnitNet === currUnitNet;
+        }
 
-      // Moduł powtarzalny:
-      // - panele: samo przęsło
-      // - palisada: przęsło + słupek
-      const moduleW_m = width_m_panel + postW_m;
-
-      // Ogrodzenie ma zawsze o 1 słupek więcej niż liczba przęseł,
-      // więc przed dzieleniem odejmujemy "ten dodatkowy" słupek z końca.
-      const lenForSpans_m = Math.max(effectiveLen_m - postW_m, 0);
-
-      const spans = (moduleW_m > 0) ? Math.ceil(lenForSpans_m / moduleW_m) : 0;
-      const hasFence = spans > 0;
-      const posts = hasFence ? spans + 1 : 0;
-
-      const cornersInput = document.getElementById('corners');
-      const maxCorners = Math.max(posts - 2, 0);
-      if (cornersInput && parseInt(cornersInput.value) > maxCorners) {
-        cornersInput.value = maxCorners;
-      }
-
-      const spanUnit = getSpanPrice(typeKey, model, height);
-      if (spanUnit==null){ return; }
-
-      const pt = elPostType.value;
-      let wall = elPostWall.value;
-      let ph = parseInt(elPostHeight.value,10);
-      let postUnit = 0;
-
-      const isCustomPost = (pt === 'custom');
-
-      // Dla "Brak" i "Własny rozmiar" nie pobieramy ceny słupka (nie mamy tego w cenniku)
-      if (isCustomPost){
-        postUnit = 0;
-        wall = '-';
-        ph = 0;
-      } else if (pt !== 'none'){
-        postUnit = getPostUnitPrice(pt, wall, ph);
-        if (postUnit==null){ return; }
-      }
-
-      // aktualny stan podmurówki – potrzebny także do logiki obejm
-      const pdmKey = elPdm.value;
-      const hasPdm = (pdmKey!=='none' && pdmAvailable(typeKey));
-
-      // obejmy (tylko panele 60x40)
-      let clampPassQty=0, clampEndQty=0;
-      if (hasFence && typeKey==='panel_2500' && pt==='60x40'){
-        const cl = clampsForPanels(spans, height, pt, hasPdm);
-        clampPassQty=cl.passQty; clampEndQty=cl.endQty;
-      }
-
-// podmurówka
-      let pdmUnit = 0, pdmQty = 0;
-      if (pdmKey!=='none' && pdmAvailable(typeKey)){
-        pdmQty = spans;
-        pdmUnit = (pdmKey.startsWith('pdm_250')?55: (pdmKey.startsWith('pdm_300')?65:0));
-      }
-
-      // narożne obejmy
-      const corners = parseInt((document.getElementById('corners')||{value:0}).value) || 0;
-      const cornerClampUnit = 5.06;
-      const perPost = clampsPerPost(height, hasPdm);
-      const cornerClampQty = (hasFence && typeKey==='panel_2500' && pt==='60x40') ? corners * perPost : 0;
-      if (cornerClampQty>0){ clampPassQty = Math.max(clampPassQty - cornerClampQty, 0); }
-
-      // mocowania podmurówki (NIEZALEŻNE od wyboru podmurówki)
-      // - ilość bazujemy na liczbie "podmurówek", czyli liczbie przęseł (spans)
-      // - ale sama podmurówka jako pozycja w tabeli pojawia się tylko gdy pdmKey != 'none'
-      let mocQty = 0, mocUnit = 0;
-      if (hasFence && pdmAvailable(typeKey) && elMoc && elMoc.value !== 'none') {
-        mocUnit = MOC_PRICE[elMoc.value] || 0;
-        mocQty = spans * 2;
-      }
-
-      const withVAT = elVat.checked, VAT=0.23;
+        const savedText = String(saved.unitLabel || '').trim().toLowerCase();
+        const currText = String(unitLabel || '').trim().toLowerCase();
+        return !!savedText && !!currText && savedText === currText;
+      };
       tbody.innerHTML = '';
-      const addRow = (label, qty, unit)=> {
-        if (!qty || qty <= 0) return 0;
-        const u = withVAT ? round2(unit*(1+VAT)) : unit;
-        const s = round2(u*qty);
-        addRowQtyMoney(label, qty, u, s);
-        return s;
+      Object.keys(currentSummaryRowsById).forEach(k => delete currentSummaryRowsById[k]);
+      let hasUnknownPrice = false;
+
+      const hasRowOverride = (rowId) => !!(rowId && Object.prototype.hasOwnProperty.call(summaryQtyOverrideState, rowId));
+      const getFinalQty = (rowId, baseQty) => {
+        if (hasRowOverride(rowId)) return Math.max(0, toInt(summaryQtyOverrideState[rowId]));
+        return Math.max(0, toInt(baseQty));
+      };
+
+      const addRow = (label, baseQty, unit, forcePriceLabel = false, meta = null) => {
+        const rowId = meta?.control?.rowId || '';
+        const qty = meta?.control ? getFinalQty(rowId, baseQty) : Math.max(0, toInt(baseQty));
+        const keepIfZero = !!meta?.keepIfZero && hasRowOverride(rowId);
+        const rowUnitNet = (!forcePriceLabel && typeof unit === 'number' && Number.isFinite(unit))
+          ? Number(unit)
+          : null;
+        const rowUnitLabel = rowUnitNet === null ? unknownPriceLabel : '';
+
+        if (meta?.control && meta.control.rowType !== 'saved' && !Object.prototype.hasOwnProperty.call(meta.control, 'saveActive')){
+          const rowIdForActiveFlag = String(meta.control.rowId || '');
+          meta = {
+            ...meta,
+            control: {
+              ...meta.control,
+              saveActive: isRowSavedExactInCurrentContext(rowIdForActiveFlag, qty, rowUnitNet, rowUnitLabel)
+            }
+          };
+        }
+
+        if (qty <= 0 && !keepIfZero) return 0;
+        if (!forcePriceLabel && typeof unit === 'number' && Number.isFinite(unit)){
+          const u = withVAT ? round2(unit * (1 + VAT)) : unit;
+          const s = round2(u * qty);
+          addRowQtyMoney(label, qty, u, s, meta);
+          return s;
+        }
+        hasUnknownPrice = true;
+        addRowQtyMoney(label, qty, unknownPriceLabel, unknownPriceLabel, meta);
+        return 0;
+      };
+
+      const addOptionalRow = (option, qty, forcePriceLabel = false) => {
+        if (!option || !option.id || !qty || qty <= 0) return 0;
+        const optionName = option.name || option.uiLabel || 'Wyposażenie opcjonalne';
+        const comment = option.sectionTitle
+          ? `Opcja dodatkowa - ${option.sectionTitle}`
+          : 'Opcja dodatkowa';
+        const rowMeta = {
+          comment,
+          control: {
+            rowType: 'optional',
+            optId: option.id,
+            rowId: `opt:${option.id}`
+          }
+        };
+        const optionalUnitNet = (!forcePriceLabel && typeof option.priceNet === 'number' && Number.isFinite(option.priceNet))
+          ? Number(option.priceNet)
+          : null;
+        rowMeta.control.saveActive = isRowSavedExactInCurrentContext(
+          `opt:${option.id}`,
+          qty,
+          optionalUnitNet,
+          optionalUnitNet === null ? unknownPriceLabel : ''
+        );
+
+        if (!forcePriceLabel && typeof option.priceNet === 'number' && Number.isFinite(option.priceNet)){
+          const u = withVAT ? round2(option.priceNet * (1 + VAT)) : option.priceNet;
+          const s = round2(u * qty);
+          addRowQtyMoney(optionName, qty, u, s, rowMeta);
+          return s;
+        }
+
+        hasUnknownPrice = true;
+        addRowQtyMoney(optionName, qty, unknownPriceLabel, unknownPriceLabel, rowMeta);
+        return 0;
       };
 
       let total = 0;
-      total += addRow(`Przęsła (${model})`, spans, spanUnit);
+      total += addRow(`Przęsło (${model.name})`, spans, getSpanUnitPrice(typeKey, modelId, height), isCustomAluColor, {
+        control: { rowType: 'generic', rowId: `span:${typeKey}:${modelId}:${height}` },
+        keepIfZero: true
+      });
 
-      // Słupki
-      if (pt === 'custom'){
-        const wmm = postWidthMM('custom');
-        const wTxt = (wmm > 0) ? `, szer. ${wmm} mm` : '';
-        total += addRow(`Słupki niestandardowe${wTxt} (wycena indywidualna)`, posts, 0);
-      } else if (pt !== 'none'){
-        total += addRow(`Słupki ${pt} (ścianka ${wall}, wys. ${ph} mm)`, posts, postUnit);
+      if (isAlu){
+        const postChoice = String(elPostType.value || '');
+        let postData = null;
+        if (postChoice === 'toAnchor'){
+          postData = ALUMINIUM_PRIME_DATA.sharedPosts.toAnchor;
+        } else if (postChoice === 'toConcrete'){
+          postData = ALUMINIUM_PRIME_DATA.sharedPosts.toConcrete;
+        }
+
+        if (postData){
+          total += addRow(`${postData.name} ${postData.sizeMM}x${postData.heightMM} mm`, posts, Number(postData.priceNet), isCustomAluColor, {
+            control: { rowType: 'generic', rowId: `post-alu:${postChoice}:${height}` },
+            keepIfZero: true
+          });
+        }
+      } else {
+        const rule = getTabalPostRule(height);
+        const postHeight = Number(rule.post);
+        const clampsPerPost = Number(rule.clamps) || 0;
+        const clampType = String(elPostType.value || 'OM-1');
+
+        total += addRow(`Słupek 60x40x${postHeight} mm`, posts, null, false, {
+          control: { rowType: 'generic', rowId: `post-tabal:${height}` },
+          keepIfZero: true
+        });
+
+        if (clampType === 'OM-2'){
+          total += addRow(`Obejma OM-2 (${clampsPerPost}/słupek)`, posts * clampsPerPost, null, false, {
+            control: { rowType: 'generic', rowId: `clamp-om2:${height}:${clampType}` },
+            keepIfZero: true
+          });
+        } else {
+          const passQty = Math.max(spans - 1, 0) * clampsPerPost;
+          const endQty = 2 * clampsPerPost;
+          total += addRow(`Obejma OM-1 przelotowa (${clampsPerPost}/słupek)`, passQty, null, false, {
+            control: { rowType: 'generic', rowId: `clamp-pass:${height}:${clampType}` },
+            keepIfZero: true
+          });
+          total += addRow(`Obejma OM-1 końcowa (${clampsPerPost}/słupek)`, endQty, null, false, {
+            control: { rowType: 'generic', rowId: `clamp-end:${height}:${clampType}` },
+            keepIfZero: true
+          });
+        }
       }
 
-      // zaślepki słupków – auto
-      const CAP_PRICE = { '60x40': 2.65, '60x60': 4.60, '80x80': 5.75, '100x100': 6.33 };
+      gateRows.forEach(row => {
+        total += addRow(row.label, row.qty, row.unit, isCustomAluColor, {
+          control: { rowType: 'gate', gateKind: row.kind, rowId: `gate:${row.kind}:${row.selected || ''}` }
+        });
+      });
 
-      const capUnit = CAP_PRICE[pt] || 0;
+      Object.keys(aluOptionalQtyState).forEach(optId => {
+        const qty = Math.max(0, toInt(aluOptionalQtyState[optId]));
+        if (!qty) return;
+        const option = activeOptionalMap[optId];
+        if (!option) return;
+        total += addOptionalRow(option, qty, isCustomAluColor);
+      });
 
-      // etykieta zależna od rozmiaru
-      const capName = (pt === '60x40')
-        ? `Zaślepka zewnętrzna słupka ${pt}`
-        : `Zaślepka wewnętrzna słupka ${pt}`;
-
-      if (capUnit > 0) {
-        total += addRow(capName, posts, capUnit);
+      const visibleSaved = savedConfigPositions.filter(saved => Math.max(0, toInt(saved.qty)) > 0);
+      if (visibleSaved.length){
+        addSavedSectionSeparator(visibleSaved.length);
       }
-      if (clampPassQty>0) total += addRow(`Obejmy przelotowe 60x40 (wys. ${height} mm)`, clampPassQty, (CLAMP_PRICE.pass[pt]||5.06));
-      if (clampEndQty>0)  total += addRow(`Obejmy końcowe 60x40 (wys. ${height} mm)`, clampEndQty, (CLAMP_PRICE.end[pt]||5.06));
-      if (cornerClampQty>0) total += addRow(`Obejmy narożne 60x40 (ilość narożników: ${corners})`, cornerClampQty, cornerClampUnit);
-      if (pdmQty>0) total += addRow(`Podmurówka (${pdmKey.includes('250')?'250 mm':'300 mm'})`, pdmQty, pdmUnit);
-      if (mocQty>0) total += addRow(`Mocowanie (${(elMoc && elMoc.options[elMoc.selectedIndex]) ? elMoc.options[elMoc.selectedIndex].text : ''})`, mocQty, (MOC_PRICE[elMoc.value]||0));
+      visibleSaved.forEach(saved => {
+        const qty = Math.max(0, toInt(saved.qty));
+        if (qty <= 0) return;
+        const label = String(saved.label || 'Pozycja zapisana');
+        const commentParts = [
+          `System: ${saved.systemLabel || '-'}`,
+          saved.modelLabel ? `model: ${saved.modelLabel}` : '',
+          saved.sourceComment || ''
+        ].filter(Boolean);
+        const rowMeta = {
+          comment: commentParts.join(' • '),
+          control: { rowType: 'saved', rowId: `saved:${saved.id}`, saveActive: true }
+        };
 
-      // Furtka/bramy
-      ['furtka','brama2s','przesuwna'].forEach(kind=>{
-        const st = extrasState[kind];
-        if (st.qty>0 && st.size){
-          const unit = (kind==='furtka')
-            ? ((lib.furtka?.standard||lib.furtka?.light||{})[st.size] ?? null)
-            : (kind==='brama2s'
-                ? (lib.brama_dwuskrzydlowa?.reczna?.[st.size] ?? null)
-                : (lib.brama_przesuwna?.reczna?.[st.size] ?? null));
-          if (unit!=null){
-            total += addRow(`${kind==='furtka'?'Skrzydło furtki':(kind==='brama2s'?'Skrzydła bramy dwuskrzydłowej':'Skrzydło bramy przesuwnej')} (${fam}) - ${st.size}`, st.qty, unit);
-          }
+        const legacyNetUnit = (typeof saved.unitValue === 'number' && Number.isFinite(saved.unitValue))
+          ? (saved.modeLabel === 'brutto' ? round2(saved.unitValue / (1 + VAT)) : Number(saved.unitValue))
+          : null;
+        const unitNet = (typeof saved.unitNetValue === 'number' && Number.isFinite(saved.unitNetValue))
+          ? Number(saved.unitNetValue)
+          : legacyNetUnit;
+
+        if (typeof unitNet === 'number' && Number.isFinite(unitNet)){
+          const unit = withVAT ? round2(unitNet * (1 + VAT)) : unitNet;
+          const sum = round2(unit * qty);
+          addRowQtyMoney(label, qty, unit, sum, rowMeta);
+          total += sum;
+        } else {
+          hasUnknownPrice = true;
+          const textLabel = saved.unitLabel || CUSTOM_QUOTE_PRICE_LABEL;
+          addRowQtyMoney(label, qty, textLabel, textLabel, rowMeta);
         }
       });
 
-      // NAPĘDY
-      const auto2sName = autoState.brama2s.name !== 'none' ? autoState.brama2s.name : null;
-      const autoPrzName = autoState.przesuwna.name !== 'none' ? autoState.przesuwna.name : null;
-
-      if (auto2sName && autoState.brama2s.qty > 0){
-        const unit = Number(AUTOMAT_PRICE.brama2s[auto2sName] || 0);
-        total += addRow(`${auto2sName}`, autoState.brama2s.qty, unit);
-      }
-      if (autoPrzName && autoState.przesuwna.qty > 0){
-        const unit = Number(AUTOMAT_PRICE.przesuwna[autoPrzName] || 0);
-        total += addRow(`${autoPrzName}`, autoState.przesuwna.qty, unit);
-      }
-
-      sumEl.textContent = fmt(total);
+      sumEl.textContent = hasUnknownPrice ? CUSTOM_QUOTE_PRICE_LABEL : fmt(total);
       priceModeLabel.textContent = withVAT ? 'Ceny brutto (23% VAT)' : 'Ceny netto';
-      boxRes.style.display='block';
+      boxRes.style.display = 'block';
 
-      // Podgląd
-      const imgSrc = PREVIEW_IMAGES[elModel.value];
-      if (imgSrc) { previewImg.src = imgSrc; previewBox.style.display='block'; previewBox.classList.remove('show'); setTimeout(()=>previewBox.classList.add('show'),50); }
-      else { previewBox.style.display='none'; }
+      const imgSrc = PREVIEW_IMAGES[model.name] || PREVIEW_IMAGES[model.id] || '';
+      if (imgSrc){
+        previewImg.src = imgSrc;
+        previewBox.style.display = 'block';
+        previewBox.classList.remove('show');
+        setTimeout(() => previewBox.classList.add('show'), 50);
+      } else {
+        previewBox.style.display = 'none';
+      }
 
-      // Dopasowanie długości
-      const width_m = moduleW_m; // moduł (palisada: przęsło+słupek, panele: przęsło)
-      const spansLen_m = spans * width_m_panel;
-      const postsLen_m = (isPalisade && postW_m > 0) ? (posts * postW_m) : 0;
-      const ideal_m = spansLen_m + postsLen_m;
-
-      const totalConfigured_m = ideal_m + accWidth_m;
+      const ideal_m = spans * spanWidthM;
+      const totalConfigured_m = ideal_m + gatesWidthM;
       const diff = ideal_m - effectiveLen_m;
       const eps = 0.005;
 
-            if (diff > eps){
-        const wmTxt   = width_m.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
-        const lenTxt  = effectiveLen_m.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
+      if (diff > eps){
+        const wmTxt = spanWidthM.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
+        const lenTxt = effectiveLen_m.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
         const diffTxt = diff.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
-        const totalTxt   = totalConfigured_m.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
-        const panelsTxt  = spansLen_m.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
-        const postsTxt   = postsLen_m.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
-        const extrasTxt  = accWidth_m.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
-        const postwTxt   = postW_m.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
-
-        const moduleLabel = (isPalisade && postW_m > 0) ? 'jednego modułu (przęsło + słupek)' : 'jednego modułu';
-        const postInfoLine = (isPalisade && postW_m > 0)
-          ? `<br>Uwzględniono szerokość słupka: <b>${postwTxt} m</b> (typ: ${ptForLen}).`
-          : '';
-
-        const postsPart = (postsLen_m > 0) ? ` + słupki: ${postsTxt} m` : '';
+        const totalTxt = totalConfigured_m.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
+        const panelsTxt = ideal_m.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
+        const extrasTxt = gatesWidthM.toLocaleString('pl-PL',{minimumFractionDigits:2, maximumFractionDigits:2});
 
         fitWarning.innerHTML = `
           <b>Dopasowanie długości</b><br>
-          Po odjęciu dodatkowych elementów do wypełnienia pozostaje <b>${lenTxt} m</b>.
-          Szerokość ${moduleLabel} to <b>${wmTxt} m</b>, dlatego nie da się uzyskać dokładnie tej długości z całych przęseł.${postInfoLine}
-          W takim wariancie ogrodzenie będzie <b>dłuższe</b> od wymiaru do wypełnienia o ok. <b>${diffTxt} m</b>.
-          <br>Masz trzy możliwości:
-          <ul>
-            <li>zostawić nadmiar i zakończyć montaż z lekką „górką”,</li>
-            <li>skrócić ostatni moduł na budowie o ok. <b>${diffTxt} m</b>,</li>
-            <li>zmienić liczbę modułów (mniej przęseł) i ewentualnie zwiększyć szerokość bramy/furtki.</li>
-          </ul>
-          <p>Łączna długość Twojej konfiguracji: <b>${totalTxt} m</b> (przęsła: ${panelsTxt} m${postsPart} + elementy dodatkowe: ${extrasTxt} m)</p>
-          <p class="calc-summary">Obecnie kalkulator przyjmuje <b>${spans}</b> przęsła (zaokrąglenie w górę).</p>
+          Po odjęciu bram/furtki do wypełnienia pozostaje <b>${lenTxt} m</b>.
+          Szerokość modułu to <b>${wmTxt} m</b>, więc kalkulator zaokrągla liczbę przęseł w górę.
+          Nadmiar długości wynosi około <b>${diffTxt} m</b>.
+          <p>Łączna długość konfiguracji: <b>${totalTxt} m</b> (przęsła: ${panelsTxt} m + bramy/furtki: ${extrasTxt} m)</p>
+          <p class="calc-summary">Aktualnie przyjęto <b>${spans}</b> przęseł.</p>
         `;
 
-        // Dane pod PDF (dataset czytany w generatorze)
-        fitWarning.dataset.spans      = String(spans);
-        fitWarning.dataset.widthm     = String(width_m);
-        fitWarning.dataset.effective  = String(effectiveLen_m);
-        fitWarning.dataset.diff       = String(diff);
-        fitWarning.dataset.total      = String(totalConfigured_m);
-
-        // panele/przęsła osobno (jak było wcześniej), + nowe pola dla słupków
-        fitWarning.dataset.panels     = String(spansLen_m);
-        fitWarning.dataset.postslen   = String(postsLen_m);
-        fitWarning.dataset.postw      = String(postW_m);
-        fitWarning.dataset.posttype   = String(ptForLen);
-        fitWarning.dataset.ispal      = (isPalisade && postW_m > 0) ? '1' : '0';
-
-        fitWarning.dataset.extras     = String(accWidth_m);
-        fitWarning.style.display='block';
+        fitWarning.dataset.spans = String(spans);
+        fitWarning.dataset.widthm = String(spanWidthM);
+        fitWarning.dataset.effective = String(effectiveLen_m);
+        fitWarning.dataset.diff = String(diff);
+        fitWarning.dataset.total = String(totalConfigured_m);
+        fitWarning.dataset.panels = String(ideal_m);
+        fitWarning.dataset.postslen = '0';
+        fitWarning.dataset.postw = '0';
+        fitWarning.dataset.posttype = String(elPostType.value || '');
+        fitWarning.dataset.ispal = '0';
+        fitWarning.dataset.extras = String(gatesWidthM);
+        fitWarning.style.display = 'block';
       } else {
-        fitWarning.style.display='none';
+        fitWarning.style.display = 'none';
         ['spans','widthm','effective','diff','total','panels','postslen','postw','posttype','ispal','extras']
           .forEach(k => fitWarning.removeAttribute('data-'+k));
       }
-    
-      // Wtrącenie napędów po każdym przeliczeniu (utrzymuje je po zmianach innych elementów)
-      if (window.injectMotors) window.injectMotors();
-}
+    }
 
     function doReset(){
-      elLen.value = 10;
-      elType.value = 'panel_2500';
-      elPdm.value = 'none';
-      elVat.checked = false;
-      const corner = document.getElementById('corners');
-      if (corner) corner.value = 0;
+      if (elLen) elLen.value = 25;
+      if (elType) elType.value = 'fokus';
+      if (elVat) elVat.checked = false;
 
-      extrasState.furtka   = { qty: 0, size: null };
-      extrasState.brama2s  = { qty: 0, size: null };
-      extrasState.przesuwna= { qty: 0, size: null };
+      if (gateWicketVariant) gateWicketVariant.value = '';
+      if (gateSwingVariant) gateSwingVariant.value = '';
+      if (gateSlidingVariant) gateSlidingVariant.value = '';
+      if (gateWicketQty) gateWicketQty.value = '0';
+      if (gateSwingQty) gateSwingQty.value = '0';
+      if (gateSlidingQty) gateSlidingQty.value = '0';
+      Object.keys(aluOptionalQtyState).forEach(k => delete aluOptionalQtyState[k]);
+      Object.keys(aluInfoOpenState).forEach(k => delete aluInfoOpenState[k]);
+      Object.keys(summaryQtyOverrideState).forEach(k => delete summaryQtyOverrideState[k]);
 
-      autoState.brama2s    = { name: 'none', qty: 0 };
-      autoState.przesuwna  = { name: 'none', qty: 0 };
+      if (tbody) tbody.innerHTML = '';
+      if (sumEl) sumEl.textContent = fmt(0);
+      if (priceModeLabel) priceModeLabel.textContent = 'Ceny netto';
 
-      updateExtrasQtyLabels();
-
-      automatyVisible = false;
-      const wrap2s = document.getElementById('accAutoWrap-brama2s');
-      const wrapPrz = document.getElementById('accAutoWrap-przesuwna');
-      if (wrap2s) wrap2s.style.display = 'none';
-      if (wrapPrz) wrapPrz.style.display = 'none';
-      const auto2s = document.getElementById('accAuto-brama2s');
-      const autoPrz = document.getElementById('accAuto-przesuwna');
-      if (auto2s) auto2s.value = 'none';
-      if (autoPrz) autoPrz.value = 'none';
-      if (autosBtn){
-        autosBtn.textContent = 'Automaty +';
-        autosBtn.setAttribute('aria-expanded', 'false');
+      if (boxRes) boxRes.style.display = 'none';
+      if (fitWarning) fitWarning.style.display = 'none';
+      if (previewBox){
+        previewBox.style.display = 'none';
+        previewBox.classList.remove('show');
       }
-
-      boxRes.style.display = 'none';
-      fitWarning.style.display = 'none';
-      previewBox.style.display = 'none';
-      previewBox.classList.remove('show');
-      previewImg.removeAttribute('src');
+      if (previewImg) previewImg.removeAttribute('src');
 
       autoCalc = false;
       if (btnCalc) btnCalc.textContent = 'Oblicz';
 
       refreshUI();
-    }
-
-    function toggleExtras(){
-      if (!extrasBox || !extrasBtn) return;
-      const show = (extrasBox.style.display !== 'block');
-      extrasBox.style.display = show ? 'block' : 'none';
-      extrasBtn.textContent = show ? 'Dodatkowe elementy -' : 'Dodatkowe elementy +';
-      extrasBtn.setAttribute('aria-expanded', show ? 'true' : 'false');
-
-      if (extrasFooter) extrasFooter.style.display = show ? 'flex' : 'none';
-
-      if (!show){
-        automatyVisible = false;
-        ['brama2s','przesuwna'].forEach(kind=>{
-          const card = document.querySelector(`.acc-card[data-kind="${kind}"]`);
-          if (card) card.classList.remove('show-auto');
-        });
-        if (autosBtn){
-          autosBtn.textContent = 'Automaty +';
-          autosBtn.setAttribute('aria-expanded', 'false');
-        }
-      }
-
-      equalizeAccControlsRow();
-      setTimeout(equalizeAccControlsRow, 60);
     }
 
     /* ==== ZDARZENIA ==== */
@@ -2483,32 +3354,150 @@ label[for="accAuto-przesuwna"]{
         return;
       }
       if (btn.id === 'reset'){ ev.preventDefault(); doReset(); return; }
-      if (btn.id === 'extrasBtn'){ ev.preventDefault(); toggleExtras(); return; }
-      
 
-      // PLUS/MINUS dodatków
-      if (btn.classList.contains('acc-plus') || btn.classList.contains('acc-minus')){
-        const kind = btn.dataset.kind;
-        if (!kind || !extrasState[kind]) return;
-        if (btn.classList.contains('acc-plus')) extrasState[kind].qty++;
-        else extrasState[kind].qty = Math.max(0, extrasState[kind].qty-1);
-        updateExtrasQtyLabels();
-        if (autoCalc) calculate();
+      if (btn.classList.contains('sum-row-action-btn')){
+        ev.preventDefault();
+        const action = String(btn.dataset.action || '');
+        const rowType = String(btn.dataset.rowType || 'generic');
+
+        if (action === 'save'){
+          if (rowType === 'saved'){
+            const rowId = String(btn.dataset.rowId || '');
+            const id = rowId.replace(/^saved:/, '');
+            const idx = savedConfigPositions.findIndex(s => s.id === id);
+            if (idx >= 0) savedConfigPositions.splice(idx, 1);
+            calculate();
+            return;
+          }
+
+          const rowId = String(btn.dataset.rowId || '');
+          if (!rowId) return;
+          const sourceKey = getCurrentSourceKeyForRowId(rowId);
+          const isActive = btn.classList.contains('active');
+
+          if (isActive){
+            removeSavedBySourceKey(sourceKey);
+            calculate();
+            return;
+          }
+
+          if (!boxRes || boxRes.style.display === 'none') calculate();
+          removeSavedBySourceKey(sourceKey);
+          if (!saveCurrentSummaryRow(rowId)) return;
+          calculate();
+          return;
+        }
+
+        if (action === 'remove'){
+          if (rowType === 'saved'){
+            const rowId = String(btn.dataset.rowId || '');
+            const id = rowId.replace(/^saved:/, '');
+            const idx = savedConfigPositions.findIndex(s => s.id === id);
+            if (idx >= 0) savedConfigPositions.splice(idx, 1);
+            calculate();
+            return;
+          }
+
+          if (rowType === 'optional'){
+            const optId = String(btn.dataset.optId || '');
+            if (!optId) return;
+            delete aluOptionalQtyState[optId];
+            refreshAluminiumInfoPanel(elType.value, elModel.value);
+            calculate();
+            return;
+          }
+
+          if (rowType === 'gate'){
+            const gateKind = String(btn.dataset.gateKind || '');
+            const gateInput = getGateQtyInput(gateKind);
+            if (!gateInput) return;
+            gateInput.value = '0';
+            calculate();
+            return;
+          }
+
+          const rowId = String(btn.dataset.rowId || '');
+          if (!rowId) return;
+          summaryQtyOverrideState[rowId] = 0;
+          calculate();
+          return;
+        }
       }
 
-      // PLUS/MINUS napędów
-      if (btn.classList.contains('auto-plus') || btn.classList.contains('auto-minus')){
-        const kind = btn.dataset.autoKind; // 'brama2s' | 'przesuwna'
-        if (!kind || !autoState[kind]) return;
-        const maxQ = extrasState[kind].qty || 0;
-        if (btn.classList.contains('auto-plus')){
-          autoState[kind].qty = Math.min(maxQ, autoState[kind].qty + 1);
+      if (btn.classList.contains('alu-opt-step-btn')){
+        ev.preventDefault();
+        const optId = String(btn.dataset.optId || '');
+        const delta = toInt(btn.dataset.delta);
+        if (!optId || !delta) return;
+        const activeOptionalMap = getActiveAluminiumOptionalMap(elType.value, elModel.value);
+        if (!activeOptionalMap[optId]) return;
+        const nextQty = Math.max(0, Math.max(0, toInt(aluOptionalQtyState[optId])) + delta);
+        if (nextQty > 0){
+          aluOptionalQtyState[optId] = nextQty;
         } else {
-          autoState[kind].qty = Math.max(0, autoState[kind].qty - 1);
+          delete aluOptionalQtyState[optId];
         }
-        const lbl = document.getElementById('accAutoQty-'+kind);
-        if (lbl) lbl.textContent = `${autoState[kind].qty} szt.`;
-        if (autoCalc) calculate();
+        refreshAluminiumInfoPanel(elType.value, elModel.value);
+        calculate();
+        return;
+      }
+
+      if (btn.classList.contains('sum-qty-btn')){
+        ev.preventDefault();
+        const rowType = String(btn.dataset.rowType || 'generic');
+        const delta = toInt(btn.dataset.delta);
+        if (!delta) return;
+
+        if (rowType === 'optional'){
+          const optId = String(btn.dataset.optId || '');
+          if (!optId) return;
+          const activeOptionalMap = getActiveAluminiumOptionalMap(elType.value, elModel.value);
+          if (!activeOptionalMap[optId]) return;
+          const nextQty = Math.max(0, Math.max(0, toInt(aluOptionalQtyState[optId])) + delta);
+          if (nextQty > 0){
+            aluOptionalQtyState[optId] = nextQty;
+          } else {
+            delete aluOptionalQtyState[optId];
+          }
+          refreshAluminiumInfoPanel(elType.value, elModel.value);
+          calculate();
+          return;
+        }
+
+        if (rowType === 'gate'){
+          const gateKind = String(btn.dataset.gateKind || '');
+          const gateInput = getGateQtyInput(gateKind);
+          if (!gateInput || gateInput.disabled) return;
+          const nextQty = Math.max(0, toInt(gateInput.value) + delta);
+          gateInput.value = String(nextQty);
+          calculate();
+          return;
+        }
+
+        if (rowType === 'saved'){
+          const rowId = String(btn.dataset.rowId || '');
+          const id = rowId.replace(/^saved:/, '');
+          const saved = savedConfigPositions.find(s => s.id === id);
+          if (!saved) return;
+          const nextQty = Math.max(0, toInt(saved.qty) + delta);
+          if (nextQty > 0){
+            saved.qty = nextQty;
+          } else {
+            const idx = savedConfigPositions.findIndex(s => s.id === id);
+            if (idx >= 0) savedConfigPositions.splice(idx, 1);
+          }
+          calculate();
+          return;
+        }
+
+        const rowId = String(btn.dataset.rowId || '');
+        if (!rowId) return;
+        const qtyWrap = btn.closest('.sum-qty-control');
+        const currentQty = toInt(qtyWrap?.querySelector('.sum-qty-value')?.textContent);
+        const nextQty = Math.max(0, currentQty + delta);
+        summaryQtyOverrideState[rowId] = nextQty;
+        calculate();
+        return;
       }
 
       // PDF
@@ -2575,89 +3564,69 @@ label[for="accAuto-przesuwna"]{
       }
     });
 
-    // NOWE: własna szerokość słupka - autoCalc
-    if (elPostCustomWidth) {
+    // Zmiany pól - auto-obliczanie po włączeniu
+    root.addEventListener('change', (ev)=>{
+      const t = ev.target;
+      if (!t) return;
+
+      if (t.id === 'type'){
+        refreshUI();
+        return;
+      }
+
+      if (t.id === 'model'){
+        setOptions(elHeight, heightsForSelection(elType.value, elModel.value));
+        refreshGatesUI(elType.value, elModel.value);
+        if (autoCalc) calculate();
+        return;
+      }
+
+      if (t.id === 'vat'){
+        priceModeLabel.textContent = elVat.checked ? 'Ceny brutto (23% VAT)' : 'Ceny netto';
+        if (boxRes && boxRes.style.display !== 'none') calculate();
+        return;
+      }
+
+      if (
+        t.id === 'postType' ||
+        t.id === 'height' ||
+        t.id === 'color' ||
+        t.id === 'gateWicketVariant' ||
+        t.id === 'gateSwingVariant' ||
+        t.id === 'gateSlidingVariant'
+      ){
+        if (t.id === 'gateWicketVariant' || t.id === 'gateSwingVariant' || t.id === 'gateSlidingVariant'){
+          refreshGateQtyAvailability(elType.value);
+        }
+        if (
+          t.id === 'postType' ||
+          t.id === 'gateWicketVariant' ||
+          t.id === 'gateSwingVariant' ||
+          t.id === 'gateSlidingVariant'
+        ){
+          refreshAluminiumInfoPanel(elType.value, elModel.value);
+        }
+        if (autoCalc) calculate();
+      }
+    });
+
+    function bindAutoCalcInput(el, normalizeNonNegative){
+      if (!el) return;
       ['input', 'change'].forEach(evt => {
-        elPostCustomWidth.addEventListener(evt, () => {
-          toggleCustomPostWidthUI();
+        el.addEventListener(evt, () => {
+          if (normalizeNonNegative){
+            const v = Math.max(0, toInt(el.value));
+            el.value = String(v);
+          }
           if (autoCalc) calculate();
         });
       });
     }
 
-    // Zmiany pól – auto-oblicz po włączeniu
-    root.addEventListener('change', (ev)=>{
-      const t = ev.target;
-      if (!t) return;
-      if (t.id === 'type'){ refreshUI(); }
-      else if (t.id === 'model'){ setOptions(elHeight, heightsForSelection(elType.value, elModel.value)); syncPostHeightConstraints(); refreshExtrasUI(); if (autoCalc) calculate(); }
-      else if (t.id === 'postType') {
-        setOptions(elPostWall, postWallsForPostType(elPostType.value));
-        const { postColors } = colorsFor(elType.value, elPostType.value);
-        setOptions(elPostColor, postColors);
-
-        // NOWE: schowanie/pokazanie wariantu/wysokości/koloru
-        togglePostDetailsVisibility();
-        toggleCustomPostWidthUI();
-
-        if (autoCalc) calculate();
-      }
-      else if (t.id === 'pdm'){ refreshMocOptions(); syncPostHeightConstraints(); if (autoCalc) calculate(); }
-      else if (t.id === 'moc'){
-        if (mocColorField) mocColorField.style.display = 'block';
-
-        const isNone = (t.value === 'none');
-
-        if (elMocColor){
-          elMocColor.disabled = isNone;
-
-          if (isNone) {
-            elMocColor.value = 'none';
-            setNoneOptionState(elMocColor, true);   // nieaktywne => allow none
-          } else {
-            setNoneOptionState(elMocColor, false);  // aktywne => block none
-
-            // gdy włączamy i nadal stoi na none, ustaw pierwszego RAL-a
-            if (elMocColor.value === 'none'){
-              const firstRal = Array.from(elMocColor.options || []).find(o => o.value && o.value !== 'none' && !o.disabled && !o.hidden);
-              if (firstRal) elMocColor.value = firstRal.value;
-            }
-          }
-        }
-
-        if (autoCalc) calculate();
-      }
-      else if (t.id === 'vat'){ priceModeLabel.textContent = elVat.checked ? 'Ceny brutto (23% VAT)' : 'Ceny netto'; if (boxRes && boxRes.style.display!=='none' && autoCalc) calculate(); }
-      else if (t.id && t.id.startsWith('accSize-')){ const kind = t.id.replace('accSize-',''); if (extrasState[kind]) extrasState[kind].size = t.value || null; if (autoCalc) calculate(); }
-      else if (t.id === 'accAuto-brama2s' || t.id === 'accAuto-przesuwna'){
-        const kind = (t.id.includes('brama2s')?'brama2s':'przesuwna');
-        autoState[kind].name = t.value || 'none';
-        if (autoState[kind].name !== 'none' && autoState[kind].qty === 0){
-          autoState[kind].qty = extrasState[kind].qty || 0;
-          const lbl = document.getElementById('accAutoQty-'+kind);
-          if (lbl) lbl.textContent = `${autoState[kind].qty} szt.`;
-        }
-        if (autoState[kind].name === 'none'){
-          autoState[kind].qty = 0;
-          const lbl = document.getElementById('accAutoQty-'+kind);
-          if (lbl) lbl.textContent = `0 szt.`;
-        }
-        if (autoCalc) calculate();
-      }
-      else if (t.id === 'height' || t.id === 'color' || t.id === 'postWall' || t.id === 'postHeight' || t.id === 'postColor' || t.id === 'corners'){ if (t.id === 'height') syncPostHeightConstraints(); if (autoCalc) calculate(); }
-    });
-
-    // input na długości
-    // input na długości - zmiana długości ma też odpalać autoCalc
-if (elLen) {
-  ['input', 'change'].forEach(evt => {
-    elLen.addEventListener(evt, () => {
-      if (autoCalc) {
-        calculate();
-      }
-    });
-  });
-}
+    bindAutoCalcInput(elLen, false);
+    bindAutoCalcInput(gateWicketQty, true);
+    bindAutoCalcInput(gateSwingQty, true);
+    bindAutoCalcInput(gateSlidingQty, true);
 
 
     // Telefon – tylko dozwolone znaki
@@ -2685,17 +3654,7 @@ if (phoneEl) phoneEl.addEventListener('input', function(){
 
     // startowy stan
     refreshUI();
-    previewBox.style.display='none';
-
-    // jednorazowe nasłuchy rozmiaru/załadunku
-    window.addEventListener('resize', equalizeAccControlsRow);
-    window.addEventListener('load',   equalizeAccControlsRow);
-    requestAnimationFrame(equalizeAccControlsRow);
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => requestAnimationFrame(equalizeAccControlsRow));
-    } else {
-      setTimeout(equalizeAccControlsRow, 80);
-    }
+    if (previewBox) previewBox.style.display = 'none';
 /* ==== POPPINS base64 here === */
 
 
@@ -2827,31 +3786,18 @@ if (phoneEl) phoneEl.addEventListener('input', function(){
         ? (getSelText(postColorEl) || postColorEl.value || '')
         : '';
 
-      // Jeśli wybrano "Brak słupków" (value = 'none') lub nic nie wybrano -> pokaż "brak"
-      const slupLabel =
-        !postTypeVal || postTypeVal === 'none'
-          ? 'brak'
-          : `${postTypeVal}, ścianka ${postWallVal}, ${postHeightVal} mm, kolor ${postColorText}`;
+      const selectedPostType = getSelText(postTypeEl) || postTypeVal;
+      const slupLabel = (!selectedPostType || postTypeVal === 'none')
+        ? 'brak'
+        : selectedPostType;
 
       const tableData = [
         ['Długość (m)', `${$('#len').value}`],
-        ['Typ', getSelText($('#type'))],
-        ['Model', $('#model').value],
+        ['System', getSelText($('#type'))],
+        ['Model', getSelText($('#model'))],
         ['Wysokość przęsła', `${$('#height')?.value || ''} mm`],
         ['Kolor ogrodzenia', getSelText($('#color')) || $('#color')?.value || ''],
         ['Słupek', slupLabel],
-        ['Narożniki', `${document.getElementById('corners')?.value || 0}`],
-        ['Podmurówka', `${$('#pdm').value === 'none'
-          ? 'brak'
-          : ($('#pdm').value.includes('250') ? '250 mm' : '300 mm')}`],
-        ['Mocowanie podm.', `${(document.getElementById('moc')?.value &&
-                                document.getElementById('moc')?.value !== 'none')
-          ? getSelText(document.getElementById('moc'))
-          : 'brak'}`],
-        ['Kolor mocowania', `${(document.getElementById('moc')?.value &&
-                                 document.getElementById('moc')?.value !== 'none')
-          ? (document.getElementById('mocColor')?.value || '-')
-          : '-'}`],
         ['Ceny', `${$('#vat').checked ? 'brutto (23% VAT)' : 'netto'}`],
       ];
       doc.setFontSize(10);
@@ -2874,16 +3820,34 @@ if (phoneEl) phoneEl.addEventListener('input', function(){
       doc.text('ELEMENT', colX.el, y + 14); doc.text('ILOŚĆ', colX.qty, y + 14); doc.text('CENA JEDN.', colX.unit, y + 14); doc.text('SUMA', colX.sum, y + 14); y += 20;
       doc.setDrawColor(230); doc.setLineWidth(0.1); doc.setFont(undefined,'normal');
 
-      const rows = [...document.querySelectorAll('#tbody tr')].map(tr => [...tr.children].map(td => td.textContent));
+      const rows = Array.from(document.querySelectorAll('#tbody tr'))
+        .map(tr => {
+          if (tr.classList.contains('sum-saved-separator')) return null;
+          const tds = Array.from(tr.querySelectorAll('td'));
+          if (!tds.length) return null;
+
+          const cellByLabel = (label, fallbackIdx) =>
+            tds.find(td => String(td.getAttribute('data-label') || '').trim() === label) || tds[fallbackIdx] || null;
+
+          const elementTxt = String(cellByLabel('Element', 0)?.textContent || '').trim();
+          const qtyTxt = String(cellByLabel('Ilość', 1)?.textContent || '').trim();
+          const unitTxt = String(cellByLabel('Cena jedn.', 2)?.textContent || '').trim();
+          const sumTxt = String(cellByLabel('Suma', 3)?.textContent || '').trim();
+
+          if (!elementTxt || !qtyTxt || !unitTxt || !sumTxt) return null;
+          return { element: elementTxt, qty: qtyTxt, unit: unitTxt, sum: sumTxt };
+        })
+        .filter(Boolean);
+
       if (!rows || rows.length === 0) { doc.setFont(undefined, 'italic'); doc.text('Brak pozycji - w kalkulatorze kliknij „Oblicz”.', marginX, y + 12); doc.setFont(undefined, 'normal'); y += 26; }
       rows.forEach((r, i) => {
-        const rh = 16; const elLines = doc.splitTextToSize(r[0], (colX.qty - 10) - (colX.el));
+        const rh = 16; const elLines = doc.splitTextToSize(r.element, (colX.qty - 10) - (colX.el));
         const rowHeight2 = rh * Math.max(elLines.length,1);
         if (y + rowHeight2 + 10 > doc.internal.pageSize.height - 60){ doc.addPage(); y = 50; }
         if (i % 2 === 1) { doc.setFillColor(250, 250, 250); doc.rect(marginX, y, tableW, rowHeight2, 'F'); }
         doc.rect(marginX, y, tableW, rowHeight2);
-        doc.text(elLines, colX.el, y + 11); doc.text(r[1], colX.qty,  y + 11);
-        doc.text(r[2], colX.unit, y + 11); doc.text(r[3], colX.sum,  y + 11);
+        doc.text(elLines, colX.el, y + 11); doc.text(r.qty, colX.qty,  y + 11);
+        doc.text(r.unit, colX.unit, y + 11); doc.text(r.sum, colX.sum,  y + 11);
         y += rowHeight2;
       });
 
@@ -2937,6 +3901,7 @@ if (phoneEl) phoneEl.addEventListener('input', function(){
         const rowDiscData = [];
 
         rowsEl.forEach(tr => {
+          if (tr.classList.contains('sum-saved-separator')) return;
           const tds = tr.querySelectorAll('td');
           if (!tds.length) return;
 
@@ -3261,15 +4226,29 @@ async function handleSend(){
   const pdfBase64 = await generateZeggerPDFBase64();
 
   // 2) buduj summary
-  const rows = Array.from(document.querySelectorAll('#tbody tr')).map(tr => {
-    const tds = tr.querySelectorAll('td');
-    return {
-      element: (tds[0]?.textContent || '').trim(),
-      name:    (tds[1]?.textContent || '').trim(),
-      qty:     (tds[2]?.textContent || '').trim(),
-      sum:     (tds[3]?.textContent || '').trim()
-    };
-  });
+  const rows = Array.from(document.querySelectorAll('#tbody tr'))
+    .map(tr => {
+      if (tr.classList.contains('sum-saved-separator')) return null;
+      const tds = Array.from(tr.querySelectorAll('td'));
+      if (!tds.length) return null;
+
+      const cellByLabel = (label, fallbackIdx) =>
+        tds.find(td => String(td.getAttribute('data-label') || '').trim() === label) || tds[fallbackIdx] || null;
+
+      const elementTxt = String(cellByLabel('Element', 0)?.textContent || '').trim();
+      const qtyTxt = String(cellByLabel('Ilość', 1)?.textContent || '').trim();
+      const unitTxt = String(cellByLabel('Cena jedn.', 2)?.textContent || '').trim();
+      const sumTxt = String(cellByLabel('Suma', 3)?.textContent || '').trim();
+
+      if (!elementTxt) return null;
+      return {
+        element: elementTxt,
+        name: unitTxt,
+        qty: qtyTxt,
+        sum: sumTxt
+      };
+    })
+    .filter(Boolean);
 
   const summary = {
     length_m: document.getElementById('len').value,
@@ -3388,7 +4367,7 @@ try {
   }
 
 })();
-/* ZEGGER - spinner dla #len i #corners, wyrównany do inputa */
+/* ZEGGER - spinner dla pól liczbowych (długość + ilości bram/furtek), wyrównany do inputa */
 (function() {
   function setupSpinner(inputId) {
     var input = document.getElementById(inputId);
@@ -3426,6 +4405,8 @@ try {
     input.dataset.zSpinner = "1";
 
     function changeBy(dir) {
+      if (input.disabled || input.readOnly) return;
+
       var step = parseFloat(input.step || '1');
       if (!isFinite(step) || step <= 0) step = 1;
 
@@ -3463,13 +4444,17 @@ try {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
       setupSpinner('len');
-      setupSpinner('corners');
       setupSpinner('postCustomWidth');
+      setupSpinner('gateWicketQty');
+      setupSpinner('gateSwingQty');
+      setupSpinner('gateSlidingQty');
     });
   } else {
     setupSpinner('len');
-    setupSpinner('corners');
     setupSpinner('postCustomWidth');
+    setupSpinner('gateWicketQty');
+    setupSpinner('gateSwingQty');
+    setupSpinner('gateSlidingQty');
   }
 })();
 </script>
@@ -3881,6 +4866,9 @@ try {
     var discountValue  = document.getElementById('discountValue');
     var globalDiscountWrap = document.getElementById('globalDiscountWrap');
     var vatCheckbox    = document.getElementById('vat');
+    var BASE_SUMMARY_COLS = 5; // Element, Ilość, Cena jedn., Suma, Funkcje
+    var COL_DISCOUNT = 4;
+    var COL_AFTER_DISCOUNT = 5;
 
 
     // Jeśli czegokolwiek brakuje - nie odpalamy logiki rabatów
@@ -3907,14 +4895,19 @@ try {
       var thead = tbl.tHead;
       if (!thead || !thead.rows.length) return;
       var tr = thead.rows[0];
-      if (tr.cells.length < 6){
+      if (tr.cells.length < (BASE_SUMMARY_COLS + 2)){
         var thDisc = document.createElement('th');
         thDisc.textContent = 'Rabat %';
-        tr.appendChild(thDisc);
-
         var thAfter = document.createElement('th');
         thAfter.textContent = 'Po rabacie';
-        tr.appendChild(thAfter);
+        var funcHead = tr.querySelector('th.sum-func-col');
+        if (funcHead){
+          tr.insertBefore(thDisc, funcHead);
+          tr.insertBefore(thAfter, funcHead);
+        } else {
+          tr.appendChild(thDisc);
+          tr.appendChild(thAfter);
+        }
       }
     }
 
@@ -3923,9 +4916,9 @@ try {
       var thead = tbl.tHead;
       if (!thead || !thead.rows.length) return;
       var tr = thead.rows[0];
-      if (tr.cells.length >= 6){
-        var thDisc  = tr.cells[4];
-        var thAfter = tr.cells[5];
+      if (tr.cells.length >= (BASE_SUMMARY_COLS + 2)){
+        var thDisc  = tr.cells[COL_DISCOUNT];
+        var thAfter = tr.cells[COL_AFTER_DISCOUNT];
         if (thDisc)  thDisc.style.display  = modeOn ? '' : 'none';
         if (thAfter) thAfter.style.display = modeOn ? '' : 'none';
       }
@@ -3942,6 +4935,23 @@ try {
       if (!nameCell) return false;
       var txt = (nameCell.textContent || '').toLowerCase();
       return txt.indexOf('podmur') !== -1;
+    }
+
+    function isUnknownPriceText(txt){
+      var val = (txt || '').toLowerCase();
+      return val.indexOf('brak ceny') !== -1 || val.indexOf('wycena indywidualna') !== -1;
+    }
+
+    function normalizeUnknownPriceLabel(txt){
+      return /wycena indywidualna/i.test(txt || '') ? 'Wycena indywidualna' : 'brak ceny';
+    }
+
+    function isRowWithoutPrice(tr){
+      if (!tr) return false;
+      var cells = tr.querySelectorAll('td');
+      if (!cells || cells.length < 4) return false;
+      var txt = (cells[3].textContent || '');
+      return isUnknownPriceText(txt);
     }
 
     function bindRowInput(inputEl, rowKey){
@@ -3986,15 +4996,26 @@ try {
 
         var rowKey = getRowKey(tr);
         if (!rowKey) return;
+        var noPrice = isRowWithoutPrice(tr);
 
         // Kolumna rabatu % w tabeli (5. kolumna)
-        var discCell    = cells.length >= 5 ? cells[4] : null;
+        var discCell    = cells.length >= (BASE_SUMMARY_COLS + 2) ? cells[COL_DISCOUNT] : null;
         var discInputEl = discCell ? discCell.querySelector('input.row-discount-input') : null;
 
         // Podmurówki - nigdy nie podlegają rabatowi globalnemu
         if (isRowPodmur(tr)){
           if (discInputEl){
             discInputEl.value = '0';
+            discInputEl.disabled = true;
+            if (discCell && discCell.classList) discCell.classList.add('discount-disabled');
+          }
+          rowDiscountMemory[rowKey] = '0';
+          return;
+        }
+
+        if (noPrice){
+          if (discInputEl){
+            discInputEl.value = '';
             discInputEl.disabled = true;
             if (discCell && discCell.classList) discCell.classList.add('discount-disabled');
           }
@@ -4028,15 +5049,17 @@ try {
         // 4 kolumna - Suma z kalkulatora (już po VAT)
         var sumCell = cells[3];
         if (!sumCell) return;
+        var sumCellText = (sumCell.textContent || '').trim();
+        var noPrice = isUnknownPriceText(sumCellText);
 
         // bazowa kwota z kolumny "Suma"
-        var baseSum = parseMoney(sumCell.textContent);
+        var baseSum = noPrice ? 0 : parseMoney(sumCellText);
         tr.setAttribute('data-base-sum', baseSum);
 
         var discCell, discSumCell, discInputEl, valueSpan;
 
         // Jeżeli wiersz nie ma jeszcze kolumn rabatowych - dokładamy
-        if (cells.length < 6){
+        if (cells.length < (BASE_SUMMARY_COLS + 2)){
           discCell = document.createElement('td');
           discCell.className = 'discount-col discount-col-percent';
           discCell.setAttribute('data-label', 'Rabat %');
@@ -4065,13 +5088,19 @@ try {
           valueSpan.textContent = sumCell.textContent;
           discSumCell.appendChild(valueSpan);
 
-          tr.appendChild(discCell);
-          tr.appendChild(discSumCell);
+          var funcCell = tr.querySelector('td.sum-func-col');
+          if (funcCell){
+            tr.insertBefore(discCell, funcCell);
+            tr.insertBefore(discSumCell, funcCell);
+          } else {
+            tr.appendChild(discCell);
+            tr.appendChild(discSumCell);
+          }
 
           bindRowInput(discInputEl, rowKey);
         } else {
-          discCell    = cells[4];
-          discSumCell = cells[5];
+          discCell    = cells[COL_DISCOUNT];
+          discSumCell = cells[COL_AFTER_DISCOUNT];
           discInputEl = discCell ? discCell.querySelector('input.row-discount-input') : null;
           valueSpan   = discSumCell ? discSumCell.querySelector('.row-discount-value') : null;
 
@@ -4089,19 +5118,23 @@ try {
 
         // Tryb rabatów wyłączony - chowamy kolumny, bierzemy kwotę bazową
         // Podmurówki zawsze bez rabatu (0%), także przy włączonym trybie rabatów
-        if (!modeOn || isPodmur){
-          if (isPodmur){
+        if (!modeOn || isPodmur || noPrice){
+          if (isPodmur || noPrice){
             // Kolumny rabatowe widoczne, ale nieaktywne
             discCell.style.display = modeOn ? '' : 'none';
             discSumCell.style.display = modeOn ? '' : 'none';
-            discInputEl.value = '0';
+            discInputEl.value = noPrice ? '' : '0';
             discInputEl.disabled = true;
             if (discCell.classList) discCell.classList.add('discount-disabled');
 
-            if (typeof fmt === 'function'){
-              valueSpan.textContent = fmt(baseSum);
+            if (noPrice){
+              valueSpan.textContent = normalizeUnknownPriceLabel(sumCellText);
             } else {
-              valueSpan.textContent = baseSum.toFixed(2) + ' zł';
+              if (typeof fmt === 'function'){
+                valueSpan.textContent = fmt(baseSum);
+              } else {
+                valueSpan.textContent = baseSum.toFixed(2) + ' zł';
+              }
             }
 
             if (rowKey){
