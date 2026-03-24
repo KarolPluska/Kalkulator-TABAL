@@ -90,6 +90,7 @@ modification or distribution is prohibited. For licensing please contact Zegger 
 .btn:hover{background:var(--brand-dark)}
 .btn.secondary{background:transparent;color:var(--brand);border:1px solid #c5d8ea}
 .btn.secondary:hover{background:var(--brand-soft);border-color:#9fc0df}
+#zeggerCalc #reset.btn.secondary{box-shadow:none}
 .vatwrap{display:flex;align-items:center;gap:6px}
 .vatwrap label{font-size:13px;color:var(--muted)}
 .box{margin-top:16px;background:linear-gradient(180deg,#f8fbff 0%, var(--bg) 100%);border-radius:10px;padding:12px;color:var(--text);border:1px solid #e6edf4;box-shadow:var(--shadow-soft-sm)}
@@ -643,6 +644,36 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px}
   font-size:13px;
   color:var(--muted);
 }
+#result .result-header-right{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:12px;
+  flex-wrap:wrap;
+}
+#result .result-header-toggles{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:14px;
+}
+#result .result-header-toggles .vatwrap{
+  display:flex;
+  align-items:center;
+  height:32px;
+  margin:0;
+  white-space:nowrap;
+}
+#result .result-header-toggles .vatwrap input[type="checkbox"]{
+  margin:0;
+}
+#result .result-header-toggles .vatwrap label{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  line-height:1;
+}
 
 /* Input rabatu globalnego w nagłówku */
 #result .result-header-left .discount-input{
@@ -699,9 +730,25 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px}
 .sep{height:1px;background:var(--line);margin:12px 0}
 @media (max-width:520px){.row{gap:8px}}
 
-/* Podgląd */
-#previewImageBox{opacity:0;transition:opacity .9s ease;display:none;margin-top:20px} /* © Zegger Tech - komentarz pr. aut. (blok CSS) */ 
+/* Podgląd modelu */
+#previewImageBox{
+  opacity:0;
+  transition:opacity .35s ease;
+  display:none;
+  margin-top:12px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px;
+  box-shadow:var(--shadow-soft-sm);
+} /* © Zegger Tech - komentarz pr. aut. (blok CSS) */ 
 #previewImageBox.show{opacity:1}
+#previewImage{
+  width:100%;
+  display:block;
+  border-radius:10px;
+  box-shadow:none;
+}
 
 /* Tytuł */
 #zeggerCalc h4.calc-title{
@@ -778,6 +825,61 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px}
   .tbl tr{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:10px;padding:10px 8px;box-shadow:0 2px 6px rgba(15,94,168,.08)} /* © Zegger Tech - komentarz pr. aut. (blok CSS) */ 
   .tbl td{font-size:13px;padding:4px 0;text-align:left}
   .tbl td::before{content:attr(data-label);font-weight:600;display:inline-block;width:45%;color:var(--muted)}
+
+  /* Funkcje - mobile: pełna szerokość komórki i stabilne wyrównanie */
+  #zeggerCalc .tbl th.sum-func-col,
+  #zeggerCalc .tbl td.sum-func-col{
+    width:auto;
+    min-width:0;
+    text-align:left;
+  }
+  #zeggerCalc .tbl td.sum-func-col{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    min-height:26px;
+  }
+  #zeggerCalc .tbl td.sum-func-col::before{
+    width:auto;
+    flex:0 0 auto;
+    margin-right:8px;
+  }
+  #zeggerCalc .tbl td.sum-func-col .sum-row-actions{
+    margin-left:auto;
+    display:inline-flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:6px;
+  }
+
+  /* Mobile - wartości liczbowe i ceny po prawej (spójnie z Funkcjami) */
+  #zeggerCalc .tbl td[data-label="Ilość"],
+  #zeggerCalc .tbl td[data-label="Cena jedn."],
+  #zeggerCalc .tbl td[data-label="Suma"],
+  #zeggerCalc .tbl td[data-label="Po rabacie"]{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  #zeggerCalc .tbl td[data-label="Ilość"]::before,
+  #zeggerCalc .tbl td[data-label="Cena jedn."]::before,
+  #zeggerCalc .tbl td[data-label="Suma"]::before,
+  #zeggerCalc .tbl td[data-label="Po rabacie"]::before{
+    width:auto;
+    flex:0 0 auto;
+    margin-right:8px;
+  }
+  #zeggerCalc .tbl td[data-label="Ilość"] .sum-qty-control{
+    margin-left:auto;
+  }
+  #zeggerCalc .tbl td[data-label="Cena jedn."],
+  #zeggerCalc .tbl td[data-label="Suma"],
+  #zeggerCalc .tbl td[data-label="Po rabacie"]{
+    white-space:nowrap;
+  }
+
   .totalline{flex-direction:column;align-items:flex-end;margin-top:8px}
   .totalline .label{font-size:13px}
   .totalline .value{font-size:16px;font-weight:700}
@@ -1338,6 +1440,131 @@ label[for="accAuto-przesuwna"]{
 #zeggerCalc .field select::-ms-expand{
   display:none;
 }
+
+/* Własny rozmiar słupka - przycisk + przy selekcie i modal */
+#zeggerCalc .post-type-select-wrap{
+  display:flex;
+  align-items:stretch;
+  gap:6px;
+}
+#zeggerCalc .post-type-select-wrap select{
+  flex:1 1 auto;
+  min-width:0;
+}
+#zeggerCalc .post-custom-width-btn{
+  width:42px;
+  min-width:42px;
+  height:42px;
+  min-height:42px;
+  border:1px solid #dfe3e6;
+  border-radius:10px;
+  background:var(--bg);
+  color:#1f2a35;
+  font-size:20px;
+  font-weight:600;
+  line-height:1;
+  padding:0;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:none;
+  transition:background .14s ease, border-color .14s ease, color .14s ease, transform .08s ease;
+}
+#zeggerCalc .post-custom-width-btn:hover{
+  background:#fff;
+  border-color:#cfd8e1;
+}
+#zeggerCalc .post-custom-width-btn:active{
+  transform:translateY(1px);
+}
+#zeggerCalc .post-custom-modal{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:none;
+}
+#zeggerCalc .post-custom-modal[hidden]{
+  display:none !important;
+}
+#zeggerCalc .post-custom-modal.is-open{
+  display:block;
+}
+#zeggerCalc .post-custom-modal-backdrop{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  padding:0;
+  margin:0;
+  background:rgba(14,22,31,.32);
+  cursor:pointer;
+}
+#zeggerCalc .post-custom-modal-card{
+  position:relative;
+  width:min(92vw, 420px);
+  margin:10vh auto 0;
+  background:#fff;
+  border:1px solid #d8e3ef;
+  border-radius:12px;
+  padding:12px;
+  box-shadow:0 18px 44px rgba(12,31,52,.22);
+}
+#zeggerCalc .post-custom-modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:6px;
+}
+#zeggerCalc .post-custom-modal-title{
+  font-size:14px;
+  font-weight:700;
+  color:#1f2a35;
+}
+#zeggerCalc .post-custom-modal-close{
+  width:26px;
+  height:26px;
+  border:1px solid #d9e1ea;
+  border-radius:8px;
+  background:#f6f8fb;
+  color:#5f6d79;
+  cursor:pointer;
+  font-size:16px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+}
+#zeggerCalc .post-custom-modal-hint{
+  margin:0 0 8px 0;
+  font-size:12px;
+  line-height:1.35;
+  color:var(--muted);
+}
+#zeggerCalc .post-custom-modal .post-custom-modal-input-label{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:5px;
+}
+#zeggerCalc .post-custom-modal .post-custom-modal-input{
+  width:100%;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid var(--input-border);
+  background:#fff;
+  font-size:14px;
+  box-sizing:border-box;
+}
+#zeggerCalc .post-custom-modal-actions{
+  margin-top:10px;
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+}
 /* ZEGGER PATCH - spinner dla długości ogrodzenia */
 .zegger-input-spinner{
   position: relative;
@@ -1642,11 +1869,15 @@ label[for="accAuto-przesuwna"]{
 }
 /* ZEGGER PATCH - "Ceny netto" zawsze przy prawej krawędzi nagłówka */
 #zeggerCalc .result-header .price-mode-label{
-  margin-left:auto;   /* w flexie dociąga chip do prawej strony, także gdy jest sam */
+  margin-left:0;
+  margin-bottom:0;
+  display:inline-flex;
+  align-items:center;
+  min-height:32px;
   text-align:right;   /* tekst wewnątrz nadal wyrównany do prawej */
 }
 
-/* ZEGGER PATCH - układ akcji: przyciski + checkboxy po prawej, checkboxy pod Oblicz */
+/* ZEGGER PATCH - układ akcji: przyciski po prawej */
 #zeggerCalc #calcActions{
   display:flex;
   flex-direction:column;
@@ -1658,17 +1889,6 @@ label[for="accAuto-przesuwna"]{
   align-items:center;
   justify-content:flex-end;
   gap:12px;
-}
-#zeggerCalc #calcActions .calc-actions-toggles{
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  gap:16px;
-}
-#zeggerCalc #calcActions .calc-actions-toggles .vatwrap{
-  width:auto;
-  margin-top:0;
-  justify-content:flex-end;
 }
 #zeggerCalc #calcActions #reset:not(.is-visible){
   display:none;
@@ -1691,13 +1911,17 @@ label[for="accAuto-przesuwna"]{
   #zeggerCalc #calcActions .calc-actions-main{
     gap:10px;
   }
-  #zeggerCalc #calcActions .calc-actions-toggles{
-    gap:12px;
+  #result .result-header{
+    align-items:flex-start;
+    flex-wrap:wrap;
   }
-  #zeggerCalc #calcActions .calc-actions-toggles .vatwrap{
-    width:auto;
+  #result .result-header-right{
+    width:100%;
     justify-content:flex-end;
-    margin-top:0;
+    gap:10px;
+  }
+  #result .result-header-toggles{
+    gap:12px;
   }
 }
 
@@ -1708,7 +1932,7 @@ label[for="accAuto-przesuwna"]{
 <div class="fcalc" id="zeggerCalc" data-owner="Zegger Tech Sp. z o.o." data-copyright="© Zegger Tech 2019–2025" data-license="All rights reserved">
   <h4 class="calc-title">
     <img src="https://tabal.pl/wp-content/uploads/2022/08/TABAL-LOGOTYP.png" alt="TABAL logo" class="calc-logo">
-    Konfigurator ogrodzeń
+    Kalkulator ogrodzeń
   </h4>
 
   <!-- ZEGGER TECH: Sekcja formularza (row) - prawa autorskie © Zegger Tech -->
@@ -1755,7 +1979,10 @@ label[for="accAuto-przesuwna"]{
       <label for="postType"><span id="postTypeLabel">Opcja systemowa</span>
         <span class="tip" data-tip="Dla systemów panelowych: typ obejmy. Dla Aluminium Prime: rodzaj słupka.">?</span>
       </label>
-      <select id="postType"></select>
+      <div class="post-type-select-wrap">
+        <select id="postType"></select>
+        <button id="postCustomWidthBtn" class="post-custom-width-btn" type="button" style="display:none;" aria-label="Ustaw własny rozmiar słupka" title="Ustaw własny rozmiar słupka">+</button>
+      </div>
     </div>
   </div>
 
@@ -1785,12 +2012,29 @@ label[for="accAuto-przesuwna"]{
 
   <!-- Własny rozmiar słupka -->
   <!-- ZEGGER TECH: Sekcja formularza (row) - prawa autorskie © Zegger Tech -->
-<div class="row" id="postCustomWidthRow" style="display:none;">
+  <div class="row" id="postCustomWidthRow" style="display:none;">
     <div class="field" id="postCustomWidthField">
       <label for="postCustomWidth">Własny rozmiar słupka (mm)
         <span class="tip" data-tip="Wpisz szerokość słupka w mm. Może to być niestandardowy słupek murowany lub betonowy. Wartość jest używana do obliczeń palisady (długość osi ogrodzenia).">?</span>
       </label>
       <input id="postCustomWidth" type="number" min="1" step="1" value="" placeholder="np. 120">
+    </div>
+  </div>
+
+  <div id="postCustomWidthModal" class="post-custom-modal" hidden>
+    <button id="postCustomWidthModalBackdrop" class="post-custom-modal-backdrop" type="button" aria-label="Zamknij okno"></button>
+    <div class="post-custom-modal-card" role="dialog" aria-modal="true" aria-labelledby="postCustomWidthModalTitle">
+      <div class="post-custom-modal-head">
+        <div id="postCustomWidthModalTitle" class="post-custom-modal-title">Własny rozmiar słupka</div>
+        <button id="postCustomWidthModalClose" class="post-custom-modal-close" type="button" aria-label="Zamknij">×</button>
+      </div>
+      <p class="post-custom-modal-hint">Wpisz szerokość słupka w mm. Opcja dotyczy słupków murowanych i betonowych. Ta wartość wpływa na obliczenie długości osi ogrodzenia.</p>
+      <label class="post-custom-modal-input-label" for="postCustomWidthModalInput">Szerokość słupka (mm)</label>
+      <input id="postCustomWidthModalInput" class="post-custom-modal-input" type="number" min="1" step="1" placeholder="np. 120">
+      <div class="post-custom-modal-actions">
+        <button id="postCustomWidthModalCancel" class="btn secondary" type="button">Anuluj</button>
+        <button id="postCustomWidthModalSave" class="btn" type="button">Zapisz</button>
+      </div>
     </div>
   </div>
 
@@ -1830,25 +2074,11 @@ label[for="accAuto-przesuwna"]{
       <!-- ZEGGER TECH: Przycisk obliczeń (calc) - prawa autorskie © Zegger Tech -->
       <button class="btn" id="calc" type="button">Oblicz</button>
     </div>
-    <div class="calc-actions-toggles">
-      <div class="vatwrap">
-        <input id="vat" type="checkbox">
-        <label for="vat">+23% VAT <span class="tip" data-tip="Odznacz, aby zobaczyć ceny netto.">?</span></label>
-      </div>
-      <!-- NOWY CHECKBOX RABATY -->
-      <div class="vatwrap" id="discountWrap">
-        <input id="discountToggle" type="checkbox">
-        <label for="discountToggle">
-          Rabaty
-          <span class="tip" data-tip="Dodaj rabat procentowy do ceny produktu.">?</span>
-        </label>
-      </div>
-    </div>
   </div>
 
   <!-- Podgląd -->
   <div id="previewImageBox">
-    <img id="previewImage" src="" alt="Podgląd ogrodzenia" style="width:100%; border-radius:10px; box-shadow:0 4px 14px rgba(0,0,0,0.08);">
+    <img id="previewImage" src="" alt="Podgląd ogrodzenia">
   </div>
 
   <!-- ZEGGER TECH: Sekcja wyników / podsumowania - prawa autorskie © Zegger Tech -->
@@ -1866,7 +2096,22 @@ label[for="accAuto-przesuwna"]{
           placeholder="0"
         >
       </div>
-      <div id="priceModeLabel" class="price-mode-label">Ceny netto</div>
+      <div class="result-header-right">
+        <div class="result-header-toggles">
+          <div class="vatwrap">
+            <input id="vat" type="checkbox">
+            <label for="vat">+23% VAT <span class="tip" data-tip="Odznacz, aby zobaczyć ceny netto.">?</span></label>
+          </div>
+          <div class="vatwrap" id="discountWrap">
+            <input id="discountToggle" type="checkbox">
+            <label for="discountToggle">
+              Rabaty
+              <span class="tip" data-tip="Dodaj rabat procentowy do ceny produktu.">?</span>
+            </label>
+          </div>
+        </div>
+        <div id="priceModeLabel" class="price-mode-label">Ceny netto</div>
+      </div>
     </div>
     <!-- ZEGGER TECH: Tabela podsumowania - prawa autorskie © Zegger Tech -->
     <table class="tbl" id="tbl">
@@ -2172,6 +2417,29 @@ label[for="accAuto-przesuwna"]{
       "VERTICAL 60": "https://zegger.pl/wp-content/uploads/2025/10/FullVertical60-scaled.png",
       "CURTAIN": "https://zegger.pl/wp-content/uploads/2025/10/FullCurtain-scaled.png",
       "PLATE": "https://zegger.pl/wp-content/uploads/2025/10/FullPlate-scaled.png"
+    };
+
+    // Podgląd panoramiczny modeli - tutaj podmień URL-e na docelowe grafiki.
+    const MODEL_PREVIEW_IMAGE_URLS = {
+      // System Fokus
+      fokus_3d_fi5_50x200: "https://zegger.pl/wp-content/uploads/2025/10/FullPanel3D-scaled.png",
+      fokus_3d_fi4_50x200: "https://zegger.pl/wp-content/uploads/2025/10/FullPanel3D-scaled.png",
+
+      // System Fokus Light
+      fokus_light_3d_fi5_55x200: "https://zegger.pl/wp-content/uploads/2025/10/FullPanel3D-scaled.png",
+      fokus_light_3d_fi4_55x200: "https://zegger.pl/wp-content/uploads/2025/10/FullPanel3D-scaled.png",
+
+      // System Flat
+      flat_2d_5_4_5_55x200: "https://zegger.pl/wp-content/uploads/2025/10/FullPanel3D-scaled.png",
+      flat_2d_6_5_6_50x200: "https://zegger.pl/wp-content/uploads/2025/10/FullPanel3D-scaled.png",
+      flat_2d_8_6_8_50x200: "https://zegger.pl/wp-content/uploads/2025/10/FullPanel3D-scaled.png",
+
+      // System Aluminium Prime
+      morana: "https://zegger.pl/wp-content/uploads/2025/10/FullHorizontal100-scaled.png",
+      khors: "https://zegger.pl/wp-content/uploads/2025/10/FullHorizontal100-scaled.png",
+      perun: "https://zegger.pl/wp-content/uploads/2025/10/FullHorizontal100-scaled.png",
+      veles: "https://zegger.pl/wp-content/uploads/2025/10/FullHorizontal100-scaled.png",
+      svarog: "https://zegger.pl/wp-content/uploads/2025/10/FullHorizontal100-scaled.png"
     };
 
     const TABAL_SYSTEM_DATA = {
@@ -2664,6 +2932,9 @@ label[for="accAuto-przesuwna"]{
     const elPostCustomWidthRow = $('#postCustomWidthRow');
     const elPostCustomWidthField = $('#postCustomWidthField');
     const elPostCustomWidth = $('#postCustomWidth');
+    const postCustomWidthBtn = $('#postCustomWidthBtn');
+    const postCustomWidthModal = $('#postCustomWidthModal');
+    const postCustomWidthModalInput = $('#postCustomWidthModalInput');
     const elVat = $('#vat');
     const boxRes = $('#result');
     const tbody = $('#tbody');
@@ -2690,6 +2961,86 @@ label[for="accAuto-przesuwna"]{
       if (!selectEl) return '';
       const opt = selectEl.options?.[selectEl.selectedIndex];
       return (opt?.textContent || selectEl.value || '').trim();
+    }
+
+    function getNormalizedCustomPostWidth(){
+      let mm = Math.max(0, toInt(elPostCustomWidth?.value));
+      if (mm <= 0) mm = 120;
+      return mm;
+    }
+
+    function closePostCustomWidthModal(restoreFocus){
+      if (!postCustomWidthModal) return;
+      postCustomWidthModal.classList.remove('is-open');
+      postCustomWidthModal.hidden = true;
+      if (restoreFocus && postCustomWidthBtn && postCustomWidthBtn.style.display !== 'none'){
+        postCustomWidthBtn.focus();
+      }
+    }
+
+    function openPostCustomWidthModal(){
+      if (!postCustomWidthModal || !postCustomWidthModalInput) return;
+      const mm = getNormalizedCustomPostWidth();
+      if (elPostCustomWidth) elPostCustomWidth.value = String(mm);
+      postCustomWidthModalInput.value = String(mm);
+      postCustomWidthModal.hidden = false;
+      postCustomWidthModal.classList.add('is-open');
+      setTimeout(() => {
+        postCustomWidthModalInput.focus();
+        postCustomWidthModalInput.select();
+      }, 0);
+    }
+
+    function savePostCustomWidthModal(){
+      if (!elPostCustomWidth || !postCustomWidthModalInput) return;
+      let mm = Math.max(1, toInt(postCustomWidthModalInput.value));
+      if (!Number.isFinite(mm) || mm <= 0) mm = 120;
+      elPostCustomWidth.value = String(mm);
+      postCustomWidthModalInput.value = String(mm);
+      if (postCustomWidthBtn){
+        postCustomWidthBtn.title = `Ustaw własny rozmiar słupka (aktualnie: ${mm} mm)`;
+      }
+      closePostCustomWidthModal(true);
+      if (autoCalc) calculate();
+    }
+
+    function getModelPreviewImage(model){
+      if (!model) return '';
+      const byId = MODEL_PREVIEW_IMAGE_URLS[String(model.id || '')] || '';
+      if (byId) return byId;
+      const byName = MODEL_PREVIEW_IMAGE_URLS[String(model.name || '')] || '';
+      if (byName) return byName;
+      return PREVIEW_IMAGES[model.name] || PREVIEW_IMAGES[model.id] || '';
+    }
+
+    function hidePreviewPanel(){
+      if (previewBox){
+        previewBox.classList.remove('show');
+        previewBox.style.display = 'none';
+      }
+      if (previewImg) previewImg.removeAttribute('src');
+    }
+
+    function refreshPreviewPanel(typeKey, modelId){
+      if (!previewBox || !previewImg) return;
+      if (!boxRes || boxRes.style.display === 'none'){
+        hidePreviewPanel();
+        return;
+      }
+      const model = getModel(typeKey, modelId);
+      const imageUrl = getModelPreviewImage(model);
+
+      if (!imageUrl){
+        hidePreviewPanel();
+        return;
+      }
+
+      previewImg.src = imageUrl;
+      previewImg.alt = `Podgląd modelu ${model?.name || ''}`.trim();
+
+      previewBox.style.display = 'block';
+      previewBox.classList.remove('show');
+      requestAnimationFrame(() => previewBox.classList.add('show'));
     }
 
     function setResetVisible(visible){
@@ -3032,13 +3383,23 @@ label[for="accAuto-przesuwna"]{
 
     function refreshPostCustomWidthVisibility(typeKey){
       const show = isAluminiumSystem(typeKey) && String(elPostType?.value || '') === 'custom';
-      if (elPostCustomWidthRow) elPostCustomWidthRow.style.display = show ? '' : 'none';
-      if (elPostCustomWidthField) elPostCustomWidthField.style.display = show ? '' : 'none';
+      if (elPostCustomWidthRow) elPostCustomWidthRow.style.display = 'none';
+      if (elPostCustomWidthField) elPostCustomWidthField.style.display = 'none';
       if (elPostCustomWidth){
         elPostCustomWidth.disabled = !show;
         if (show && toInt(elPostCustomWidth.value) <= 0){
           elPostCustomWidth.value = '120';
         }
+      }
+      if (postCustomWidthBtn){
+        postCustomWidthBtn.style.display = show ? 'inline-flex' : 'none';
+        if (show){
+          const mm = getNormalizedCustomPostWidth();
+          postCustomWidthBtn.title = `Ustaw własny rozmiar słupka (aktualnie: ${mm} mm)`;
+        }
+      }
+      if (!show){
+        closePostCustomWidthModal(false);
       }
     }
 
@@ -3087,6 +3448,7 @@ label[for="accAuto-przesuwna"]{
       refreshPostCustomWidthVisibility(typeKey);
 
       refreshGatesUI(typeKey, elModel.value);
+      hidePreviewPanel();
       if (autoCalc) calculate();
     }
 
@@ -3602,15 +3964,7 @@ label[for="accAuto-przesuwna"]{
       priceModeLabel.textContent = withVAT ? 'Ceny brutto (23% VAT)' : 'Ceny netto';
       boxRes.style.display = 'block';
 
-      const imgSrc = PREVIEW_IMAGES[model.name] || PREVIEW_IMAGES[model.id] || '';
-      if (imgSrc){
-        previewImg.src = imgSrc;
-        previewBox.style.display = 'block';
-        previewBox.classList.remove('show');
-        setTimeout(() => previewBox.classList.add('show'), 50);
-      } else {
-        previewBox.style.display = 'none';
-      }
+      refreshPreviewPanel(typeKey, modelId);
 
       const ideal_m = spans * spanWidthM;
       const baseWithPosts_m = ideal_m + postsLen_m;
@@ -3694,11 +4048,7 @@ label[for="accAuto-przesuwna"]{
 
       if (boxRes) boxRes.style.display = 'none';
       if (fitWarning) fitWarning.style.display = 'none';
-      if (previewBox){
-        previewBox.style.display = 'none';
-        previewBox.classList.remove('show');
-      }
-      if (previewImg) previewImg.removeAttribute('src');
+      hidePreviewPanel();
 
       autoCalc = false;
       if (btnCalc) btnCalc.textContent = 'Oblicz';
@@ -3721,6 +4071,25 @@ label[for="accAuto-przesuwna"]{
         return;
       }
       if (btn.id === 'reset'){ ev.preventDefault(); doReset(); return; }
+      if (btn.id === 'postCustomWidthBtn'){
+        ev.preventDefault();
+        openPostCustomWidthModal();
+        return;
+      }
+      if (btn.id === 'postCustomWidthModalSave'){
+        ev.preventDefault();
+        savePostCustomWidthModal();
+        return;
+      }
+      if (
+        btn.id === 'postCustomWidthModalCancel' ||
+        btn.id === 'postCustomWidthModalClose' ||
+        btn.id === 'postCustomWidthModalBackdrop'
+      ){
+        ev.preventDefault();
+        closePostCustomWidthModal(true);
+        return;
+      }
 
       if (btn.classList.contains('sum-row-action-btn')){
         ev.preventDefault();
@@ -4013,6 +4382,21 @@ label[for="accAuto-przesuwna"]{
     bindAutoCalcInput(gateSwingQty, true);
     bindAutoCalcInput(gateSlidingQty, true);
     bindAutoCalcInput(elPostCustomWidth, true);
+    bindAutoCalcInput(postCustomWidthModalInput, true);
+
+    if (postCustomWidthModalInput){
+      postCustomWidthModalInput.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Enter'){
+          ev.preventDefault();
+          savePostCustomWidthModal();
+        }
+      });
+    }
+    document.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Escape' && postCustomWidthModal && !postCustomWidthModal.hidden){
+        closePostCustomWidthModal(true);
+      }
+    });
 
 
     // Telefon – tylko dozwolone znaki
@@ -4040,7 +4424,6 @@ if (phoneEl) phoneEl.addEventListener('input', function(){
 
     // startowy stan
     refreshUI();
-    if (previewBox) previewBox.style.display = 'none';
 /* ==== POPPINS base64 here === */
 
 
@@ -4183,7 +4566,7 @@ if (phoneEl) phoneEl.addEventListener('input', function(){
             doc.setFont(undefined,'bold'); 
       doc.setFontSize(16);
       doc.setTextColor(15,94,168);
-      doc.text('Konfigurator ogrodzeń', pageWidth/2, y, { align:'center' });
+      doc.text('Kalkulator ogrodzeń', pageWidth/2, y, { align:'center' });
       doc.setTextColor(0,0,0);
 
       // Tekst informacyjny przeniesiony pod tytuł

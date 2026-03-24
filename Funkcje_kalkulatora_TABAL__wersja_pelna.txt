@@ -1,0 +1,172 @@
+- Funkcje aktywne - konfigurator i wejście:
+  - Pole liczby: Długość ogrodzenia (m) z własnym spinnerem góra/dół.
+  - Lista: System ogrodzenia (System Fokus, System Fokus Light, System Flat, System Aluminium Prime).
+  - Lista: Model - dynamiczna, zależna od wybranego systemu.
+  - Lista: Wysokość przęsła (mm) - dynamiczna, zależna od systemu/modelu.
+  - Lista: Kolor ogrodzenia (RAL) - dynamiczna, zależna od systemu.
+  - Wariant koloru: Inny (Na zamówienie) z obsługą wyceny indywidualnej.
+  - Lista: Słupek systemowy / opcja systemowa (różna logika dla paneli i Aluminium).
+  - Dla opcji "Własny rozmiar (murowane/betonowe)": przycisk "+" przy selekcie słupka.
+  - Modal "Własny rozmiar słupka":
+    - Pole liczby: szerokość słupka (mm).
+    - Walidacja minimalnej wartości.
+    - Zapis/Anuluj/Zamknij.
+    - Aktualizacja tytułu/przycisku z bieżącą wartością mm.
+
+- Funkcje aktywne - pola dynamiczne dla Aluminium Prime:
+  - Sekcja bram/furtek widoczna tylko dla systemu Aluminium Prime.
+  - Lista: Furtka (wariant) + Ilość furtki.
+  - Lista: Brama dwuskrzydłowa (wariant) + Ilość bram dwuskrzydłowych.
+  - Lista: Brama przesuwna (wariant) + Ilość bram przesuwnych.
+  - Pola ilości bram/furtek:
+    - Domyślnie zablokowane.
+    - Aktywują się dopiero po wyborze wariantu.
+    - Mają własne etykiety i spinner góra/dół.
+
+- Funkcje aktywne - panel "Aluminium Prime - wyposażenie i uwagi":
+  - Panel widoczny tylko dla systemu Aluminium Prime.
+  - Dynamiczna treść zależna od:
+    - Wybranego modelu.
+    - Wybranego słupka systemowego.
+    - Wybranych wariantów furtek/bram.
+  - Sekcje komponentów:
+    - Segment.
+    - Słupek systemowy.
+    - Furtka.
+    - Brama dwuskrzydłowa.
+    - Brama przesuwna samonośna.
+  - Każda sekcja:
+    - Startuje zwinięta.
+    - Ma wyraźny wskaźnik rozwinięcia/zwinięcia.
+    - Ma płynną animację rozwijania.
+    - Zachowuje stan zwinięcia/rozwinięcia podczas zmian konfiguracji.
+  - Kolumny informacji:
+    - W cenie.
+    - Opcje dodatkowe.
+    - Uwagi.
+  - Opcje dodatkowe:
+    - Każda pozycja ma mały kontroler ilości "-" / licznik / "+".
+    - Licznik opcji wpływa na podsumowanie i cenę.
+    - Pozycja opcjonalna w podsumowaniu ma komentarz źródła (od czego opcja).
+
+- Funkcje aktywne - logika obliczeń:
+  - Obliczanie liczby przęseł na podstawie długości ogrodzenia.
+  - Dla Aluminium:
+    - Odjęcie szerokości wybranych bram/furtek od długości do wypełnienia.
+    - Uwzględnienie szerokości słupków systemowych 80 mm.
+    - Dla opcji "Własny rozmiar" użycie podanej szerokości słupka (mm).
+  - Dla systemów panelowych:
+    - Uwzględnienie szerokości słupka 40 mm w dopasowaniu długości.
+  - Obliczanie liczby słupków jako przęsła + 1.
+  - Automatyczne wyliczanie ilości obejm wg reguł wysokości (systemy panelowe).
+  - Dynamiczna zmiana pozycji i ilości po każdej zmianie konfiguracji.
+
+- Funkcje aktywne - wycena:
+  - Wyliczanie ceny jednostkowej i sumy dla każdej pozycji.
+  - Obsługa cen nieznanych:
+    - "brak ceny".
+    - "Wycena indywidualna".
+  - Pozycje bez ceny:
+    - Nie zawyżają sumy końcowej.
+    - Są liczone jako pozycje wymagające uwagi.
+  - Specjalna pozycja dla koloru "Inny (Na zamówienie)":
+    - Dodawana jako osobny produkt w podsumowaniu.
+    - Oznaczana jako wycena indywidualna.
+
+- Funkcje aktywne - podsumowanie:
+  - Tabela z kolumnami:
+    - Element.
+    - Ilość.
+    - Cena jedn.
+    - Suma.
+    - Rabat %.
+    - Po rabacie.
+    - Funkcje.
+  - Każdy wiersz produktu:
+    - Edycja ilości przez spinner góra/dół.
+    - Akcje w kolumnie "Funkcje":
+      - Check (zapis/odznacz zapisanie pozycji).
+      - X (usuń pozycję z podsumowania).
+  - Sekcja "Zapisane pozycje":
+    - Wizualnie wydzielona separatorem i nagłówkiem.
+    - Zliczanie liczby pozycji zapisanych.
+    - Komentarz pod pozycją z kontekstem (system/model/tryb).
+    - Własne akcje:
+      - Check (status zapisania).
+      - X (usuń zapisaną pozycję).
+      - Powiel (duplikacja zapisanej pozycji).
+  - Zasada check dla bieżącej konfiguracji:
+    - Zielony check tylko gdy istnieje dokładnie taka sama zapisana pozycja.
+    - Zmiana ilości/parametrów powoduje utratę zgodności.
+    - Ponowne kliknięcie check może dodać nową pozycję zapisaną (gdy konfiguracja się różni).
+
+- Funkcje aktywne - tryby cen i rabaty:
+  - Przełącznik +23% VAT:
+    - Zmiana prezentacji netto/brutto.
+    - Aktualizacja cen także dla pozycji zapisanych.
+  - Przełącznik Rabaty:
+    - Pokazuje/ukrywa logikę rabatową.
+    - Steruje widocznością i przeliczaniem kolumn rabatowych.
+  - Rabat globalny (%):
+    - Jedno pole procentowe.
+    - Przepisuje wartość do produktów i przelicza "Po rabacie".
+  - Rabat wierszowy (%):
+    - Edytowalny dla każdej pozycji.
+    - Aktualizacja wartości "Po rabacie" na poziomie wiersza i sumy.
+
+- Funkcje aktywne - ostrzeżenia dopasowania:
+  - Panel "Dopasowanie długości":
+    - Pokazuje się, gdy występuje różnica długości po zaokrągleniu modułów.
+    - Uwzględnia przęsła, słupki i elementy dodatkowe.
+    - Podaje:
+      - Długość efektywną do wypełnienia.
+      - Szerokość modułu (przęsło + słupek).
+      - Różnicę/nadmiar długości.
+      - Łączną długość konfiguracji.
+      - Sugerowane warianty decyzji.
+
+- Funkcje aktywne - akcje użytkownika:
+  - Przycisk Oblicz.
+  - Tryb automatycznego obliczania (aktywny/nieaktywny).
+  - Przycisk Reset:
+    - Czyści konfigurację i wynik.
+    - Ukrywa sekcje wynikowe (m.in. podsumowanie i podgląd modelu).
+  - Przycisk Pobierz PDF:
+    - Generuje plik PDF oferty.
+
+- Funkcje aktywne - podgląd modelu:
+  - Oddzielne okno podglądu grafiki modelu.
+  - Podgląd widoczny dopiero po obliczeniu.
+  - Podgląd ukrywany po resecie.
+  - Mapowanie obrazów modeli trzymane w kodzie jako konfiguracja linków URL.
+
+- Funkcje aktywne - PDF:
+  - Nagłówek PDF z brandingiem TABAL i tytułem.
+  - Numer kalkulacji z datą i godziną (format oparty o czas generowania).
+  - Sekcja parametrów konfiguracji.
+  - Tabela zestawienia pozycji.
+  - Obsługa netto/brutto.
+  - Obsługa rabatów i sekcji "Po rabacie".
+  - Komentarze podsumowania:
+    - Notatka o pozycjach poza sumą (wycena indywidualna/brak ceny).
+    - Notatka pod "Po rabacie" przy aktywnych rabatach.
+  - Obsługa panelu ostrzeżeń dopasowania długości bez nakładania tekstu.
+  - Normalizacja tekstów cen nieznanych (bez duplikacji typu "Wycena indywidualnaWycena indywidualna").
+
+- Funkcje aktywne - UX/UI:
+  - Responsywność mobile-first.
+  - Własne, kompaktowe spinnery ilości.
+  - Tooltipy "?" przy kluczowych polach.
+  - Delikatna kolorystyka z niebieskimi akcentami.
+  - Delikatne cienie i subtelne style pól/sekcji.
+  - Układ akcji i sekcji zoptymalizowany pod prawostronną ergonomię kliknięć.
+
+- Funkcje obecne w kodzie (legacy/techniczne):
+  - Moduł wysyłki zapytania e-mail z walidacją danych klienta i zgodą RODO.
+  - Integracja newsletter (zapis e-mail po udanej wysyłce).
+  - Eksport/serializacja stanu kalkulatora dla zewnętrznych integracji.
+  - Mostki komunikacji postMessage dla integracji iframe.
+  - Moduł "Symulacja 2D/3D" (dodawanie przycisku i modal z iframe).
+  - Moduł "Asystent AI" (skrypt obecny, sekcje z return i kontrolą uruchamiania).
+  - Moduł "Samouczek" (skrypt obecny, kroki i overlay).
+  - Moduł "Zaloguj/Panel ofertowy" (skrypt obecny, overlay logowania, endpointy REST).

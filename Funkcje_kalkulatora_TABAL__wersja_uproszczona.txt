@@ -1,0 +1,52 @@
+- Wybór podstawowej konfiguracji:
+  - Długość ogrodzenia.
+  - System ogrodzenia.
+  - Model.
+  - Wysokość.
+  - Kolor.
+  - Typ słupka.
+
+- Obsługa systemu Aluminium Prime:
+  - Osobne warianty i ilości dla furtki oraz bram.
+  - Wybór słupka systemowego.
+  - Opcja "Własny rozmiar słupka" (podawany w mm).
+  - Panel "Wyposażenie i uwagi" z rozwijanymi sekcjami.
+  - Dodawanie opcji dodatkowych przez małe kontrolki +/-.
+
+- Inteligentne przeliczanie:
+  - Automatyczne liczenie liczby przęseł i słupków.
+  - Uwzględnianie szerokości słupków w długości konfiguracji.
+  - Uwzględnianie szerokości wybranych furtek/bram.
+  - Ostrzeżenie, gdy długość nie dzieli się idealnie na moduły.
+
+- Wycena:
+  - Ceny jednostkowe i sumy dla pozycji.
+  - Obsługa netto/brutto (+23% VAT).
+  - Obsługa rabatów (globalnych i per pozycja).
+  - Obsługa pozycji bez ceny / z wyceną indywidualną.
+  - Łączna kwota liczona tylko z pozycji, które mają cenę.
+
+- Podsumowanie:
+  - Tabela produktów z ilościami i cenami.
+  - Zmiana ilości z poziomu podsumowania.
+  - Akcje na pozycji:
+    - Zapisz (check).
+    - Usuń (X).
+    - Powiel (dla zapisanych).
+  - Osobna sekcja "Zapisane pozycje".
+
+- Podgląd i dokument:
+  - Podgląd grafiki wybranego modelu po kliknięciu "Oblicz".
+  - Eksport do PDF z logo TABAL i pełnym zestawieniem.
+  - PDF zawiera:
+    - Parametry konfiguracji.
+    - Tabelę pozycji i sumy.
+    - Sekcję rabatów.
+    - Ostrzeżenia i notatki o pozycjach bez ceny.
+
+- Dodatkowe moduły obecne w kodzie:
+  - Symulacja 2D/3D.
+  - Asystent AI.
+  - Samouczek.
+  - Logowanie/Panel ofertowy.
+  - Integracja wysyłki zapytania e-mail/newsletter.
