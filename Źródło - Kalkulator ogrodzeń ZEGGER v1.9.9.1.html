@@ -1883,6 +1883,8 @@ label[for="accAuto-przesuwna"]{
   flex-direction:column;
   align-items:flex-end;
   gap:6px;
+  margin-top:10px;
+  margin-bottom:10px;
 }
 #zeggerCalc #calcActions .calc-actions-main{
   display:flex;
@@ -1893,6 +1895,9 @@ label[for="accAuto-przesuwna"]{
 #zeggerCalc #calcActions #reset:not(.is-visible){
   display:none;
 }
+#zeggerCalc #calcActions + #previewImageBox{
+  margin-top:0;
+}
 
 /* ZEGGER PATCH - sekcja pod tabelą: notka po lewej, PDF po prawej */
 #zeggerCalc #result .summary-info-note{
@@ -1902,6 +1907,7 @@ label[for="accAuto-przesuwna"]{
 }
 #zeggerCalc #resultActions{
   justify-content:flex-end;
+  margin-top:24px;
 }
 
 @media (max-width:720px){
@@ -2150,10 +2156,8 @@ label[for="accAuto-przesuwna"]{
         <span id="discountValue">0,00 zł</span>
       </div>
     </div>
-    <div class="sep"></div>
     <!-- ZEGGER TECH: Pasek akcji (actions) - prawa autorskie © Zegger Tech -->
 <div class="actions" id="resultActions"><button class="btn secondary" id="pdf" type="button">Pobierz PDF</button></div>
-    <div class="sep"></div>
 
   </div>
 
@@ -2422,24 +2426,24 @@ label[for="accAuto-przesuwna"]{
     // Podgląd panoramiczny modeli - tutaj podmień URL-e na docelowe grafiki.
     const MODEL_PREVIEW_IMAGE_URLS = {
       // System Fokus
-      fokus_3d_fi5_50x200: "https://zegger.pl/wp-content/uploads/2025/10/FullPanel3D-scaled.png",
-      fokus_3d_fi4_50x200: "https://zegger.pl/wp-content/uploads/2025/10/FullPanel3D-scaled.png",
+      fokus_3d_fi5_50x200: "https://zegger.pl/wp-content/uploads/2026/03/FullPanel3D-scaled-1.png",
+      fokus_3d_fi4_50x200: "https://zegger.pl/wp-content/uploads/2026/03/FullPanel3D-scaled-1.png",
 
       // System Fokus Light
-      fokus_light_3d_fi5_55x200: "https://zegger.pl/wp-content/uploads/2025/10/FullPanel3D-scaled.png",
-      fokus_light_3d_fi4_55x200: "https://zegger.pl/wp-content/uploads/2025/10/FullPanel3D-scaled.png",
+      fokus_light_3d_fi5_55x200: "https://zegger.pl/wp-content/uploads/2026/03/FullPanel3D-scaled-1.png",
+      fokus_light_3d_fi4_55x200: "https://zegger.pl/wp-content/uploads/2026/03/FullPanel3D-scaled-1.png",
 
       // System Flat
-      flat_2d_5_4_5_55x200: "https://zegger.pl/wp-content/uploads/2025/10/FullPanel3D-scaled.png",
-      flat_2d_6_5_6_50x200: "https://zegger.pl/wp-content/uploads/2025/10/FullPanel3D-scaled.png",
-      flat_2d_8_6_8_50x200: "https://zegger.pl/wp-content/uploads/2025/10/FullPanel3D-scaled.png",
+      flat_2d_5_4_5_55x200: "https://zegger.pl/wp-content/uploads/2026/03/FullPanel3D-scaled-1.png",
+      flat_2d_6_5_6_50x200: "https://zegger.pl/wp-content/uploads/2026/03/FullPanel3D-scaled-1.png",
+      flat_2d_8_6_8_50x200: "https://zegger.pl/wp-content/uploads/2026/03/FullPanel3D-scaled-1.png",
 
       // System Aluminium Prime
-      morana: "https://zegger.pl/wp-content/uploads/2025/10/FullHorizontal100-scaled.png",
-      khors: "https://zegger.pl/wp-content/uploads/2025/10/FullHorizontal100-scaled.png",
-      perun: "https://zegger.pl/wp-content/uploads/2025/10/FullHorizontal100-scaled.png",
-      veles: "https://zegger.pl/wp-content/uploads/2025/10/FullHorizontal100-scaled.png",
-      svarog: "https://zegger.pl/wp-content/uploads/2025/10/FullHorizontal100-scaled.png"
+      morana: "https://zegger.pl/wp-content/uploads/2026/03/MORANA.png",
+      khors: "https://zegger.pl/wp-content/uploads/2026/03/KHORS.png",
+      perun: "https://zegger.pl/wp-content/uploads/2026/03/PERUN.png",
+      veles: "https://zegger.pl/wp-content/uploads/2026/03/VELES.png",
+      svarog: "https://zegger.pl/wp-content/uploads/2026/03/SVAROG.png"
     };
 
     const TABAL_SYSTEM_DATA = {
