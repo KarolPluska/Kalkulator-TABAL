@@ -373,6 +373,9 @@ modification or distribution is prohibited. For licensing please contact Zegger 
   font-weight:600;
   line-height:1;
   padding:0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
   box-shadow:0 1px 0 rgba(0,0,0,.02);
   transition:background .12s ease, border-color .12s ease, color .12s ease, transform .08s ease;
 }
@@ -380,10 +383,32 @@ modification or distribution is prohibited. For licensing please contact Zegger 
   background:#e8edf2;
   border-color:#bec8d2;
 }
+#zeggerCalc .sum-row-action-btn.save{
+  border-color:#9fbfe0;
+  background:#eaf3fb;
+  color:#1f5fa6;
+  font-size:0;
+}
+#zeggerCalc .sum-row-action-btn.save::before{
+  content:"";
+  width:11px;
+  height:11px;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:11px 11px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%231f5fa6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z'/%3E%3Cpolyline points='17 21 17 13 7 13 7 21'/%3E%3Cpolyline points='7 3 7 8 15 8'/%3E%3C/svg%3E");
+}
+#zeggerCalc .sum-row-action-btn.save:hover{
+  background:#dbe9f8;
+  border-color:#8fb3db;
+}
 #zeggerCalc .sum-row-action-btn.save.active{
-  background:#1f9f59;
-  border-color:#19884b;
+  background:var(--brand);
+  border-color:var(--brand-dark);
   color:#fff;
+}
+#zeggerCalc .sum-row-action-btn.save.active::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z'/%3E%3Cpolyline points='17 21 17 13 7 13 7 21'/%3E%3Cpolyline points='7 3 7 8 15 8'/%3E%3C/svg%3E");
 }
 #zeggerCalc .sum-row-action-btn.remove{
   border-color:#d4dbe2;
@@ -413,11 +438,17 @@ modification or distribution is prohibited. For licensing please contact Zegger 
   font-size:11px;
   color:var(--muted);
 }
+#zeggerCalc .sum-saved-separator{
+  background:#e6eff9;
+}
+#zeggerCalc .tbl tr.sum-saved-separator{
+  background:#e6eff9;
+}
 #zeggerCalc .sum-saved-separator td{
   border-top:2px solid #cfd8e2;
   border-bottom:1px solid #dbe3ea;
   padding:8px 10px;
-  background:linear-gradient(180deg,#f8fafc 0%, #f2f6fa 100%);
+  background:#e6eff9;
 }
 #zeggerCalc .sum-saved-head{
   display:flex;
@@ -461,9 +492,13 @@ modification or distribution is prohibited. For licensing please contact Zegger 
   white-space:nowrap;
 }
 #zeggerCalc .sum-row-saved{
-  background:linear-gradient(180deg,#f9fbfe 0%, #f5f9fd 100%);
+  background:#e6eff9;
+}
+#zeggerCalc .tbl tr.sum-row-saved{
+  background:#e6eff9;
 }
 #zeggerCalc .sum-row-saved td{
+  background:#e6eff9;
   border-bottom-color:#d8e2ec;
 }
 #zeggerCalc .sum-row-saved td:first-child{
@@ -549,6 +584,23 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px}
 #zeggerCalc .tbl td[data-label="Po rabacie"]{
   white-space:nowrap;
   font-variant-numeric:tabular-nums;
+}
+@media (min-width:721px){
+  #zeggerCalc #result .tbl{
+    border-collapse:separate;
+    border-spacing:0;
+    border:1px solid var(--line);
+    border-radius:14px;
+    overflow:hidden;
+    background:var(--bg);
+  }
+  #zeggerCalc #result .tbl th,
+  #zeggerCalc #result .tbl td{
+    background:transparent;
+  }
+  #zeggerCalc #result .tbl tr:last-child td{
+    border-bottom:none;
+  }
 }
 
 .totalline{display:flex;gap:8px;justify-content:flex-end;align-items:center;margin-top:8px;padding-right:10px}
@@ -663,6 +715,72 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px}
   align-items:center;
   justify-content:flex-end;
   gap:14px;
+}
+#result .result-history-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:6px;
+}
+#result .summary-history-btn{
+  width:32px;
+  min-width:32px;
+  height:32px;
+  border:none;
+  background:var(--brand-soft);
+  color:var(--brand-dark);
+  border-radius:8px;
+  font-size:0;
+  line-height:0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  padding:0;
+  box-shadow:none;
+  cursor:pointer;
+  transition:background .16s ease, color .16s ease, transform .08s ease;
+}
+#result .summary-history-btn:hover:not(:disabled){
+  background:#dce9f7;
+}
+#result .summary-history-btn:focus-visible{
+  outline:none;
+  box-shadow:var(--focus-ring);
+}
+#result .summary-history-btn:active:not(:disabled){
+  transform:translateY(1px);
+}
+#result .summary-history-btn:disabled{
+  background:var(--brand-soft);
+  color:#90a6bd;
+  opacity:1;
+  cursor:not-allowed;
+}
+#result .summary-history-btn::before{
+  content:"";
+  width:16px;
+  height:16px;
+  display:block;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:16px 16px;
+}
+#result .summary-history-btn.undo::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230f5ea8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 14L4 9l5-5'/%3E%3Cpath d='M4 9h11a4 4 0 1 1 0 8h-1'/%3E%3C/svg%3E");
+}
+#result .summary-history-btn.redo::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230f5ea8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 14l5-5-5-5'/%3E%3Cpath d='M20 9H9a4 4 0 1 0 0 8h1'/%3E%3C/svg%3E");
+}
+#result .summary-history-btn:disabled.undo::before,
+#result .summary-history-btn:disabled.redo::before{
+  opacity:1;
+}
+#result .summary-history-btn:disabled.undo::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2390a6bd' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 14L4 9l5-5'/%3E%3Cpath d='M4 9h11a4 4 0 1 1 0 8h-1'/%3E%3C/svg%3E");
+}
+#result .summary-history-btn:disabled.redo::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2390a6bd' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 14l5-5-5-5'/%3E%3Cpath d='M20 9H9a4 4 0 1 0 0 8h1'/%3E%3C/svg%3E");
 }
 #result .result-header-toggles .vatwrap{
   display:flex;
@@ -822,7 +940,7 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px}
 .tip:hover::after{opacity:1;transform:translate(-50%,-4px);z-index:100}
 
 /* Etykieta trybu cen */
-.price-mode-label{font-size:13px;font-weight:700;color:var(--brand-dark);background:var(--brand-soft);border-radius:8px;padding:6px 10px;display:block;text-align:right;margin-bottom:10px}
+.price-mode-label{font-size:13px;font-weight:700;color:var(--brand-dark);background:var(--brand-soft);border-radius:8px;padding:4px 10px;display:block;text-align:right;margin-bottom:10px}
 
 /* Mobile tabela */
 @media (max-width: 720px){
@@ -1857,7 +1975,11 @@ label[for="accAuto-przesuwna"]{
   margin-bottom:0;
   display:inline-flex;
   align-items:center;
-  min-height:32px;
+  height:32px;
+  min-height:0;
+  padding:0 10px;
+  line-height:1;
+  box-sizing:border-box;
   text-align:right;   /* tekst wewnątrz nadal wyrównany do prawej */
 }
 
@@ -1912,6 +2034,16 @@ label[for="accAuto-przesuwna"]{
   }
   #result .result-header-toggles{
     gap:12px;
+  }
+  #result .result-history-actions{
+    width:100%;
+    justify-content:flex-end;
+  }
+  #result .summary-history-btn{
+    width:32px;
+    min-width:32px;
+    height:32px;
+    padding:0;
   }
 }
 
@@ -2108,6 +2240,10 @@ label[for="accAuto-przesuwna"]{
               <span class="tip" data-tip="Dodaj rabat procentowy do ceny produktu.">?</span>
             </label>
           </div>
+        </div>
+        <div class="result-history-actions" id="summaryHistoryActions" aria-label="Historia zmian podsumowania">
+          <button id="summaryUndo" class="summary-history-btn undo" type="button" aria-label="Cofnij zmianę" title="Cofnij zmianę" disabled></button>
+          <button id="summaryRedo" class="summary-history-btn redo" type="button" aria-label="Przywróć zmianę" title="Przywróć zmianę" disabled></button>
         </div>
         <div id="priceModeLabel" class="price-mode-label">Ceny netto</div>
       </div>
@@ -2733,6 +2869,11 @@ label[for="accAuto-przesuwna"]{
     const summaryHiddenRowsState = Object.create(null);
     const currentSummaryRowsById = Object.create(null);
     const savedConfigPositions = [];
+    const summaryUndoStack = [];
+    const summaryRedoStack = [];
+    const SUMMARY_HISTORY_LIMIT = 40;
+    let panelHistoryBaseline = null;
+    let panelHistoryApplying = false;
 
     /* ==== UTIL ==== */
     const $ = s=>document.querySelector(s);
@@ -2939,6 +3080,10 @@ label[for="accAuto-przesuwna"]{
     const sumUnknownNote = $('#sumUnknownNote');
     const fitWarning = $('#fitWarning');
     const priceModeLabel = $('#priceModeLabel');
+    const discountToggleEl = $('#discountToggle');
+    const discountPercentEl = $('#discountPercent');
+    const summaryUndoBtn = $('#summaryUndo');
+    const summaryRedoBtn = $('#summaryRedo');
     const previewBox = document.getElementById('previewImageBox');
     const previewImg = document.getElementById('previewImage');
     const btnCalc = document.getElementById('calc');
@@ -2992,13 +3137,22 @@ label[for="accAuto-przesuwna"]{
       if (!elPostCustomWidth || !postCustomWidthModalInput) return;
       let mm = Math.max(1, toInt(postCustomWidthModalInput.value));
       if (!Number.isFinite(mm) || mm <= 0) mm = 120;
+      const prevValue = String(elPostCustomWidth.value || '');
+      const nextValue = String(mm);
+      if (prevValue !== nextValue){
+        pushSummaryHistorySnapshotBeforeRemove();
+      }
       elPostCustomWidth.value = String(mm);
       postCustomWidthModalInput.value = String(mm);
       if (postCustomWidthBtn){
         postCustomWidthBtn.title = `Ustaw własny rozmiar słupka (aktualnie: ${mm} mm)`;
       }
       closePostCustomWidthModal(true);
-      if (autoCalc) calculate();
+      if (autoCalc || isResultVisible()){
+        calculate();
+      } else {
+        syncPanelHistoryBaseline();
+      }
     }
 
     function getModelPreviewImage(model){
@@ -3171,6 +3325,219 @@ label[for="accAuto-przesuwna"]{
       return true;
     }
 
+    function cloneHistorySnapshot(snapshot){
+      return snapshot ? JSON.parse(JSON.stringify(snapshot)) : null;
+    }
+
+    function setSelectValueIfPossible(selectEl, value){
+      if (!selectEl) return;
+      const target = String(value ?? '');
+      const hasTarget = Array.from(selectEl.options || []).some(opt => String(opt.value) === target);
+      if (hasTarget){
+        selectEl.value = target;
+      } else if (selectEl.options.length){
+        selectEl.selectedIndex = 0;
+      }
+    }
+
+    function readRowDiscountValuesFromTable(){
+      if (!tbody) return [];
+      return Array.from(tbody.querySelectorAll('tr'))
+        .filter(tr => !tr.classList.contains('sum-saved-separator'))
+        .map(tr => {
+          const input = tr.querySelector('input.row-discount-input');
+          return input ? String(input.value || '') : null;
+        });
+    }
+
+    function applyRowDiscountValuesToTable(values){
+      if (!tbody || !Array.isArray(values)) return;
+      const rows = Array.from(tbody.querySelectorAll('tr'))
+        .filter(tr => !tr.classList.contains('sum-saved-separator'));
+
+      rows.forEach((tr, idx) => {
+        const input = tr.querySelector('input.row-discount-input');
+        if (!input) return;
+        const nextVal = values[idx];
+        if (nextVal == null) return;
+        input.value = String(nextVal);
+      });
+    }
+
+    function capturePanelHistoryState(){
+      return {
+        autoCalc: !!autoCalc,
+        resultVisible: isResultVisible(),
+        resetVisible: !!(btnReset && btnReset.classList.contains('is-visible')),
+        values: {
+          len: String(elLen?.value || ''),
+          type: String(elType?.value || ''),
+          model: String(elModel?.value || ''),
+          height: String(elHeight?.value || ''),
+          color: String(elColor?.value || ''),
+          postType: String(elPostType?.value || ''),
+          postCustomWidth: String(elPostCustomWidth?.value || ''),
+          gateWicketVariant: String(gateWicketVariant?.value || ''),
+          gateWicketQty: String(gateWicketQty?.value || '0'),
+          gateSwingVariant: String(gateSwingVariant?.value || ''),
+          gateSwingQty: String(gateSwingQty?.value || '0'),
+          gateSlidingVariant: String(gateSlidingVariant?.value || ''),
+          gateSlidingQty: String(gateSlidingQty?.value || '0'),
+          vatChecked: !!elVat?.checked,
+          discountEnabled: !!discountToggleEl?.checked,
+          discountPercent: String(discountPercentEl?.value || '')
+        },
+        maps: {
+          aluInfoOpen: { ...aluInfoOpenState },
+          optionalQty: { ...aluOptionalQtyState },
+          qtyOverrides: { ...summaryQtyOverrideState },
+          hiddenRows: { ...summaryHiddenRowsState }
+        },
+        saved: savedConfigPositions.map(item => ({ ...item })),
+        rowDiscountValues: readRowDiscountValuesFromTable()
+      };
+    }
+
+    function applySummaryHistoryState(snapshot){
+      if (!snapshot || typeof snapshot !== 'object') return;
+      panelHistoryApplying = true;
+      try {
+        autoCalc = false;
+        if (btnCalc) btnCalc.textContent = 'Oblicz';
+
+        if (elLen) elLen.value = String(snapshot?.values?.len ?? '25');
+        if (elType) elType.value = String(snapshot?.values?.type || 'fokus');
+        refreshUI();
+
+        setSelectValueIfPossible(elModel, String(snapshot?.values?.model || ''));
+        setOptions(elHeight, heightsForSelection(elType.value, elModel.value));
+        setSelectValueIfPossible(elHeight, String(snapshot?.values?.height || ''));
+        setOptions(elColor, colorOptionsForType(elType.value));
+        setSelectValueIfPossible(elColor, String(snapshot?.values?.color || ''));
+        setOptions(elPostType, systemOptionValues(elType.value));
+        setSelectValueIfPossible(elPostType, String(snapshot?.values?.postType || ''));
+        refreshPostCustomWidthVisibility(elType.value);
+        if (elPostCustomWidth) elPostCustomWidth.value = String(snapshot?.values?.postCustomWidth || '');
+
+        refreshGatesUI(elType.value, elModel.value);
+        setSelectValueIfPossible(gateWicketVariant, String(snapshot?.values?.gateWicketVariant || ''));
+        setSelectValueIfPossible(gateSwingVariant, String(snapshot?.values?.gateSwingVariant || ''));
+        setSelectValueIfPossible(gateSlidingVariant, String(snapshot?.values?.gateSlidingVariant || ''));
+        refreshGateQtyAvailability(elType.value);
+        if (gateWicketQty) gateWicketQty.value = String(snapshot?.values?.gateWicketQty || '0');
+        if (gateSwingQty) gateSwingQty.value = String(snapshot?.values?.gateSwingQty || '0');
+        if (gateSlidingQty) gateSlidingQty.value = String(snapshot?.values?.gateSlidingQty || '0');
+
+        if (elVat) elVat.checked = !!snapshot?.values?.vatChecked;
+        if (discountToggleEl) discountToggleEl.checked = !!snapshot?.values?.discountEnabled;
+        if (discountPercentEl) discountPercentEl.value = String(snapshot?.values?.discountPercent || '');
+
+        savedConfigPositions.length = 0;
+        (snapshot.saved || []).forEach(item => {
+          if (item && typeof item === 'object') savedConfigPositions.push({ ...item });
+        });
+
+        Object.keys(aluInfoOpenState).forEach(k => delete aluInfoOpenState[k]);
+        Object.entries(snapshot?.maps?.aluInfoOpen || {}).forEach(([k, v]) => {
+          aluInfoOpenState[String(k)] = !!v;
+        });
+
+        Object.keys(aluOptionalQtyState).forEach(k => delete aluOptionalQtyState[k]);
+        Object.entries(snapshot?.maps?.optionalQty || {}).forEach(([k, v]) => {
+          const qty = Math.max(0, toInt(v));
+          if (qty > 0) aluOptionalQtyState[String(k)] = qty;
+        });
+
+        Object.keys(summaryQtyOverrideState).forEach(k => delete summaryQtyOverrideState[k]);
+        Object.entries(snapshot?.maps?.qtyOverrides || {}).forEach(([k, v]) => {
+          summaryQtyOverrideState[String(k)] = Math.max(0, toInt(v));
+        });
+
+        Object.keys(summaryHiddenRowsState).forEach(k => delete summaryHiddenRowsState[k]);
+        Object.entries(snapshot?.maps?.hiddenRows || {}).forEach(([k, v]) => {
+          summaryHiddenRowsState[String(k)] = !!v;
+        });
+
+        autoCalc = !!snapshot.autoCalc;
+        if (btnCalc) btnCalc.textContent = autoCalc ? 'Automatyczne obliczanie (aktywne)' : 'Oblicz';
+        setResetVisible(!!snapshot.resetVisible || autoCalc || !!snapshot.resultVisible);
+
+        if (snapshot.resultVisible){
+          calculate();
+          applyRowDiscountValuesToTable(snapshot.rowDiscountValues || []);
+          if (typeof window.zeggerRecalcDiscounts === 'function'){
+            window.zeggerRecalcDiscounts();
+          }
+        } else {
+          refreshAluminiumInfoPanel(elType.value, elModel.value);
+          if (boxRes) boxRes.style.display = 'none';
+          if (fitWarning) fitWarning.style.display = 'none';
+          hidePreviewPanel();
+          if (typeof window.zeggerRecalcDiscounts === 'function'){
+            window.zeggerRecalcDiscounts();
+          }
+        }
+      } finally {
+        panelHistoryApplying = false;
+      }
+      syncPanelHistoryBaseline();
+    }
+
+    function updateSummaryHistoryButtons(){
+      if (summaryUndoBtn) summaryUndoBtn.disabled = summaryUndoStack.length <= 0;
+      if (summaryRedoBtn) summaryRedoBtn.disabled = summaryRedoStack.length <= 0;
+    }
+
+    function syncPanelHistoryBaseline(){
+      if (panelHistoryApplying) return;
+      panelHistoryBaseline = cloneHistorySnapshot(capturePanelHistoryState());
+      updateSummaryHistoryButtons();
+    }
+
+    function pushSummaryHistorySnapshotBeforeRemove(){
+      if (panelHistoryApplying) return;
+      if (!panelHistoryBaseline){
+        panelHistoryBaseline = cloneHistorySnapshot(capturePanelHistoryState());
+      }
+      summaryUndoStack.push(cloneHistorySnapshot(panelHistoryBaseline));
+      if (summaryUndoStack.length > SUMMARY_HISTORY_LIMIT){
+        summaryUndoStack.splice(0, summaryUndoStack.length - SUMMARY_HISTORY_LIMIT);
+      }
+      summaryRedoStack.length = 0;
+      updateSummaryHistoryButtons();
+    }
+
+    function clearSummaryHistory(){
+      summaryUndoStack.length = 0;
+      summaryRedoStack.length = 0;
+      panelHistoryBaseline = null;
+      updateSummaryHistoryButtons();
+    }
+
+    function handleSummaryUndo(){
+      if (!summaryUndoStack.length) return;
+      const previous = summaryUndoStack.pop();
+      const current = cloneHistorySnapshot(capturePanelHistoryState());
+      summaryRedoStack.push(current);
+      if (summaryRedoStack.length > SUMMARY_HISTORY_LIMIT){
+        summaryRedoStack.splice(0, summaryRedoStack.length - SUMMARY_HISTORY_LIMIT);
+      }
+      applySummaryHistoryState(previous);
+      updateSummaryHistoryButtons();
+    }
+
+    function handleSummaryRedo(){
+      if (!summaryRedoStack.length) return;
+      const next = summaryRedoStack.pop();
+      const current = cloneHistorySnapshot(capturePanelHistoryState());
+      summaryUndoStack.push(current);
+      if (summaryUndoStack.length > SUMMARY_HISTORY_LIMIT){
+        summaryUndoStack.splice(0, summaryUndoStack.length - SUMMARY_HISTORY_LIMIT);
+      }
+      applySummaryHistoryState(next);
+      updateSummaryHistoryButtons();
+    }
+
     function createTextInfoColumn(title, rows, opts = {}){
       const col = document.createElement('div');
       col.className = `alu-info-col ${opts.colClass || ''}`.trim();
@@ -3337,7 +3704,9 @@ label[for="accAuto-przesuwna"]{
 
       setOpen(!!aluInfoOpenState[item.id]);
       toggle.addEventListener('click', () => {
+        pushSummaryHistorySnapshotBeforeRemove();
         setOpen(!wrap.classList.contains('is-open'));
+        syncPanelHistoryBaseline();
       });
 
       return wrap;
@@ -4023,6 +4392,7 @@ label[for="accAuto-przesuwna"]{
         ['spans','widthm','effective','diff','total','panels','postslen','postw','posttype','ispal','extras']
           .forEach(k => fitWarning.removeAttribute('data-'+k));
       }
+      syncPanelHistoryBaseline();
     }
 
     function doReset(){
@@ -4059,6 +4429,7 @@ label[for="accAuto-przesuwna"]{
       setResetVisible(false);
 
       refreshUI();
+      syncPanelHistoryBaseline();
     }
 
     /* ==== ZDARZENIA ==== */
@@ -4068,13 +4439,29 @@ label[for="accAuto-przesuwna"]{
 
       if (btn.id === 'calc') {
         ev.preventDefault();
+        pushSummaryHistorySnapshotBeforeRemove();
         autoCalc = !autoCalc;
         btn.textContent = autoCalc ? 'Automatyczne obliczanie (aktywne)' : 'Oblicz';
         setResetVisible(true);
         calculate();
         return;
       }
-      if (btn.id === 'reset'){ ev.preventDefault(); doReset(); return; }
+      if (btn.id === 'reset'){
+        ev.preventDefault();
+        pushSummaryHistorySnapshotBeforeRemove();
+        doReset();
+        return;
+      }
+      if (btn.id === 'summaryUndo'){
+        ev.preventDefault();
+        handleSummaryUndo();
+        return;
+      }
+      if (btn.id === 'summaryRedo'){
+        ev.preventDefault();
+        handleSummaryRedo();
+        return;
+      }
       if (btn.id === 'postCustomWidthBtn'){
         ev.preventDefault();
         openPostCustomWidthModal();
@@ -4105,7 +4492,9 @@ label[for="accAuto-przesuwna"]{
             const rowId = String(btn.dataset.rowId || '');
             const id = rowId.replace(/^saved:/, '');
             const idx = savedConfigPositions.findIndex(s => s.id === id);
-            if (idx >= 0) savedConfigPositions.splice(idx, 1);
+            if (idx < 0) return;
+            pushSummaryHistorySnapshotBeforeRemove();
+            savedConfigPositions.splice(idx, 1);
             calculate();
             return;
           }
@@ -4115,12 +4504,19 @@ label[for="accAuto-przesuwna"]{
           const isActive = btn.classList.contains('active');
 
           if (isActive){
-            removeExactSavedEntriesForCurrentRow(rowId);
+            const payload = buildCurrentSavedPayload(rowId);
+            const hasExact = hasExactSavedForPayload(payload);
+            if (!hasExact) return;
+            pushSummaryHistorySnapshotBeforeRemove();
+            removeExactSavedEntriesForPayload(payload);
             calculate();
             return;
           }
 
           if (!isResultVisible()) calculate();
+          const payloadToSave = buildCurrentSavedPayload(rowId);
+          if (!payloadToSave || hasExactSavedForPayload(payloadToSave)) return;
+          pushSummaryHistorySnapshotBeforeRemove();
           if (!saveCurrentSummaryRow(rowId)) return;
           calculate();
           return;
@@ -4132,6 +4528,7 @@ label[for="accAuto-przesuwna"]{
           const id = rowId.replace(/^saved:/, '');
           const source = savedConfigPositions.find(s => s.id === id);
           if (!source) return;
+          pushSummaryHistorySnapshotBeforeRemove();
           savedConfigPositions.push({
             ...source,
             id: `${Date.now()}_${Math.random().toString(36).slice(2, 8)}`
@@ -4145,7 +4542,9 @@ label[for="accAuto-przesuwna"]{
             const rowId = String(btn.dataset.rowId || '');
             const id = rowId.replace(/^saved:/, '');
             const idx = savedConfigPositions.findIndex(s => s.id === id);
-            if (idx >= 0) savedConfigPositions.splice(idx, 1);
+            if (idx < 0) return;
+            pushSummaryHistorySnapshotBeforeRemove();
+            savedConfigPositions.splice(idx, 1);
             calculate();
             return;
           }
@@ -4153,6 +4552,9 @@ label[for="accAuto-przesuwna"]{
           if (rowType === 'optional'){
             const optId = String(btn.dataset.optId || '');
             if (!optId) return;
+            const prevQty = Math.max(0, toInt(aluOptionalQtyState[optId]));
+            if (prevQty <= 0) return;
+            pushSummaryHistorySnapshotBeforeRemove();
             delete aluOptionalQtyState[optId];
             refreshAluminiumInfoPanel(elType.value, elModel.value);
             calculate();
@@ -4163,6 +4565,9 @@ label[for="accAuto-przesuwna"]{
             const gateKind = String(btn.dataset.gateKind || '');
             const gateInput = getGateQtyInput(gateKind);
             if (!gateInput) return;
+            const prevQty = Math.max(0, toInt(gateInput.value));
+            if (prevQty <= 0) return;
+            pushSummaryHistorySnapshotBeforeRemove();
             gateInput.value = '0';
             calculate();
             return;
@@ -4170,6 +4575,9 @@ label[for="accAuto-przesuwna"]{
 
           const rowId = String(btn.dataset.rowId || '');
           if (!rowId) return;
+          const alreadyHidden = summaryHiddenRowsState[rowId] === true && Math.max(0, toInt(summaryQtyOverrideState[rowId])) === 0;
+          if (alreadyHidden) return;
+          pushSummaryHistorySnapshotBeforeRemove();
           summaryHiddenRowsState[rowId] = true;
           summaryQtyOverrideState[rowId] = 0;
           calculate();
@@ -4184,7 +4592,10 @@ label[for="accAuto-przesuwna"]{
         if (!optId || !delta) return;
         const activeOptionalMap = getActiveAluminiumOptionalMap(elType.value, elModel.value);
         if (!activeOptionalMap[optId]) return;
+        const prevQty = Math.max(0, toInt(aluOptionalQtyState[optId]));
         const nextQty = Math.max(0, Math.max(0, toInt(aluOptionalQtyState[optId])) + delta);
+        if (nextQty === prevQty) return;
+        pushSummaryHistorySnapshotBeforeRemove();
         if (nextQty > 0){
           aluOptionalQtyState[optId] = nextQty;
         } else {
@@ -4193,6 +4604,8 @@ label[for="accAuto-przesuwna"]{
         refreshAluminiumInfoPanel(elType.value, elModel.value);
         if (autoCalc || isResultVisible()){
           calculate();
+        } else {
+          syncPanelHistoryBaseline();
         }
         return;
       }
@@ -4208,7 +4621,10 @@ label[for="accAuto-przesuwna"]{
           if (!optId) return;
           const activeOptionalMap = getActiveAluminiumOptionalMap(elType.value, elModel.value);
           if (!activeOptionalMap[optId]) return;
+          const prevQty = Math.max(0, toInt(aluOptionalQtyState[optId]));
           const nextQty = Math.max(0, Math.max(0, toInt(aluOptionalQtyState[optId])) + delta);
+          if (nextQty === prevQty) return;
+          pushSummaryHistorySnapshotBeforeRemove();
           if (nextQty > 0){
             aluOptionalQtyState[optId] = nextQty;
           } else {
@@ -4223,7 +4639,10 @@ label[for="accAuto-przesuwna"]{
           const gateKind = String(btn.dataset.gateKind || '');
           const gateInput = getGateQtyInput(gateKind);
           if (!gateInput || gateInput.disabled) return;
+          const prevQty = Math.max(0, toInt(gateInput.value));
           const nextQty = Math.max(0, toInt(gateInput.value) + delta);
+          if (nextQty === prevQty) return;
+          pushSummaryHistorySnapshotBeforeRemove();
           gateInput.value = String(nextQty);
           calculate();
           return;
@@ -4234,7 +4653,10 @@ label[for="accAuto-przesuwna"]{
           const id = rowId.replace(/^saved:/, '');
           const saved = savedConfigPositions.find(s => s.id === id);
           if (!saved) return;
+          const prevQty = Math.max(0, toInt(saved.qty));
           const nextQty = Math.max(0, toInt(saved.qty) + delta);
+          if (nextQty === prevQty) return;
+          pushSummaryHistorySnapshotBeforeRemove();
           if (nextQty > 0){
             saved.qty = nextQty;
           } else {
@@ -4250,6 +4672,8 @@ label[for="accAuto-przesuwna"]{
         const qtyWrap = btn.closest('.sum-qty-control');
         const currentQty = toInt(qtyWrap?.querySelector('.sum-qty-value')?.textContent);
         const nextQty = Math.max(0, currentQty + delta);
+        if (nextQty === currentQty) return;
+        pushSummaryHistorySnapshotBeforeRemove();
         summaryQtyOverrideState[rowId] = nextQty;
         calculate();
         return;
@@ -4304,22 +4728,56 @@ label[for="accAuto-przesuwna"]{
     root.addEventListener('change', (ev)=>{
       const t = ev.target;
       if (!t) return;
+      const isRowDiscountInput = !!(t.classList && t.classList.contains('row-discount-input'));
+      const shouldTrackChange = (
+        t.id === 'type' ||
+        t.id === 'model' ||
+        t.id === 'vat' ||
+        t.id === 'discountToggle' ||
+        t.id === 'discountPercent' ||
+        t.id === 'postType' ||
+        t.id === 'height' ||
+        t.id === 'color' ||
+        t.id === 'gateWicketVariant' ||
+        t.id === 'gateSwingVariant' ||
+        t.id === 'gateSlidingVariant' ||
+        isRowDiscountInput
+      );
+      if (shouldTrackChange){
+        pushSummaryHistorySnapshotBeforeRemove();
+      }
 
       if (t.id === 'type'){
         refreshUI();
+        if (!autoCalc) syncPanelHistoryBaseline();
         return;
       }
 
       if (t.id === 'model'){
         setOptions(elHeight, heightsForSelection(elType.value, elModel.value));
         refreshGatesUI(elType.value, elModel.value);
-        if (autoCalc) calculate();
+        if (autoCalc || isResultVisible()){
+          calculate();
+        } else {
+          syncPanelHistoryBaseline();
+        }
         return;
       }
 
       if (t.id === 'vat'){
         priceModeLabel.textContent = elVat.checked ? 'Ceny brutto (23% VAT)' : 'Ceny netto';
-        if (isResultVisible()) calculate();
+        if (isResultVisible()){
+          calculate();
+        } else {
+          syncPanelHistoryBaseline();
+        }
+        return;
+      }
+
+      if (t.id === 'discountToggle' || t.id === 'discountPercent' || isRowDiscountInput){
+        setTimeout(() => {
+          if (!panelHistoryApplying) syncPanelHistoryBaseline();
+        }, 0);
         return;
       }
 
@@ -4345,7 +4803,11 @@ label[for="accAuto-przesuwna"]{
         ){
           refreshAluminiumInfoPanel(elType.value, elModel.value);
         }
-        if (autoCalc) calculate();
+        if (autoCalc || isResultVisible()){
+          calculate();
+        } else {
+          syncPanelHistoryBaseline();
+        }
       }
     });
 
@@ -4353,13 +4815,20 @@ label[for="accAuto-przesuwna"]{
       if (!el) return;
       ['input', 'change'].forEach(evt => {
         el.addEventListener(evt, () => {
+          if (evt === 'change'){
+            pushSummaryHistorySnapshotBeforeRemove();
+          }
           if (normalizeNonNegative){
             const minAttr = (el.min !== '') ? Number(el.min) : 0;
             const minVal = Number.isFinite(minAttr) ? minAttr : 0;
             const v = Math.max(minVal, toInt(el.value));
             el.value = String(v);
           }
-          if (autoCalc) calculate();
+          if (autoCalc || isResultVisible()){
+            calculate();
+          } else if (evt === 'change'){
+            syncPanelHistoryBaseline();
+          }
         });
       });
     }
@@ -4369,7 +4838,6 @@ label[for="accAuto-przesuwna"]{
     bindAutoCalcInput(gateSwingQty, true);
     bindAutoCalcInput(gateSlidingQty, true);
     bindAutoCalcInput(elPostCustomWidth, true);
-    bindAutoCalcInput(postCustomWidthModalInput, true);
 
     if (postCustomWidthModalInput){
       postCustomWidthModalInput.addEventListener('keydown', (ev) => {
@@ -4411,6 +4879,7 @@ if (phoneEl) phoneEl.addEventListener('input', function(){
 
     // startowy stan
     refreshUI();
+    syncPanelHistoryBaseline();
 /* ==== POPPINS base64 here === */
 
 

@@ -1,0 +1,231 @@
+PEŁNA LISTA FUNKCJI KALKULATORA TABAL - WERSJA SZCZEGÓŁOWA
+
+- Nagłówek kalkulatora:
+- Logo TABAL w nagłówku (zewnętrzny URL + fallback).
+- Tytuł "Kalkulator ogrodzeń".
+
+- Obsługiwane systemy ogrodzeń:
+- System Fokus.
+- System Fokus Light.
+- System Flat.
+- System Aluminium Prime.
+
+- Obsługiwane modele:
+- Fokus: Panel Fokus 3D Fi5 50x200, Panel Fokus ECO 3D Fi4 50x200.
+- Fokus Light: Panel Fokus Light 3D Fi5 55x200, Panel Fokus Light ECO 3D Fi4 55x200.
+- Flat: Panel Flat 5/4/5 2D Fi4 55x200, Panel Fokus 6/5/6 2D Fi5 50x200, Panel Fokus 8/6/8 2D Fi6 50x200.
+- Aluminium Prime: Morana, Khors, Perun, Veles, Svarog.
+
+- Parametry wejściowe konfiguracji:
+- Długość ogrodzenia (m) - pole liczbowe.
+- System ogrodzenia - select.
+- Model - select zależny od systemu.
+- Wysokość przęsła (mm) - select zależny od systemu/modelu.
+- Kolor ogrodzenia (RAL) - select zależny od systemu.
+- Opcja systemowa:
+- Dla systemów panelowych: rodzaj obejmy (OM-1 / OM-2).
+- Dla Aluminium Prime: słupek systemowy (wbetonowanie / kotwienie / własny rozmiar / brak wyboru).
+
+- Kolory:
+- Systemy panelowe: RAL 9005, RAL 7016, RAL 8017, RAL 6005, Inny (Na zamówienia).
+- Aluminium Prime: RAL 7016M, Inny (Na zamówienia).
+
+- Słupek systemowy - własny rozmiar:
+- Opcja "Własny rozmiar (murowane/betonowe)".
+- Przycisk "+" przy selekcie słupka.
+- Modal do wpisania szerokości słupka (mm).
+- Walidacja wartości minimalnej.
+- Zastosowanie wartości w obliczeniach długości.
+
+- Bramy/furtki dla Aluminium Prime:
+- Furtka (wariant) + ilość.
+- Brama dwuskrzydłowa (wariant) + ilość.
+- Brama przesuwna (wariant) + ilość.
+- Ilość aktywna dopiero po wyborze wariantu.
+- Warianty i ceny zależne od wybranego modelu Aluminium Prime.
+
+- Panel "Aluminium Prime - wyposażenie i uwagi":
+- Sekcja widoczna tylko dla Aluminium Prime.
+- Sekcje budowane dynamicznie na podstawie wyboru:
+- Segment (zawsze).
+- Słupek (po wyborze typu słupka).
+- Furtka / Brama dwuskrzydłowa / Brama przesuwna (po wyborze wariantu).
+- Każda sekcja rozwijana/zwijana.
+- Zapamiętywanie stanu rozwinięcia sekcji.
+- Blok "W cenie".
+- Blok "Opcje dodatkowe".
+- Blok "Uwagi".
+
+- Opcje dodatkowe (Aluminium):
+- Każda opcja ma kontrolę ilości +/-.
+- Ilość opcji wpływa na podsumowanie.
+- W podsumowaniu opcja ma komentarz "Opcja dodatkowa - [sekcja]".
+- Brak ceny opcji obsługiwany jako pozycja bez ceny.
+
+- Podgląd modelu:
+- Osobny panel z grafiką panoramiczną modelu.
+- Grafika zależna od modelu.
+- Mapowanie URL podglądu dla wszystkich modeli.
+- Widoczność dopiero po pokazaniu wyników.
+- Ukrycie po resecie.
+
+- Tryb obliczeń:
+- Przycisk "Oblicz":
+- Pierwsze kliknięcie uruchamia obliczenie i aktywuje auto-obliczanie.
+- Kolejne kliknięcie przełącza auto-obliczanie ON/OFF.
+- Etykieta przycisku:
+- "Oblicz" (tryb ręczny).
+- "Automatyczne obliczanie (aktywne)" (tryb auto).
+
+- Przycisk "Reset":
+- Ukryty na starcie.
+- Pokazywany po pierwszym obliczeniu.
+- Resetuje formularz i stany pomocnicze.
+- Czyści bieżące podsumowanie i ostrzeżenia.
+- Ukrywa podgląd modelu.
+- Wyłącza auto-obliczanie.
+
+- Obliczenia długości i ilości:
+- Od długości ogrodzenia odejmowana jest suma szerokości wybranych bram/furtek.
+- Wyliczana jest liczba przęseł (zaokrąglenie w górę).
+- Wyliczana jest liczba słupków: przęsła + 1.
+- Uwzględnianie szerokości słupków:
+- Aluminium toConcrete/toAnchor: 80 mm.
+- Aluminium custom: wartość z modala.
+- Systemy panelowe: 40 mm.
+- Łączna długość konfiguracji liczona z uwzględnieniem przęseł, słupków i bram/furtek.
+
+- Cenniki i pozycje podsumowania:
+- Przęsło:
+- Dla Aluminium - cena wg modelu i wysokości.
+- Dla systemów panelowych - cena może być "brak ceny".
+- Słupki:
+- Aluminium:
+- Słup do wbetonowania 80x80x2390 mm.
+- Słup do kotwienia 80x80x1800 mm.
+- Systemy panelowe:
+- Słupek 60x40x[wysokość wg reguł].
+- Obejmy (systemy panelowe):
+- OM-2: jedna pozycja zbiorcza.
+- OM-1: osobno obejmy przelotowe i końcowe.
+- Bramy/furtki:
+- Cena z danych wariantu.
+- Brak wariantu/ceny - pozycja bez ceny.
+- Opcje dodatkowe Aluminium:
+- Pozycje zależne od ilości opcji.
+- Kolor niestandardowy:
+- Dodawana osobna pozycja "Kolor: Inny (Na zamówienia)".
+- Cena tej pozycji: "Wycena indywidualna".
+
+- Obsługa pozycji bez ceny:
+- "brak ceny" i "Wycena indywidualna" nie zwiększają sumy łącznej.
+- Pod sumą pokazywana notatka o liczbie pozycji poza sumą.
+- Notatka działa także przy aktywnych rabatach.
+
+- VAT:
+- Checkbox +23% VAT przełącza netto/brutto.
+- Zmiana VAT przelicza ceny i sumy.
+- Zapisane pozycje także przeliczane netto/brutto na podstawie ceny netto bazowej.
+
+- Rabaty:
+- Checkbox "Rabaty" aktywuje tryb rabatowy.
+- Kolumny "Rabat %" i "Po rabacie" pokazywane tylko w trybie rabatów.
+- Pole "Rabat globalny" widoczne tylko w trybie rabatów.
+- Rabat globalny działa jako masowe wpisanie procentu do wszystkich pozycji.
+- Rabat per pozycja:
+- Osobne pole procentowe w każdym wierszu.
+- Pamięć rabatu per pozycja przy kolejnych przeliczeniach.
+- Dla pozycji bez ceny rabaty są nieaktywne.
+- "Po rabacie" to suma po rabatach wierszowych.
+
+- Tabela podsumowania:
+- Kolumny: Element, Ilość, Cena jedn., Suma, Rabat %, Po rabacie, Funkcje.
+- Mobile: layout kartowy z etykietami.
+- Ilość sterowana strzałkami góra/dół w każdym wierszu.
+- Funkcje wiersza:
+- Zapisz (check).
+- Usuń (X).
+- Powiel (tylko zapisane pozycje).
+
+- Zapisywanie pozycji:
+- Zapis działa per wiersz podsumowania.
+- Zapisane pozycje trafiają do sekcji "Zapisane pozycje".
+- Sekcja zapisanych jest oddzielona separatorem i licznikiem pozycji.
+- Zapisana pozycja ma komentarz źródła:
+- System.
+- Model.
+- Dodatkowy komentarz źródłowy.
+- Check aktywny tylko gdy istnieje dokładne dopasowanie pozycji:
+- Ten sam system.
+- Ten sam model.
+- Ten sam identyfikator pozycji.
+- Ta sama ilość.
+- Ta sama cena bazowa lub ten sam tekst ceny.
+- Ponowne kliknięcie check odznacza/usuwa dokładnie dopasowaną zapisaną pozycję.
+- Zmiana ilości powoduje brak dopasowania (check nieaktywny).
+- Powiel tworzy nową zapisaną pozycję.
+
+- Usuwanie pozycji:
+- Dla pozycji bieżącej konfiguracji:
+- Usuń ukrywa pozycję i zeruje override ilości.
+- Dla bram/furtek:
+- Usuń ustawia ilość danego typu bramy/furtki na 0.
+- Dla opcji dodatkowych:
+- Usuń zeruje ilość opcji dodatkowej.
+- Dla pozycji zapisanych:
+- Usuń usuwa pozycję z listy zapisanych.
+
+- Ostrzeżenie dopasowania długości:
+- Pokazywane, gdy wynik konfiguracji przekracza długość do wypełnienia.
+- Wyświetla:
+- Długość po odjęciu bram/furtek.
+- Szerokość modułu.
+- Nadmiar długości.
+- 3 możliwe decyzje montażowe.
+- Łączną długość konfiguracji.
+- Liczbę przyjętych przęseł.
+- Dane ostrzeżenia zapisywane w data-* i używane w PDF.
+
+- Tooltipy:
+- Tooltipy przy głównych polach formularza i opcjach VAT/Rabat.
+
+- Spinnery pól liczbowych:
+- Długość ogrodzenia.
+- Własny rozmiar słupka.
+- Ilość furtki.
+- Ilość bram dwuskrzydłowych.
+- Ilość bram przesuwnych.
+
+- PDF:
+- Przycisk "Pobierz PDF".
+- Jeśli wyniki nie są widoczne - wymusza obliczenie przed generacją.
+- Nazwa pliku oparta o numer kalkulacji.
+- Numer kalkulacji: OF-[yymmdd]-[hhmm].
+- Sekcje PDF:
+- Logo TABAL nad tytułem (z fallbackiem).
+- Tytuł dokumentu.
+- Tekst informacyjny.
+- Data i numer kalkulacji.
+- Parametry konfiguracji.
+- Zestawienie ilości/cen.
+- Łącznie.
+- Notatka o pozycjach poza sumą.
+- Sekcja rabatowa (gdy rabaty aktywne).
+- Po rabacie.
+- Ostrzeżenie dopasowania długości.
+- Stopka firmowa.
+- Komentarze pozycji w PDF jako drobny druk pod tytułem pozycji.
+- Normalizacja tekstów "Wycena indywidualna"/"brak ceny" w PDF.
+
+- Zachowanie responsywne:
+- Osobne reguły mobile dla:
+- tabeli podsumowania,
+- kolumny funkcji,
+- wyrównań ilości/cen/sum,
+- nagłówka podsumowania.
+
+- Zachowanie startowe:
+- Podsumowanie ukryte.
+- Podgląd modelu ukryty.
+- Reset ukryty.
+- Auto-obliczanie wyłączone.

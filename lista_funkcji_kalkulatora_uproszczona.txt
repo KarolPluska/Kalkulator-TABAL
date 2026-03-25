@@ -1,0 +1,74 @@
+LISTA FUNKCJI KALKULATORA TABAL - WERSJA UPROSZCZONA
+
+- Wybór systemu ogrodzenia.
+- Wybór modelu ogrodzenia.
+- Wybór wysokości przęsła.
+- Wybór koloru ogrodzenia.
+- Wybór opcji systemowej (obejmy/słupki).
+- Definicja długości ogrodzenia.
+
+- Obsługa systemu Aluminium Prime:
+- Wybór wariantu furtki.
+- Wybór wariantu bramy dwuskrzydłowej.
+- Wybór wariantu bramy przesuwnej.
+- Ustawianie ilości furtek i bram.
+- Obsługa słupka systemowego.
+- Obsługa własnego rozmiaru słupka (modal).
+
+- Dynamiczne wyposażenie i uwagi dla Aluminium:
+- Sekcje rozwijane/zwijane.
+- Lista elementów w cenie.
+- Lista opcji dodatkowych.
+- Ilości opcji dodatkowych przez przyciski +/-.
+
+- Podgląd graficzny wybranego modelu.
+
+- Obliczenia:
+- Liczba przęseł.
+- Liczba słupków.
+- Uwzględnianie szerokości słupków i bram/furtek.
+- Wyliczenie pozycji w podsumowaniu.
+- Obsługa pozycji bez ceny i wyceny indywidualnej.
+
+- Podsumowanie:
+- Tabela elementów z ilością, ceną i sumą.
+- Edycja ilości z poziomu podsumowania (strzałki +/-).
+- Sekcja "Funkcje" dla pozycji.
+
+- Funkcje pozycji:
+- Zapisz pozycję.
+- Usuń pozycję.
+- Powiel zapisaną pozycję.
+
+- Zapisane pozycje:
+- Osobna sekcja z zapisanymi elementami.
+- Licznik zapisanych pozycji.
+- Zachowanie zapisanych pozycji przy zmianie konfiguracji.
+
+- Tryby ceny:
+- Netto/brutto (+23% VAT).
+- Rabaty per pozycja.
+- Rabat globalny (masowe ustawienie rabatu).
+- Suma po rabatach.
+
+- Ostrzeżenie dopasowania długości:
+- Informacja o nadmiarze długości.
+- Sugestie co zrobić z nadmiarem.
+
+- Akcje główne:
+- Oblicz / Automatyczne obliczanie.
+- Reset.
+- Pobierz PDF.
+
+- Eksport PDF:
+- Logo TABAL.
+- Numer kalkulacji.
+- Parametry konfiguracji.
+- Zestawienie ilości i cen.
+- Łącznie i po rabacie.
+- Notatki o pozycjach bez ceny.
+- Panel ostrzeżenia dopasowania długości.
+
+- Responsywność:
+- Dostosowanie widoku do mobile i desktop.
+- Spójne wyrównanie wartości i funkcji w podsumowaniu.
