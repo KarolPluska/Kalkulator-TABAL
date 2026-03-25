@@ -1,0 +1,88 @@
+Temat: Kalkulator ogrodzeń TABAL - zakres funkcji (wersja aktualna)
+
+Dzień dobry,
+przesyłamy aktualny zakres funkcji kalkulatora TABAL. Narzędzie działa dynamicznie - po wyborze systemu, modelu i wariantów bram/furtek automatycznie aktualizuje pola, ilości oraz podsumowanie cenowe.
+
+Najważniejsze na ten moment:
+- obsługa systemów panelowych oraz Aluminium Prime,
+- dynamiczne dopasowanie pól wyboru do wybranego systemu,
+- kalkulacja długości z uwzględnieniem bram/furtek i szerokości słupków,
+- sekcja zapisanych pozycji (zapis, powielanie, usuwanie),
+- cofanie/przywracanie zmian,
+- ceny netto/brutto (+23% VAT), rabaty globalne i per pozycja,
+- eksport pełnego podsumowania do PDF,
+- czytelny widok desktop i mobile.
+
+Poniżej pełna lista funkcji wraz z opisem działania.
+
+PEŁNA LISTA FUNKCJI - CO MAMY I JAK DZIAŁA
+
+- Wybór systemu ogrodzenia: System Fokus, System Fokus Light, System Flat, System Aluminium Prime.
+- Wybór modelu zależny od systemu - lista modeli zmienia się automatycznie.
+- Wysokość przęsła zależna od systemu/modelu - dostępne tylko poprawne warianty.
+- Kolor ogrodzenia (RAL) - dla Aluminium dostępna opcja "Inny (Na zamówienia)".
+- Dla koloru "Inny (Na zamówienia)" dodawana jest osobna pozycja do podsumowania jako "Wycena indywidualna".
+- Słupek systemowy:
+  - dla Aluminium: do wbetonowania, do kotwienia, Własny rozmiar (murowane/betonowe),
+  - dla Własny rozmiar działa przycisk "+" i modal do wpisania szerokości słupka w mm.
+- Kalkulator uwzględnia szerokość słupków w obliczeniu długości:
+  - systemy panelowe: 40 mm na słupek,
+  - Aluminium (słupki systemowe): 80 mm na słupek,
+  - Aluminium (własny rozmiar): wartość z modalu.
+- Warianty furtki i bram (Aluminium) - wybór osobno dla furtki, bramy dwuskrzydłowej i przesuwnej.
+- Pola ilości furtki/bram są aktywne dopiero po wyborze wariantu.
+- Sekcja "Aluminium Prime - wyposażenie i uwagi":
+  - dynamicznie pokazuje sekcje zależne od wybranego modelu i wariantów,
+  - sekcje są zwijane/rozwijane,
+  - stan rozwinięcia jest pamiętany podczas dalszej edycji.
+- Opcje dodatkowe w Aluminium - każda pozycja ma własny licznik -/+.
+- Opcje dodatkowe po dodaniu trafiają do podsumowania z komentarzem, do jakiego elementu należą.
+- Podsumowanie pozycji:
+  - każda pozycja ma ilość, cenę jedn., sumę i funkcje,
+  - ilości można zmieniać +/- bez wracania do pól u góry.
+- Funkcje przy każdej pozycji:
+  - zapisz (ikona zapisu),
+  - usuń (X),
+  - dla pozycji zapisanych: dodatkowo powiel.
+- Zapisane pozycje:
+  - są trzymane osobno w dedykowanej sekcji,
+  - nie znikają po zmianie bieżącej konfiguracji,
+  - mają opis kontekstu (system/model), żeby było wiadomo, skąd pochodzą.
+- Logika zapisu:
+  - jeśli pozycja jest identyczna jak zapisana - stan jest rozpoznawany jako już zapisany,
+  - jeśli ilość/cena się zmieni i zapiszesz ponownie - tworzona jest nowa pozycja.
+- Historia zmian:
+  - przyciski cofnij/przywróć działają dla zmian w panelu i podsumowaniu,
+  - obejmuje m.in. ilości, wybory pól, opcje dodatkowe, zapisy/usunięcia pozycji.
+- VAT i rabaty:
+  - przełącznik +23% VAT zmienia netto/brutto w całym zestawieniu,
+  - działa także na pozycjach zapisanych,
+  - rabaty: globalny i per pozycja,
+  - pokazywana jest wartość "Po rabacie".
+- Pozycje bez ceny:
+  - wyświetlają "brak ceny" lub "Wycena indywidualna",
+  - nie są doliczane do łącznej kwoty,
+  - pod sumą pokazywana jest notka ile pozycji jest poza sumą.
+- Panel ostrzeżeń dopasowania długości:
+  - pokazuje różnicę długości i sugeruje możliwe działania,
+  - uwzględnia przęsła, słupki i elementy dodatkowe (bramy/furtki).
+- Podgląd modelu:
+  - po kliknięciu Oblicz pokazuje się grafika wybranego modelu,
+  - po Reset podgląd jest ukrywany.
+- Eksport PDF:
+  - logo TABAL, numer kalkulacji, parametry konfiguracji,
+  - tabela pozycji, sumy, rabaty, komentarze o pozycjach bez ceny,
+  - uwzględnia tryb netto/brutto i panel ostrzeżeń.
+- Układ mobilny:
+  - podsumowanie i funkcje działają w układzie kart,
+  - wartości i akcje są wyrównane dla czytelności.
+- Interfejs uproszczony:
+  - usunięte zbędne moduły/integracje, które nie są potrzebne w tej wersji klienta.
+
+CO WARTO JESZCZE UZUPEŁNIĆ (BRAKUJĄCE DANE/CENY)
+
+- Cennik słupków i obejm dla systemów panelowych (Fokus/Fokus Light/Flat), aby zniknęły pozycje "brak ceny".
+- Pełne ceny wszystkich elementów dodatkowych, które mogą pojawiać się w podsumowaniu (jeśli dojdą nowe opcje).
+- Jasna tabela dopłat kolorystycznych dla opcji "Inny (Na zamówienia)" (jeśli ma być kwotowa, a nie tylko indywidualna wycena).
+- Finalne, docelowe linki do panoram dla każdego modelu (obecnie część modeli może korzystać ze wspólnych grafik).
+- Zasady handlowe do PDF: transport, montaż, terminy i warunki rabatowe (jeśli mają być pokazywane klientowi końcowemu).
