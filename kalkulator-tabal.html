@@ -1921,7 +1921,16 @@ label[for="accAuto-przesuwna"]{
 
 <div class="fcalc" id="zeggerCalc" data-owner="Zegger Tech Sp. z o.o." data-copyright="© Zegger Tech 2019–2025" data-license="All rights reserved">
   <h4 class="calc-title">
-    <img src="https://tabal.pl/wp-content/uploads/2022/08/TABAL-LOGOTYP.png" alt="TABAL logo" class="calc-logo">
+    <img
+      src="https://tabal.pl/wp-content/uploads/2022/08/TABAL-LOGOTYP.png"
+      alt="TABAL logo"
+      class="calc-logo"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+      data-no-lazy="1"
+      referrerpolicy="no-referrer"
+    >
     Kalkulator ogrodzeń
   </h4>
 
@@ -4446,6 +4455,32 @@ if (phoneEl) phoneEl.addEventListener('input', function(){
       format: 'PNG'
     };
     try { window.ZQ_TABAL_LOGO_FALLBACK = TABAL_LOGO_FALLBACK_CLEAN; } catch(_) {}
+
+    // Fallback dla logo w UI (gdy zewnętrzny obraz jest blokowany przez hotlink/CSP/lazyload).
+    (function ensureHeaderLogoFallback(){
+      const logoNodes = document.querySelectorAll('#zeggerCalc .calc-logo');
+      if (!logoNodes.length) return;
+      const fallbackDataUrl =
+        (TABAL_LOGO_FALLBACK_CLEAN && TABAL_LOGO_FALLBACK_CLEAN.dataUrl) ||
+        (TABAL_LOGO_FALLBACK && TABAL_LOGO_FALLBACK.dataUrl) ||
+        (window.ZQ_TABAL_LOGO_FALLBACK && window.ZQ_TABAL_LOGO_FALLBACK.dataUrl) ||
+        '';
+      if (!fallbackDataUrl) return;
+
+      logoNodes.forEach((img) => {
+        if (!img) return;
+        const applyFallback = () => {
+          if (img.src === fallbackDataUrl) return;
+          img.src = fallbackDataUrl;
+        };
+
+        img.addEventListener('error', applyFallback, { once: true });
+
+        if (img.complete && (!img.naturalWidth || img.naturalWidth <= 1)){
+          applyFallback();
+        }
+      });
+    })();
 
     /* ==== PDF ==== */
     async function drawZeggerPdf(doc){
